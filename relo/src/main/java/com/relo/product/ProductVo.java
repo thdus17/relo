@@ -1,6 +1,11 @@
 package com.relo.product;
 
 import java.util.Date;
+import java.util.List;
+
+import com.relo.auction.AuctionVo;
+import com.relo.order_delivery.ODeliveryVo;
+import com.relo.stock.StockVo;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,9 +20,12 @@ import lombok.ToString;
 @ToString
 
 public class ProductVo {
-	private int p_num;
-	private int s_num;
-	private Date p_start_date;
-	private Date p_end_date;
-	private int p_status;
+	private int pNum;
+//	private int s_num;
+	private StockVo stock;
+	private List<AuctionVo> a;
+	private ODeliveryVo od;
+	private Date pStartDate;
+	private Date pEndDate;
+	private int pStatus;
 }
