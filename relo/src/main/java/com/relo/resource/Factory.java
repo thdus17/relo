@@ -13,7 +13,7 @@ public class Factory {
 	// 초기화 블록:멤버 변수 초기화하는 블록
 	static {
 		try {
-			String resource = "resource/config.xml";
+			String resource = "com/relo/resource/config.xml";
 			Reader reader = Resources.getResourceAsReader(resource);
 
 			if (sqlSessionFactory == null) {
@@ -23,11 +23,11 @@ public class Factory {
 				sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
 
 				// 구현할 맵퍼 등록 패키지.DAO명.class
-				Class[] mapper = { com.relo.zzim.ZzimDAO.class };
-				for (Class m : mapper) {
-					// sqlSessionFactory에 맵퍼를 등록
-					sqlSessionFactory.getConfiguration().addMapper(m);
-				}
+//				Class[] mapper = {  };
+//				for (Class m : mapper) {
+//					// sqlSessionFactory에 맵퍼를 등록
+//					sqlSessionFactory.getConfiguration().addMapper(m);
+//				}
 			}
 		} catch (FileNotFoundException fileNotFoundException) {
 			fileNotFoundException.printStackTrace();

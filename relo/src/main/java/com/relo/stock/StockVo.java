@@ -13,11 +13,11 @@ import lombok.ToString;
 @ToString
 
 public class StockVo {
-	private int s_num;
+	private int sNum;
 	private String id;
 	private int size_category_num;
 	private String s_brand;
-	private String s_name;
+	private String sName;
 	private int s_origin_price;
 	private int s_hope_price;
 	private String s_color;
