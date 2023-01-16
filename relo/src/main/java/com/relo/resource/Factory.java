@@ -23,7 +23,7 @@ public class Factory {
 				sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
 
 				// 구현할 맵퍼 등록 패키지.DAO명.class
-				Class[] mapper = {};
+				Class[] mapper = { com.relo.zzim.ZzimDAO.class };
 				for (Class m : mapper) {
 					// sqlSessionFactory에 맵퍼를 등록
 					sqlSessionFactory.getConfiguration().addMapper(m);
