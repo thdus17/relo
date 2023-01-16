@@ -13,7 +13,7 @@ public interface ZzimDAO {
 	 * @return : List<ZzimDTO> 사용자의 상품 찜목록
 	 * @throws FindException
 	 */
-	public List<ZzimDTO> selectById(String id) throws FindException;
+	public List<ZzimVo> selectById(String id) throws FindException;
 
 	/**
 	 * 사용자가 상품을 찜목록에 추가한다

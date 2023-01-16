@@ -16,11 +16,11 @@ public class ZzimDAOOracle implements ZzimDAO {
 	}
 
 	@Override
-	public List<ZzimDTO> selectById(String id) throws FindException {
+	public List<ZzimVo> selectById(String id) throws FindException {
 		SqlSession session = sqlSessionFactory.openSession();
 		// 구현체 객체를 받아옴
 		ZzimDAO dao = (ZzimDAO) session.getMapper(ZzimDAO.class);
-		List<ZzimDTO> list = dao.selectById(id);
+		List<ZzimVo> list = dao.selectById(id);
 		return list;
 	}
 
@@ -52,31 +52,38 @@ public class ZzimDAOOracle implements ZzimDAO {
 		session.close();
 	}
 
-	// 테스트용
-	public static void main(String[] args) {
-		ZzimDAOOracle dao = new ZzimDAOOracle();
-		try {
-			System.out.println(dao.selectById("bbb"));
-		} catch (FindException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		// ZzimVo vo = new ZzimVo();
-		// vo.setId("bbb");
-//		// vo.setPNum(2);
-//		int pNum = 2;
+//	// 테스트용
+//	public static void main(String[] args) {
+//		ZzimDAOOracle dao = new ZzimDAOOracle();
 //		try {
-//			// dao.insertZzim(vo);
-//			// dao.deleteZzim(vo);
-//
-//			dao.deleteZzimAll(pNum);
-//			System.out.println("찜하기 정상 삭제됨");
+//			System.out.println(dao.selectById("bbb"));
 //		} catch (FindException e) {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-
+//		ZzimVo vo = new ZzimVo();
+//		vo.setId("bbb");
+//		vo.setPNum(2);
+//		try {
+//			dao.deleteZzim(vo);
+//		} catch (FindException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		// vo.setPNum(2);
+////		int pNum = 2;
+////		try {
+////			// dao.insertZzim(vo);
+////			// dao.deleteZzim(vo);
+////
+////			dao.deleteZzimAll(pNum);
+////			System.out.println("찜하기 정상 삭제됨");
+////		} catch (FindException e) {
+////			// TODO Auto-generated catch block
+////			e.printStackTrace();
+////		}
+//
+////	}
+//
 //	}
-
-	}
 }

@@ -11,7 +11,7 @@ public class ZzimService {
 		dao = new ZzimDAOOracle();
 	}
 
-	public List<ZzimDTO> getById(String id) throws FindException {
+	public List<ZzimVo> getById(String id) throws FindException {
 		return dao.selectById(id);
 	}
 
