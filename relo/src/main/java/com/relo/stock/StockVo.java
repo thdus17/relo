@@ -1,5 +1,7 @@
 package com.relo.stock;
 
+import com.relo.sizes.SizesVo;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,20 +15,19 @@ import lombok.ToString;
 @ToString
 
 public class StockVo {
-	private int s_num;
+	private int sNum;
 	private String id;
-	private int size_category_num;
-	private String s_brand;
-	private String s_name;
-	private int s_origin_price;
-	private int s_hope_price;
-	private String s_color;
-	private String s_type;
-	private String s_grade;
-	private String s_file;
-	private int s_hope_days;
-	private String seller_comment;
-	private String manager_comment;
-	private int s_return;
-
+	private String sBrand;
+	private String sName;
+	private int sOriginPrice;
+	private int sHopePrice;
+	private String sColor;
+	private String sType;
+	private String sGrade;
+	private String sFile;
+	private int sHopeDays;
+	private String sellerComment;
+	private String managerComment;
+	private int sReturn;
+	private SizesVo sizesVo;
 }
