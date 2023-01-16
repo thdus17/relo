@@ -1,5 +1,7 @@
 package com.relo.address;
 
+import com.relo.member.vo.MemberVo;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,13 +13,13 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class AddressVo {
-	private int addr_num;
-	private String id;
-	private String addr_name;
-	private int addr_post_num;
-	private String addr_tel;
+	private int addrNum;
+	private MemberVo memberVo;
+	private String addrName;
+	private int addrPostNum;
+	private String addrTel;
 	private String addr;
-	private String addr_detail;
-	private String addr_recipient;
-	private int addr_type;
+	private String addrDetail;
+	private String addrRecipient;
+	private int addrType;
 }

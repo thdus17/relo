@@ -1,4 +1,4 @@
-package com.relo.member;
+package com.relo.member.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,5 +17,5 @@ public class MemberVo {
 	private String email;
 	private int type;
 	private String birth;
-	private String m_name;
+	private String mName;
 }

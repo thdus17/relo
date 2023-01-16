@@ -2,6 +2,15 @@
 
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+		<!-- null인 경우, JDBC타입을 파라미터에 제공하지 않을때 null값을 처리한 JDBC타입을 명시 -->
+		<setting name="jdbcTypeForNull" value="NULL" />
+	</settings>
+	<typeAliases>
+  <typeAlias alias="memberVo" type="com.relo.member.vo.MemberVo"/>
+  <typeAlias alias="noticeVo" type="com.relo.notice.vo.NoticeVo"/>
+  </typeAliases>
 	<environments default="mybatis_test">
 		<environment id="mybatis_test">
 			<transactionManager type="JDBC" />
@@ -13,4 +22,10 @@
 			</dataSource>
 		</environment>
 	</environments>
+	<mappers>
+	
+		<mapper resource="com/relo/member/member_mapper.xml"></mapper>
+		<mapper resource="com/relo/notice/notice_mapper.xml"></mapper>
+		<!-- <mapper resource="mapper.xml"/> -->
+	</mappers>
 </configuration>
