@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace = "com.relo.zzim.ZzimDAO">
+	<resultMap type ="ZzimVo" id ="ZzimVo" autoMapping ="true">
+	<id column="id" property ="id" />
+	<result column = "p_num" property ="pNum" />
+	<result column = "s_name" property ="sName" />
+	<result column = "s_type" property ="sType" />
+	<result column = "s_color" property ="sColor" />
+	<result column = "s_hope_price" property ="sHopePrice" />
+	<result column = "s_grade" property ="sGrade" />
+	<result column = "p_end_date" property ="pEndDate" javaType = "java.util.Date" />
+	</resultMap> 
+	<select id = "selectById" parameterType="String" resultMap ="ZzimVo">
+	select z.id, z.p_num, s_name, s_type, s_color, s_hope_price, s_grade, p_end_date
+	from product p, stock s, zzim z  
+	where p.p_num = z.p_num and s.s_num = p.s_num and z.id=#{id}
+	</select>
+
+	<insert id = "insertZzim" parameterType="ZzimVo">
+	insert into zzim values(#{id}, #{pNum})
+	</insert>
+
+	<delete id ="deleteZzim" parameterType="ZzimVo">
+	delete from zzim where id = #{id} and p_num = #{pNum}
+	</delete>
+
+	<delete id = "deleteZzimAll">
+	delete from zzim where p_num = #{pNum}
+	</delete> 
+</mapper>
