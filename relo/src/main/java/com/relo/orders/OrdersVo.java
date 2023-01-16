@@ -15,9 +15,9 @@ import lombok.ToString;
 @NoArgsConstructor
 
 public class OrdersVo {
-	private int o_num;
-	private int a_num;
-	private int addr_num;
-	private String o_memo;
-	private Date o_date;
+	private int oNum;
+	private int aNum;
+	private int addrNum;
+	private String oMemo;
+	private Date oDate;
 }
