@@ -14,8 +14,8 @@ import lombok.ToString;
 @ToString
 
 public class Stock_DeliveryVo {
-	private int s_num;
-	private int std_status;
-	private String std_trackin_info;
-	private Date std_start_date;
+	private int sNum;
+	private int stdStatus;
+	private String stdTrackinInfo;
+	private Date stdStartDate;
 }

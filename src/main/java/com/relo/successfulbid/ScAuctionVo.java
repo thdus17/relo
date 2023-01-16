@@ -15,6 +15,6 @@ import lombok.ToString;
 @ToString
 
 public class ScAuctionVo {
-	private int a_num;
-	private Date c_time;
+	private int aNum;
+	private Date cTime;
 }

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.relo.style.StyleDao">
+	<resultMap id="StyleVo" type="com.relo.style.StyleVo" autoMapping="true">
+      <result column="style_num" property="styleNum" />
+      <result column="id" property="id" />
+      <result column="style_content" property="styleContent" />
+      <result column="style_file" property="styleFile" />
+      <result column="style_date" property="styleDate" />
+      <result column="style_likes" property="styleLikes" />
+      <association property="styleTag"
+      		javaType="com.relo.styletag.StyleTagVo" autoMapping="true">
+      </association>
+     </resultMap>
+     
+     <insert id="addStyle">
+     	insert into style values(style_seq.nextval, #{id},
+     	 #{styleContent}, #{styleFile}, sysdate, #{styleLikes})
+     </insert>
+     
+     <delete id="delStyle">
+     	delete from style where style_num = #{styleNum} and id = #{id}
+     </delete>
+     
+     <update id="updateStyle" parameterType="StyleVo">
+   	  	update style
+		<set>
+			<if test='styleContent!=null'> style_content=#{styleContent},</if>
+			<if test='styleFile!=null'> style_file=#{styleFile}</if>
+		</set>
+		where style_num=#{styleNum}
+     </update>
+     
+     <select id="selectStyleLikes" resultType="StyleVo">
+    	select * from style order by style_likes desc, style_num desc
+     </select>
+     
+     <select id="selectStyleNum" resultType="StyleVo">
+    	select * from style order by style_num desc
+     </select>
+     
+     <select id="selectStyleId" parameterType="String" resultType="StyleVo">
+     	select * from style where id = #{id} order by style_date desc
+     </select>
+     
+     <select id="selectStyleTag" parameterType="String" resultType="StyleVo">
+     	select a.* 
+		from style a 
+		join style_tag b
+		on a.style_num = b.style_num
+		where b.hash_name = #{hashName} 
+		order by style_likes desc, a.style_num desc
+     </select>
+     
+     <select id="selectStyleDetail" parameterType="int" resultType="StyleVo">
+     	select a.style_num, a.id, b.hash_name "styleTag.hash_name", a.style_file, a.style_date, a.style_likes
+		from style a
+		join style_tag b
+		on a.style_num = b.style_num
+		where a.style_num = #{styleNum}
+     </select>
+</mapper>        

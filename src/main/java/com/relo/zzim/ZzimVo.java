@@ -15,5 +15,5 @@ import lombok.ToString;
 public class ZzimVo {
 
 	private String id;
-	private int p_num;
+	private int pNum;
 }

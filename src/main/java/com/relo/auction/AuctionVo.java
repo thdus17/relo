@@ -13,9 +13,9 @@ import lombok.ToString;
 @ToString
 
 public class AuctionVo {
-	private int a_num;
+	private int aNum;
 	private String id;
-	private int p_num;
-	private int a_price;
+	private int pNum;
+	private int aPrice;
 	
 }

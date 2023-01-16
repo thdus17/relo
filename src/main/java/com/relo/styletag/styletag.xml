@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.relo.styletag.StyleTagDao">
+	<resultMap id="styleTagVo" type="com.relo.styletag.StyleTagVo" autoMapping="true">
+      <result column="hash_num" property="hashNum" />
+      <result column="style_num" property="styleNum" />
+      <result column="hash_name" property="hashName" />
+   </resultMap>
+	
+	<insert id="addStyleTag">
+		insert into style_tag values(hash_seq.nextval,#{styleNum}, #{hashName})
+	</insert>
+	
+	<select id="styleTagList" resultType="styleTagVo">
+		select hash_name
+		from style_tag
+		group by hash_name
+		order by count(*) desc
+	</select>
+</mapper>       

@@ -5,22 +5,23 @@ import org.apache.ibatis.session.SqlSessionFactory;
 
 import com.relo.resource.Factory;
 
-public class LikesService {
+public class LikesDaoOracle implements LikesDao {
 	
 	private SqlSessionFactory sqlSessionFactory;
 	
-	public LikesService() {
+	public LikesDaoOracle() {
 		sqlSessionFactory = Factory.getSqlSessionFactory();
 	}
-	//좋아요+1
-	public void addLikes(LikesVo vo){
+	@Override
+	public void addLikes(LikesVo vo) {
 		SqlSession session = sqlSessionFactory.openSession();
 		LikesDao dao = (LikesDao) session.getMapper(LikesDao.class);
-		dao.insert(vo);
+		dao.addLikes(vo);
 		session.commit();
 		session.close();
 	}
-	//좋아요-1 
+	
+	@Override
 	public void delLikes(LikesVo vo) {
 		SqlSession session = sqlSessionFactory.openSession();
 		LikesDao dao = (LikesDao) session.getMapper(LikesDao.class);
@@ -28,4 +29,10 @@ public class LikesService {
 		session.commit();
 		session.close();
 	}
+// 테스트 확인 완료	
+//	public static void main(String[] args) {
+//		LikesDaoOracle dao = new LikesDaoOracle();
+//		dao.addLikes(new LikesVo(1,"ddd"));
+//		dao.delLikes(new LikesVo(3,"fff"));
+//	}
 }

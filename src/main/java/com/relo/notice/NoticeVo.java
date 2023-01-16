@@ -15,9 +15,9 @@ import lombok.ToString;
 public class NoticeVo {
 	private int n_num;
 	private String id;
-	private String n_title;
-	private String n_content;
-	private Date n_date;
-	private int n_category;
-	private String n_file;
+	private String nTitle;
+	private String nContent;
+	private Date nDate;
+	private int nCategory;
+	private String nFile;
 }

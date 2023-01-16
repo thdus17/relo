@@ -15,8 +15,8 @@ import lombok.ToString;
 @AllArgsConstructor
 
 public class ODeliveryVo {
-	private int o_num;
-	private int d_status;
-	private String d_trackin_info;
-	private Date d_complete_day;
+	private int oNum;
+	private int dStatus;
+	private String dTrackinIinfo;
+	private Date dCompleteDay;
 }

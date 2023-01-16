@@ -14,7 +14,7 @@ public class Factory {
 	// 초기화 블록:멤버 변수 초기화하는 블록
 	static {
 		try {
-			String resource = "/com/my/relo/resource/config.xml";
+			String resource = "com/relo/resource/config.xml";
 			Reader reader = Resources.getResourceAsReader(resource);
 
 			if (sqlSessionFactory == null) {
@@ -23,12 +23,11 @@ public class Factory {
 				//build(): config.xml의 내용을 설정에 활용하여 설정함 
 				sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
 				//구현할 맵퍼 등록
-				Class[] mapper = {com.relo.style.StyleDao.class, com.relo.likes.LikesDao.class,
-						com.relo.reply.ReplyDao.class,com.relo.styletag.StyleTagDao.class};
-				for (Class m : mapper) {
-					//sqlSessionFactory에 맵퍼를 등록
-					sqlSessionFactory.getConfiguration().addMapper(m);
-				}
+//				Class[] mapper = {};
+//				for (Class m : mapper) {
+//					//sqlSessionFactory에 맵퍼를 등록
+//					sqlSessionFactory.getConfiguration().addMapper(m);
+//				}
 			}
 		} catch (FileNotFoundException fileNotFoundException) {
 			fileNotFoundException.printStackTrace();

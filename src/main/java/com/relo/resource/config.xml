@@ -2,6 +2,17 @@
 
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+		<setting value="NULL" name="jdbcTypeForNull"/>
+	</settings>
+	<typeAliases>
+		<typeAlias type="com.relo.auction.AuctionVo" alias="Auction"/>
+		<typeAlias type="com.relo.likes.LikesVo" alias="LikesVo"/>
+		<typeAlias type="com.relo.styletag.StyleTagVo" alias="StyleTagVo"/>
+		<typeAlias type="com.relo.reply.ReplyVo" alias="ReplyVo"/>
+		<typeAlias type="com.relo.style.StyleVo" alias="StyleVo"/>
+	</typeAliases>
 	<environments default="mybatis_test">
 		<environment id="mybatis_test">
 			<transactionManager type="JDBC" />
@@ -13,4 +24,12 @@
 			</dataSource>
 		</environment>
 	</environments>
+	<mappers>
+		<mapper resource="com/relo/resource/auction.xml"/>
+		<mapper resource="com/relo/likes/likes.xml"/>
+		<mapper resource="com/relo/styletag/styletag.xml"/>
+		<mapper resource="com/relo/reply/reply.xml"/>
+		<mapper resource="com/relo/style/style.xml"/>
+	</mappers>
 </configuration>
+
