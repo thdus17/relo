@@ -33,9 +33,9 @@ public class StyleTagDaoOracle implements StyleTagDao {
 		return list;
 	}
 	//테스트완료
-//	public static void main(String[] args) {
+//	public static void main(String[] args) throws FindException {
 //		StyleTagDaoOracle dao = new StyleTagDaoOracle();
-//		dao.addStyleTag(new StyleTagVo(0, 1, "운동화"));
+//		dao.addStyleTag(new StyleTagVo(0, 3, "운동화"));
 //		List<String> list = dao.styleTagList();
 //		System.out.println(list);
 //	}

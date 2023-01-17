@@ -51,5 +51,10 @@ public interface StyleDao {
 	//게시물 리스트 동적쿼리 이용
 	public ArrayList<StyleVo> selectStyleList(HashMap<String,Object> styleCode) throws FindException;
 	
+	//게시물 총 개수
+	public int cntStyleList() throws FindException;
+	
+	//페이징 테스트
+	public ArrayList<StyleVo> StyleListPage(HashMap<Integer,Object> condition) throws FindException;
 }
 
