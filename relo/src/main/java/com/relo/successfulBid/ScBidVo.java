@@ -14,7 +14,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 
-public class ScAuctionVo {
+public class ScBidVo {
 	private int aNum;
 	private Date cTime;
 }

@@ -2,10 +2,10 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.relo.auction.AuctionDao">
+<mapper namespace="com.relo.mybatis.auction.AuctionDao">
 <resultMap id="productMap" type="Product" autoMapping="true">
 	<id property="pNum" column="p_num"/>
-<!-- 	<result property="pEndDate" column="p_end_date"/> -->
+<!--  	<result property="pEndDate" column="p_end_date"/> -->
 	<association property="stock" javaType="Stock" autoMapping="true">
 		<result property="sName" column="s_name"/>
 	</association>
@@ -32,7 +32,7 @@
 
 <!-- 낙찰 상품 목록 관리자에게 출력 -->
 <select id="selectByPStatus" resultMap="productMap">
-select p.p_num, a.a_num, a.id, a.a_price, s.s_name, p.p_end_date
+select p.p_num, a.a_num, a.id, a.a_price, s.s_name "stock.s_name", p.p_end_date
 from auction a, product p, stock s
 where p.p_status = 6
 and a.a_price = (
@@ -54,5 +54,11 @@ and a.a_num=o.a_num
 and o.o_num=od.o_num
 order by od.d_complete_day desc
 </select>
+
+<!-- 가격 입력 후 입찰하기 누르면 insert문 -->
+<insert id="insertAuction" parameterType="map">
+insert into auction values(auction_seq.nextval,#{id}, #{pNum}, #{aPrice})
+</insert>
+
 </mapper>
 

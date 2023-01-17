@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.relo.catch.mybatis.CatchDao">
+
+
+<!-- 관리자가 낙찰상품들 보고 결제요청 버튼 클릭하면 낙찰tb에 값 insert -->
+<insert id="insertCatch" parameterType="int">
+insert into catch values(#{aNum}, sysdate)
+</insert>
+
+<!-- 구매자가 구매 취소할 경우, 낙찰tb에서 값 삭제 -->
+<delete id="deleteCatch" parameterType="int">
+delete from catch
+where a_num = #{a_num}
+</delete>
+
+</mapper>
+

@@ -11,7 +11,10 @@
   <typeAlias alias="Product" type="com.relo.product.ProductVo"/>
   <typeAlias alias="Stock" type="com.relo.stock.StockVo"/>
   <typeAlias alias="ODelivery" type="com.relo.order_delivery.ODeliveryVo"/>
-  
+  <typeAlias alias="Orders" type="com.relo.orders.OrdersVo"/>
+  <typeAlias alias="Sizes" type="com.relo.sizes.SizesVo"/>
+  <typeAlias alias="Address" type="com.relo.address.AddressVo"/>
+  <typeAlias alias="ScBid" type="com.relo.successfulBid.ScBidVo"/>
   
   
   </typeAliases>
@@ -28,6 +31,9 @@
 	</environments>
 	<mappers>
 		<mapper resource="com/relo/auction/auction.xml"></mapper>
-		<!-- <mapper resource="com/relo/orders/orders.xml"></mapper>  -->
+		<mapper resource="com/relo/orders/orders.xml"></mapper>
+		<mapper resource="com/relo/successfulBid/scBid.xml"></mapper>
+		<mapper resource="com/relo/product/product.xml"></mapper>
+		<mapper resource="com/relo/order_delivery/oDelivery.xml"></mapper>
 	</mappers>
 </configuration>

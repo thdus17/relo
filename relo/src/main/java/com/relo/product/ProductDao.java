@@ -1,15 +1,12 @@
 package com.relo.product;
 
-import org.apache.ibatis.annotations.Insert;
+import java.util.List;
+
+import com.relo.exception.FindException;
+import com.relo.orders.OrdersVo;
 
 public interface ProductDao {
-	/**
-	 * 관리자가 상품 등록
-	 * @param vo
-	 */
-	@Insert("insert into product(p_num, s_num, p_start_date, p_end_date, p_status) "
-		+	"values (product_seq.nextval, #{s_num},sysdate, #{p_end_date}, #{p_status})")
-	void insert(ProductVo vo);
-
-	
+	// 낙찰자가 구매를 포기할 경우 상태 값 유찰됨(8)으로 변경
+	public void updateStatus8(int aNum) throws FindException;
+		
 }

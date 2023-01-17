@@ -14,6 +14,6 @@ import lombok.ToString;
 
 public class AccountVo {
 	private String id;
-	private String bank_account;
-	private String bank_code;
+	private String bankAccount;
+	private String bankCode;
 }

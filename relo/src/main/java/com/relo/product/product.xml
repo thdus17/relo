@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.relo.mybatis.product.ProductDao">
+
+
+<!-- 낙찰자가 구매를 포기할 경우 상태 값 유찰됨(8)으로 변경 -->
+<update id="update8" parameterType="int">
+update product 
+set p_status=8
+where p_num = (
+    select p_num 
+    from auction
+    where a_num=#{a_num})
+</update>
+
+
+</mapper>
+
