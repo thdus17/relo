@@ -15,6 +15,12 @@ public interface AuctionDao {
 	// 판매자에게 정산을 해주기 위함
 	public List<ProductVo> selectByDStatus()  throws FindException;
 	
+	// 낙찰된 상품들 리스트, 관리자 페이지에서 낙찰된 상품들을 확인 페이징
+	public List<ProductVo> selectPageByPStatus(Map map) throws FindException;
+	
+	// 구매확정된 상품들 리스트, 관리자 페이지에서 구매확정된 상품들을 확인 페이징
+	public List<ProductVo> selectPageByDStatus(Map map)  throws FindException;
+	
 	// 입찰할 시 정보 insert
 	public void insert(Map map) throws FindException;
 }

@@ -3,21 +3,21 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<settings>
-		<setting name="mapUnderscoreToCamelCase" value="true"/>
+		<setting name="mapUnderscoreToCamelCase" value="true" />
 		<setting name="jdbcTypeForNull" value="NULL" />
 	</settings>
 	<typeAliases>
-  <typeAlias alias="Auction" type="com.relo.auction.AuctionVo"/>
-  <typeAlias alias="Product" type="com.relo.product.ProductVo"/>
-  <typeAlias alias="Stock" type="com.relo.stock.StockVo"/>
-  <typeAlias alias="ODelivery" type="com.relo.order_delivery.ODeliveryVo"/>
-  <typeAlias alias="Orders" type="com.relo.orders.OrdersVo"/>
-  <typeAlias alias="Sizes" type="com.relo.sizes.SizesVo"/>
-  <typeAlias alias="Address" type="com.relo.address.AddressVo"/>
-  <typeAlias alias="ScBid" type="com.relo.successfulBid.ScBidVo"/>
-  
-  
-  </typeAliases>
+		<typeAlias alias="Auction" type="com.relo.auction.AuctionVo" />
+		<typeAlias alias="Product" type="com.relo.product.ProductVo" />
+		<typeAlias alias="Stock" type="com.relo.stock.StockVo" />
+		<typeAlias alias="ODelivery" type="com.relo.order_delivery.ODeliveryVo" />
+		<typeAlias alias="Orders" type="com.relo.orders.OrdersVo" />
+		<typeAlias alias="Sizes" type="com.relo.sizes.SizesVo" />
+		<typeAlias alias="Address" type="com.relo.address.AddressVo" />
+		<typeAlias alias="ScBid" type="com.relo.successfulBid.ScBidVo" />
+
+
+	</typeAliases>
 	<environments default="mybatis_test">
 		<environment id="mybatis_test">
 			<transactionManager type="JDBC" />

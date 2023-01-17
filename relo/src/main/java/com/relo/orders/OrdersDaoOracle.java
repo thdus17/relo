@@ -19,16 +19,25 @@ public class OrdersDaoOracle implements OrdersDao {
 	public List<OrdersVo> selectOrderListById(String id) throws FindException{
 		// TODO Auto-generated method stub
 		SqlSession session = sqlSessionFactory.openSession();
-		List<OrdersVo> list = session.selectList("com.relo.orders.mybatis.OrdersDao.selectOrdersList", id);		
+		List<OrdersVo> list = session.selectList("com.relo.mybatis.orders.OrdersDao.selectOrdersList", id);		
 		session.close();
 		return list;		
 	}
-
+	
+	@Override
+	public List<OrdersVo> selectListPageById(Map map) throws FindException {
+		// TODO Auto-generated method stub
+		SqlSession session = sqlSessionFactory.openSession();
+		List<OrdersVo> list = session.selectList("com.relo.mybatis.orders.OrdersDao.selectListPaging", map);		
+		session.close();
+		return list;
+	}
+	
 	@Override
 	public OrdersVo selectOrderDetailByNum(int oNum) throws FindException{
 		// TODO Auto-generated method stub
 		SqlSession session = sqlSessionFactory.openSession();
-		OrdersVo vo = session.selectOne("com.relo.orders.mybatis.OrdersDao.selectOrdersDetail", oNum);		
+		OrdersVo vo = session.selectOne("com.relo.mybatis.orders.OrdersDao.selectOrdersDetail", oNum);		
 		session.close();
 		return vo;
 	}
@@ -36,7 +45,7 @@ public class OrdersDaoOracle implements OrdersDao {
 	@Override
 	public void insert(Map map) throws FindException {
 		SqlSession session = sqlSessionFactory.openSession();
-		session.insert("com.relo.orders.mybatis.OrdersDao.insertOrders", map);
+		session.insert("com.relo.mybatis.orders.OrdersDao.insertOrders", map);
 		session.commit();
 		session.close();
 	}
@@ -45,7 +54,7 @@ public class OrdersDaoOracle implements OrdersDao {
 	@Override
 	public void updateAddrNum(Map map) throws FindException {
 		SqlSession session = sqlSessionFactory.openSession();
-		session.insert("com.relo.orders.mybatis.OrdersDao.updateAddrNum", map);
+		session.insert("com.relo.mybatis.orders.OrdersDao.updateAddrNum", map);
 		session.commit();
 		session.close();
 	}

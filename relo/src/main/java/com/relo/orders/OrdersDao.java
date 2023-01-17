@@ -9,6 +9,9 @@ public interface OrdersDao {
 	// 각 회원의 주문상품 목록
 	public List<OrdersVo> selectOrderListById(String id) throws FindException;
 	
+	// 각 회원의 주문상품 목록 페이징
+	public List<OrdersVo> selectListPageById(Map map) throws FindException;
+	
 	// 각 회원의 주문상품 디테일
 	public OrdersVo selectOrderDetailByNum(int oNum) throws FindException;
 

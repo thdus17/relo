@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.relo.orders.mybatis.OrdersDao">
+<mapper namespace="com.relo.mybatis.orders.OrdersDao">
 <resultMap id="ordersMap" type="Orders" autoMapping="true">
 	<id property="oNum" column="o_num"/>
 	
@@ -69,6 +69,28 @@ and p.p_num=a.p_num
 and a.a_num=o.a_num
 and o.o_num=od.o_num
 order by o.o_date desc
+</select>
+
+<!-- 회원별 주문목록 띄우기 페이징버전 -->
+<select id="selectListPaging" resultMap="ordersMap" parameterType="hashmap">
+select * from (
+    select rownum rn, a.* 
+    from (
+        select p.p_num "pro_p_num", o.o_num, s.s_name "pro_stock.s_name", sz.size_category_name "sizes.size_category_name", a.a_price "pro_a_a_price", o.o_date, od.d_status "pro_od.d_status"
+        from stock s, product p, sizes sz, orders o, auction a, order_delivery od
+        where a.a_num in (select c.a_num 
+        from auction a, catch c
+        where id=#{id}
+        and a.a_num=c.a_num)
+        and sz.size_category_num = s.size_category_num
+        and s.s_num=p.s_num
+        and p.p_num=a.p_num
+        and a.a_num=o.a_num
+        and o.o_num=od.o_num
+        order by o.o_date desc
+    ) 
+a) 
+where rn between #{start} and #{end}
 </select>
 
 <!-- 회원의 주문 상세 띄우기 -->

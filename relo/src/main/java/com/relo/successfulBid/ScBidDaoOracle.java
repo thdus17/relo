@@ -21,7 +21,7 @@ public class ScBidDaoOracle implements ScBidDao {
 	public void insert(int aNum) throws FindException{
 		// TODO Auto-generated method stub
 		SqlSession session = sqlSessionFactory.openSession();
-		session.insert("com.relo.catch.mybatis.CatchDao.insertCatch", aNum);
+		session.insert("com.relo.mybatis.catch.CatchDao.insertCatch", aNum);
 		session.commit();
 		session.close();
 	}
@@ -30,7 +30,7 @@ public class ScBidDaoOracle implements ScBidDao {
 	public void delete(int aNum) throws FindException{
 		// TODO Auto-generated method stub
 		SqlSession session = sqlSessionFactory.openSession();
-		session.delete("com.relo.catch.mybatis.CatchDao.deleteCatch", aNum);
+		session.delete("com.relo.mybatis.catch.CatchDao.deleteCatch", aNum);
 		session.commit();
 		session.close();
 	}

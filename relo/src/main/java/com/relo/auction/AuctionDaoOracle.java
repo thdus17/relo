@@ -35,6 +35,22 @@ public class AuctionDaoOracle implements AuctionDao {
 		return list;
 	}
 	
+	@Override
+	public List<ProductVo> selectPageByPStatus(Map map) throws FindException {
+		SqlSession session = sqlSessionFactory.openSession();
+//		Auction mapper = (Auction) session.getMapper(Auction.class);
+		List<ProductVo> list = session.selectList("com.relo.mybatis.auction.AuctionDao.selectPageByPStatus", map);		
+		session.close();
+		return list;
+	}
+	
+	@Override
+	public List<ProductVo> selectPageByDStatus(Map map) throws FindException {
+		SqlSession session = sqlSessionFactory.openSession();
+		List<ProductVo> list = session.selectList("com.relo.mybatis.auction.AuctionDao.selectPageByDStatus", map);		
+		session.close();
+		return list;
+	}
 	
 	@Override
 	public void insert(Map map) throws FindException {
