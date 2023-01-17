@@ -2,6 +2,8 @@ package com.relo.notice;
 
 import java.sql.Date;
 
+import com.relo.member.MemberVo;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +15,8 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class NoticeVo {
-	private int n_num;
+	private int nNum;
+	private MemberVo memberVo;
 	private String id;
 	private String nTitle;
 	private String nContent;

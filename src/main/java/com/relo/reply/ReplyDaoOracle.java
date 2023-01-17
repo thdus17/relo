@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
+import com.relo.exception.FindException;
 import com.relo.resource.Factory;
 
 public class ReplyDaoOracle implements ReplyDao {
@@ -13,44 +14,45 @@ public class ReplyDaoOracle implements ReplyDao {
 	public ReplyDaoOracle(){
 		sqlSessionFactory = Factory.getSqlSessionFactory();
 	}
+	//댓글 추가
 	@Override
-	public void addReply(ReplyVo vo) {
+	public void addReply(ReplyVo vo) throws FindException{
 		SqlSession session = sqlSessionFactory.openSession();
 		ReplyDao dao = (ReplyDao) session.getMapper(ReplyDao.class);
 		dao.addReply(vo);
 		session.commit();
 		session.close();
 	}
-
+	//댓글 삭제
 	@Override
-	public void delReply(ReplyVo vo) {
+	public void delReply(ReplyVo vo) throws FindException{
 		SqlSession session = sqlSessionFactory.openSession();
 		ReplyDao dao = (ReplyDao) session.getMapper(ReplyDao.class);
 		dao.delReply(vo);
 		session.commit();
 		session.close();
 	}
-
+	//댓글 개수 반환
 	@Override
-	public int cntReply(int styleNum) {
+	public int cntReply(int styleNum) throws FindException{
 		SqlSession session = sqlSessionFactory.openSession();
 		ReplyDao dao = (ReplyDao) session.getMapper(ReplyDao.class);
 		int cnt =dao.cntReply(styleNum);
 		session.close();
 		return cnt;
 	}
-
+	//댓글 리스트
 	@Override
-	public ArrayList<ReplyVo> detailRep(int styleNum) {
+	public ArrayList<ReplyVo> detailRep(int styleNum) throws FindException{
 		SqlSession session = sqlSessionFactory.openSession();
 		ReplyDao dao = (ReplyDao) session.getMapper(ReplyDao.class);
 		ArrayList<ReplyVo> list = dao.detailRep(styleNum);
 		session.close();
 		return list;
 	}
-
+	//댓글 수정
 	@Override
-	public void updateRep(ReplyVo vo) {
+	public void updateRep(ReplyVo vo) throws FindException{
 		SqlSession session = sqlSessionFactory.openSession();
 		ReplyDao dao = (ReplyDao) session.getMapper(ReplyDao.class);
 		dao.updateRep(vo);

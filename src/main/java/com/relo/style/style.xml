@@ -14,7 +14,7 @@
       		javaType="com.relo.styletag.StyleTagVo" autoMapping="true">
       </association>
      </resultMap>
-     
+
      <insert id="addStyle">
      	insert into style values(style_seq.nextval, #{id},
      	 #{styleContent}, #{styleFile}, sysdate, #{styleLikes})
@@ -32,13 +32,22 @@
 		</set>
 		where style_num=#{styleNum}
      </update>
-     
-     <select id="selectStyleLikes" resultType="StyleVo">
+     <!-- 동적 쿼리로 변경  -->
+     <!-- <select id="selectStyleLikes" resultType="StyleVo">
     	select * from style order by style_likes desc, style_num desc
      </select>
      
      <select id="selectStyleNum" resultType="StyleVo">
     	select * from style order by style_num desc
+     </select> -->
+     
+     <select id="selectStyleList" parameterType="map" resultType="StyleVo">
+     	select * from style
+     	order by
+     	<choose>
+     		<when test="styleCode == 'styleLikes'">style_likes desc, style_num desc</when>
+     		<otherwise> style_num desc </otherwise>
+     	</choose>
      </select>
      
      <select id="selectStyleId" parameterType="String" resultType="StyleVo">

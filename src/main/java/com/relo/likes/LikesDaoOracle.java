@@ -3,6 +3,7 @@ package com.relo.likes;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
+import com.relo.exception.FindException;
 import com.relo.resource.Factory;
 
 public class LikesDaoOracle implements LikesDao {
@@ -12,17 +13,18 @@ public class LikesDaoOracle implements LikesDao {
 	public LikesDaoOracle() {
 		sqlSessionFactory = Factory.getSqlSessionFactory();
 	}
+	//좋아요+1
 	@Override
-	public void addLikes(LikesVo vo) {
+	public void addLikes(LikesVo vo) throws FindException{
 		SqlSession session = sqlSessionFactory.openSession();
 		LikesDao dao = (LikesDao) session.getMapper(LikesDao.class);
 		dao.addLikes(vo);
 		session.commit();
 		session.close();
 	}
-	
+	//좋아요-1
 	@Override
-	public void delLikes(LikesVo vo) {
+	public void delLikes(LikesVo vo) throws FindException{
 		SqlSession session = sqlSessionFactory.openSession();
 		LikesDao dao = (LikesDao) session.getMapper(LikesDao.class);
 		dao.delLikes(vo);

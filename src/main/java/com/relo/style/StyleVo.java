@@ -2,6 +2,7 @@ package com.relo.style;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.relo.styletag.StyleTagVo;
 
 import lombok.AllArgsConstructor;
@@ -26,6 +27,7 @@ public class StyleVo {
 	private StyleTagVo styleTag;
 	private String styleContent;
 	private String styleFile;
+	@JsonFormat(timezone = "Asia/Seoul", pattern = "yy-MM-dd")
 	private Date styleDate;
 	private int styleLikes;
 
