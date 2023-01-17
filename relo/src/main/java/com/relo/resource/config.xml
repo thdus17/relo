@@ -9,6 +9,7 @@
 	<typeAliases>
 		<typeAlias alias="Auction" type="com.relo.auction.AuctionVo" />
 		<typeAlias alias="Product" type="com.relo.product.ProductVo" />
+		<typeAlias alias="Account" type="com.relo.account.AccountVo" />
 		<typeAlias alias="Stock" type="com.relo.stock.StockVo" />
 		<typeAlias alias="ODelivery" type="com.relo.order_delivery.ODeliveryVo" />
 		<typeAlias alias="Orders" type="com.relo.orders.OrdersVo" />

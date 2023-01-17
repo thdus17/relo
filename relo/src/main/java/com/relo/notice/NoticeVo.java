@@ -1,6 +1,6 @@
 package com.relo.notice;
 
-import java.sql.Date;
+import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,11 +13,11 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class NoticeVo {
-	private int n_num;
+	private int nNum;
 	private String id;
-	private String n_title;
-	private String n_content;
-	private Date n_date;
-	private int n_category;
-	private String n_file;
+	private String nTitle;
+	private String nContent;
+	private Date nDate;
+	private int nCategory;
+	private String nFile;
 }

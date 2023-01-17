@@ -23,6 +23,10 @@ public class ProductVo {
 	private int pNum;
 //	private int s_num;
 	private StockVo stock;
+	//계형님이랑 나랑 다름
+	//private StockVo stockVo;
+	//private List<AuctionVo> auction;
+	//계형님한테 맞춰서 resultMap 수정하기
 	private List<AuctionVo> a;
 	private ODeliveryVo od;
 	private Date pStartDate;
