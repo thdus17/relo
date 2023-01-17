@@ -5,10 +5,10 @@ import java.util.List;
 import com.relo.exception.FindException;
 
 public class ZzimService {
-	private ZzimDAOOracle dao;
+	private ZzimDao dao;
 
 	public ZzimService() {
-		dao = new ZzimDAOOracle();
+		dao = new ZzimDaoOracle();
 	}
 
 	public List<ZzimVo> getById(String id) throws FindException {

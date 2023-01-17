@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace = "com.relo.product.ProductDao">
+<resultMap id ="productMap" type="ProductVo" autoMapping ="true">
+	<id property ="pNum" column ="p_num"/>
+	<result property ="pEndDate" column ="p_end_date"/>
+	<association property ="stock" javaType ="com.relo.stock.StockVo" autoMapping ="true">
+		<association property = "sizesVo" javaType ="com.relo.sizes.SizesVo" autoMapping ="true">
+		</association>
+	</association>
+	
+	<collection property ="a" ofType="com.relo.auction.AuctionVo" autoMapping="true">
+	</collection>	
+</resultMap>
+<select id="searchProdList" parameterType = "Map"  resultMap="productMap">
+SELECT * FROM (SELECT rownum rn, t.* FROM (SELECT p.p_num, s.s_num, s.s_name, s.s_hope_price, s.s_file, a.max_price, p.p_end_date, s.s_type
+FROM product p, stock s,(SELECT p_num, max(a_price) as max_price FROM auction GROUP BY p_num) a
+WHERE p.s_num = s.s_num AND p.p_num = a.p_num(+) AND p_status = 4
+<choose>
+	<when test='type == "신발"'>AND s.s_type = '신발'</when>
+	<when test='type == "상의"'>AND s.s_type = '상의'</when>
+	<when test='type == "하의"'>AND s.s_type = '하의'</when>
+	<otherwise></otherwise>
+</choose> 
+<choose>
+	<when test='orderkind == "pnumdesc"'>ORDER BY p.p_num DESC</when>
+	<when test='orderkind == "penddate"'>ORDER BY p.p_end_date ASC</when>
+	<otherwise></otherwise>
+</choose>
+) t ) WHERE rn BETWEEN 1 AND 3
+</select>	
+
+<select id = "searchProdListZzim" resultMap ="productMap">
+SELECT * FROM (SELECT rownum rn, t.* FROM (SELECT p.p_num, s.s_num, s.s_name, s.s_hope_price, s.s_file, a.max_price
+FROM product p, stock s, (SELECT p_num, max(a_price) as max_price FROM auction GROUP BY p_num) a, 
+(SELECT p_num, count(*) zcount FROM zzim GROUP BY p_num ORDER BY zcount) z
+WHERE p.s_num = s.s_num AND p.p_num = a.p_num(+) AND p_status = 4 AND p.p_num = z.p_num
+ORDER BY z.zcount desc) t ) WHERE rn BETWEEN 1 AND 2
+</select>
+
+<select id ="searchProdListNoTender" parameterType = "Map" resultMap ="productMap">
+SELECT * FROM (SELECT rownum rn, t.* FROM (SELECT p.p_num, s.s_num, s.s_name, s.s_hope_price, s.s_file, p.p_end_date, s.s_type
+FROM product p , stock s 
+WHERE p.s_num = s.s_num AND p_status = 4 AND NOT p_num IN (SELECT p_num FROM auction)
+<choose>
+	<when test='type == "신발"'>AND s.s_type = '신발'</when>
+	<when test='type == "상의"'>AND s.s_type = '상의'</when>
+	<when test='type == "하의"'>AND s.s_type = '하의'</when>
+</choose> 
+ORDER BY p_end_date ) t ) WHERE rn BETWEEN 1 AND 3
+</select>
+
+<select id = "searchByProdName" parameterType = "string" resultMap = "productMap">
+SELECT * FROM (SELECT rownum rn, t.* FROM (SELECT p.p_num, s.s_num, s.s_name, s.s_hope_price, s.s_file, a.max_price, p.p_end_date, s.s_type
+FROM product p, stock s, (SELECT p_num, max(a_price) as max_price FROM auction GROUP BY p_num) a
+WHERE p.s_num = s.s_num AND p.p_num = a.p_num(+) AND p_status = 4 AND s_name Like #{sName}
+ORDER BY p_end_date) t ) WHERE rn BETWEEN 1 AND 2
+</select>
+
+<select id = "recentTender"  parameterType ="Map" resultMap="productMap">
+SELECT * FROM (SELECT rownum rn, t.* FROM (SELECT p.p_num, s_name, a_price
+FROM product p, stock s, auction a
+WHERE p.s_num = s.s_num AND p.p_num = a.p_num AND a.p_num =#{pNum}
+<choose>
+	<when test ='orderkind == "price"'>ORDER BY a.a_price DESC</when>
+	<otherwise>ORDER BY a.a_num DESC</otherwise>
+</choose>
+) t ) WHERE rn BETWEEN 1 AND 2
+</select>
+
+<select id = "productDetail" parameterType = "int" resultMap = "productMap">
+SELECT distinct s.s_num, s_file, p.p_end_date, s_hope_price, (SELECT max(a_price) FROM auction WHERE p_num =#{pNum}) max_price,
+manager_comment, sz.size_category_name, s_color, s_origin_price, s_grade
+FROM stock s, product p, auction a, sizes sz
+WHERE s.s_num = p.s_num AND s.size_category_num = sz.size_category_num AND p_status =4 AND p.p_num = a.p_num AND p.p_num =#{pNum}"
+</select>
+
+
+<select id = "totalCnt" resultType="int" >
+SELECT COUNT(*) totalcnt FROM product
+</select>
+
+<insert id = "insertTender" parameterType = "Map">
+INSERT into auction values(auction_seq.nextval, #{id} , #{pNum}, #{aPrice})
+</insert>
+
+
+
+</mapper>
