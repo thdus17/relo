@@ -1,0 +1,29 @@
+package com.relo.zzim;
+
+import java.util.List;
+
+import com.relo.exception.FindException;
+
+public class ZzimService {
+	private ZzimDao dao;
+
+	public ZzimService() {
+		dao = new ZzimDaoOracle();
+	}
+
+	public List<ZzimVo> getById(String id) throws FindException {
+		return dao.selectById(id);
+	}
+
+	public void addZzim(ZzimVo vo) throws FindException {
+		dao.insertZzim(vo);
+	}
+
+	public void delZzim(ZzimVo vo) throws FindException {
+		dao.deleteZzim(vo);
+	}
+
+	public void delZzimAll(int pNum) throws FindException {
+		dao.deleteZzimAll(pNum);
+	}
+}
