@@ -1,5 +1,7 @@
 package com.relo.stock;
 
+import com.relo.account.AccountVo;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,5 +30,6 @@ public class StockVo {
 	private String sellerComment;
 	private String managerComment;
 	private int sReturn;
+	private AccountVo accountVo;
 
 }

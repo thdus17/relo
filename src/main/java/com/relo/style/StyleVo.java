@@ -1,8 +1,10 @@
 package com.relo.style;
 
 import java.util.Date;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.relo.reply.ReplyVo;
 import com.relo.styletag.StyleTagVo;
 
 import lombok.AllArgsConstructor;
@@ -24,11 +26,21 @@ import lombok.ToString;
 public class StyleVo {
 	private int styleNum;
 	private String id;
-	private StyleTagVo styleTag;
+	private List<StyleTagVo> tagList;
+	private List<ReplyVo> replist;
 	private String styleContent;
 	private String styleFile;
 	@JsonFormat(timezone = "Asia/Seoul", pattern = "yy-MM-dd")
 	private Date styleDate;
 	private int styleLikes;
 
+	
+	public StyleVo(int styleNum, String id, String styleContent, String styleFile, Date styleDate, int styleLikes) {
+		this.styleNum= styleNum;
+		this.id = id;
+		this.styleContent = styleContent;
+		this.styleFile = styleFile;
+		this.styleDate = styleDate;
+		this.styleLikes = styleLikes;
+	}
 }

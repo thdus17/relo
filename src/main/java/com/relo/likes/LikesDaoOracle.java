@@ -32,9 +32,9 @@ public class LikesDaoOracle implements LikesDao {
 		session.close();
 	}
 // 테스트 확인 완료	
-//	public static void main(String[] args) {
-//		LikesDaoOracle dao = new LikesDaoOracle();
-//		dao.addLikes(new LikesVo(1,"ddd"));
-//		dao.delLikes(new LikesVo(3,"fff"));
-//	}
+	public static void main(String[] args) throws FindException {
+		LikesDaoOracle dao = new LikesDaoOracle();
+		dao.addLikes(new LikesVo(7,"ddd"));
+		dao.delLikes(new LikesVo(3,"ccc"));
+	}
 }

@@ -2,6 +2,7 @@ package com.relo.style;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import com.relo.exception.FindException;
 
@@ -15,11 +16,11 @@ public interface StyleDao {
 	//게시물 최신순 리스트
 //	public ArrayList<StyleVo> selectStyleNum();
 	//게시물 내 글 모아보기(최신순)
-	public ArrayList<StyleVo> selectStyleId(String id) throws FindException;
+	public List<StyleVo> selectStyleId(String id) throws FindException;
 	//게시물 해시태그별 모아보기(인기순 -> 최신순)
-	public ArrayList<StyleVo> selectStyleTag(String hashName) throws FindException;
+	public List<StyleVo> selectStyleTag(String hashName) throws FindException;
 	//게시물 상세보기 styleVo 순서 -> (style_num, id, hash_name, style_file, style_date, style_likes)
-	public ArrayList<StyleVo> selectStyleDetail(int styleNum) throws FindException;
+	public List<StyleVo> selectStyleDetail(int styleNum) throws FindException;
 	//	@Select("select a.style_num, a.id, b.hash_name, a.style_file, a.style_date, a.style_likes\n"
 //			+ "from style a\n"
 //			+ "join style_tag b\n"
@@ -49,12 +50,12 @@ public interface StyleDao {
 //			"where style_num=#{stylenum}",
 //			"</script>"})
 	//게시물 리스트 동적쿼리 이용
-	public ArrayList<StyleVo> selectStyleList(HashMap<String,Object> styleCode) throws FindException;
+	public List<StyleVo> selectStyleList(HashMap<String,Object> styleCode) throws FindException;
 	
 	//게시물 총 개수
 	public int cntStyleList() throws FindException;
 	
 	//페이징 테스트
-	public ArrayList<StyleVo> StyleListPage(HashMap<Integer,Object> condition) throws FindException;
+	public List<StyleVo> StyleListPage(int start, int end) throws FindException;
 }
 

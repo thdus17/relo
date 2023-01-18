@@ -1,6 +1,6 @@
 package com.relo.reply;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import com.relo.exception.FindException;
 
@@ -12,7 +12,7 @@ public interface ReplyDao {
 	//댓글 개수 보여주기
 	public int cntReply(int styleNum) throws FindException;
 	//댓글 내용 상세 
-	public ArrayList<ReplyVo> detailRep(int styleNum) throws FindException;
+	public List<ReplyVo> detailRep(int styleNum) throws FindException;
 	//댓글수정
 	public void updateRep(ReplyVo vo) throws FindException;
 }

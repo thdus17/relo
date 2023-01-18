@@ -1,6 +1,7 @@
 package com.relo.reply;
 
-import java.util.ArrayList;
+
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -43,10 +44,10 @@ public class ReplyDaoOracle implements ReplyDao {
 	}
 	//댓글 리스트
 	@Override
-	public ArrayList<ReplyVo> detailRep(int styleNum) throws FindException{
+	public List<ReplyVo> detailRep(int styleNum) throws FindException{
 		SqlSession session = sqlSessionFactory.openSession();
 		ReplyDao dao = (ReplyDao) session.getMapper(ReplyDao.class);
-		ArrayList<ReplyVo> list = dao.detailRep(styleNum);
+		List<ReplyVo> list = dao.detailRep(styleNum);
 		session.close();
 		return list;
 	}
@@ -59,16 +60,16 @@ public class ReplyDaoOracle implements ReplyDao {
 		session.commit();
 		session.close();
 	}
-	//테스트 완료
-//	public static void main(String[] args) {
-//		ReplyDaoOracle dao = new ReplyDaoOracle();
+//	테스트 완료
+	public static void main(String[] args) throws FindException {
+		ReplyDaoOracle dao = new ReplyDaoOracle();
 //		dao.addReply(new ReplyVo(0,3,"aaa","굳",null));
 //		dao.delReply(new ReplyVo(8,0,"aaa",null,null));
-//		int cnt = dao.cntReply(1);
-//		System.out.println(cnt);
-//		ArrayList<ReplyVo> list = dao.detailRep(1);
-//		System.out.println(list);
+		int cnt = dao.cntReply(1);
+		System.out.println(cnt);
+		List<ReplyVo> list = dao.detailRep(1);
+		System.out.println(list);
 //		dao.updateRep(new ReplyVo(1,0,"bbb","짱",null));
-//	}
+	}
 
 }

@@ -20,8 +20,6 @@ import lombok.ToString;
 
 public class OrdersVo {
 	private int oNum;
-	private int aNum;
-	private int addrNum;
 	private ProductVo product;
 	private AddressVo address;
 	private String oMemo;

@@ -6,18 +6,27 @@
 		<setting name="mapUnderscoreToCamelCase" value="true"/>
 		<setting value="NULL" name="jdbcTypeForNull"/>
 	</settings>
-	<typeAliases>
-		<typeAlias type="com.relo.likes.LikesVo" alias="LikesVo"/>
-		<typeAlias type="com.relo.styletag.StyleTagVo" alias="StyleTagVo"/>
-		<typeAlias type="com.relo.reply.ReplyVo" alias="ReplyVo"/>
-		<typeAlias type="com.relo.style.StyleVo" alias="StyleVo"/>
-<!--  	<typeAlias alias="memberVo" type="com.relo.member.vo.MemberVo"/>-->
-<!--	<typeAlias alias="noticeVo" type="com.relo.notice.vo.NoticeVo"/>-->
-  		<typeAlias alias="Auction" type="com.relo.auction.AuctionVo"/>
-  		<typeAlias alias="Product" type="com.relo.product.ProductVo"/>
-  		<typeAlias alias="Stock" type="com.relo.stock.StockVo"/>
-<!-- 	<typeAlias alias="ODelivery" type="com.relo.order_delivery.ODeliveryVo"/>-->
-	</typeAliases>
+<typeAliases>
+<!--       <typeAlias alias="AuctionVo" type="com.relo.auction.AuctionVo" />
+      <typeAlias alias="ProductVo" type="com.relo.product.ProductVo" />
+      <typeAlias alias="AccountVo" type="com.relo.account.AccountVo" />
+      <typeAlias alias="StockVo" type="com.relo.stock.StockVo" />
+      <typeAlias alias="ODeliveryVo" type="com.relo.order_delivery.ODeliveryVo" />
+      <typeAlias alias="OrdersVo" type="com.relo.orders.OrdersVo" />
+      <typeAlias alias="SizesVo" type="com.relo.sizes.SizesVo" />
+      <typeAlias alias="AddressVo" type="com.relo.address.AddressVo" />
+      <typeAlias alias="ScBidVo" type="com.relo.successfulBid.ScBidVo" /> -->
+      <typeAlias alias="LikesVo" type="com.relo.likes.LikesVo" />
+         <typeAlias alias="StyleTagVo" type="com.relo.styletag.StyleTagVo" />
+         <typeAlias alias="ReplyVo" type="com.relo.reply.ReplyVo" />
+         <typeAlias alias="StyleVo" type="com.relo.style.StyleVo"/>
+<!--         <typeAlias alias="MemberVo" type="com.relo.member.MemberVo"/>
+        <typeAlias alias="NoticeVo" type="com.relo.notice.NoticeVo"/>
+        <typeAlias alias="ZzimVo" type="com.relo.zzim.ZzimVo"/>
+         -->
+  
+</typeAliases>
+
 	<environments default="mybatis_test">
 		<environment id="mybatis_test">
 			<transactionManager type="JDBC" />
@@ -29,15 +38,24 @@
 			</dataSource>
 		</environment>
 	</environments>
-	<mappers>
-<!--		<mapper resource="com/relo/auction/auction.xml"></mapper>-->
-		<mapper resource="com/relo/likes/likes.xml"/>
-		<mapper resource="com/relo/styletag/styletag.xml"/>
-		<mapper resource="com/relo/reply/reply.xml"/>
-		<mapper resource="com/relo/style/style.xml"/>
-<!--		<mapper resource="com/relo/member/member_mapper.xml"></mapper>
-		<mapper resource="com/relo/notice/notice_mapper.xml"></mapper>
-		<mapper resource="com/relo/stock/stock.xml"></mapper>-->
-	</mappers>
+<mappers>
+<!--    <mapper resource="com/relo/auction/auction.xml" />
+   <mapper resource="com/relo/orders/orders.xml" />
+   <mapper resource="com/relo/successfulBid/scBid.xml" />
+   <mapper resource="com/relo/product/product.xml" />
+   <mapper resource="com/relo/orderDelivery/oDelivery.xml" /> -->
+   <mapper resource="com/relo/likes/likes.xml"/>
+    <mapper resource="com/relo/styletag/styleTag.xml"/>
+    <mapper resource="com/relo/reply/reply.xml"/>
+    <mapper resource="com/relo/style/style.xml"/>
+<!--     <mapper resource="com/relo/member/member.xml" />
+    <mapper resource="com/relo/notice/notice.xml" />
+    <mapper resource="com/relo/address/address.xml" />
+    <mapper resource="com/relo/stock/stock.xml" />
+    <mapper resource="com/relo/zzim/zzim.xml" />
+    <mapper resource="com/relo/account/account.xml" />
+    <mapper resource="com/relo/stockDelivery/StockDeliveryMapper.xml" />-->
+</mappers>
+
 </configuration>
 
