@@ -2,23 +2,24 @@
 <!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace = "com.relo.zzim.ZzimDao">
 	<resultMap type ="ZzimVo" id ="ZzimVo" autoMapping ="true">
-	<id column="id" property ="id" />
-	<result column = "p_num" property ="pNum" />
-	<result column = "s_name" property ="sName" />
-	<result column = "s_type" property ="sType" />
-	<result column = "s_color" property ="sColor" />
-	<result column = "s_hope_price" property ="sHopePrice" />
-	<result column = "s_grade" property ="sGrade" />
-	<result column = "p_end_date" property ="pEndDate" javaType = "java.util.Date" />
+		<id column="id" property ="id" />
+			<collection property ="product" ofType ="com.relo.product.ProductVo" autoMapping="true">
+			<id column="p_num" property ="pNum" />
+				<association property ="stockVo" javaType ="com.relo.stock.StockVo" autoMapping="true">
+				</association>
+				<collection property ="auction" ofType="com.relo.auction.AuctionVo" autoMapping="true">
+				<result column ="max_price" property ="aPrice"/>
+			</collection>	
+			</collection>	
 	</resultMap> 
 	
 	<select id = "selectById" parameterType="String" resultMap ="ZzimVo">
-	SELECT z.id, z.p_num, s_name, s_type, s_color, s_hope_price, s_grade, p_end_date
-	FROM product p, stock s, zzim z  
-	WHERE p.p_num = z.p_num AND s.s_num = p.s_num AND z.id=#{id}
+	SELECT z.id, z.p_num, s_name, s_type, s_color, s_hope_price, s_grade, p_end_date, a.max_price
+	FROM product p, stock s, zzim z, (SELECT p_num, max(a_price) as max_price FROM auction GROUP BY p_num) a 
+	WHERE p.p_num = z.p_num AND s.s_num = p.s_num AND p.p_num = a.p_num(+) and z.id=#{id}
 	</select>
 
-	<insert id = "insertZzim" parameterType="ZzimVo">
+	<insert id = "insertZzim" parameterType="map">
 	INSERT INTO zzim VALUES(#{id}, #{pNum})
 	</insert>
 

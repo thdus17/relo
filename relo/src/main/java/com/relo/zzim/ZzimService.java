@@ -1,6 +1,7 @@
 package com.relo.zzim;
 
 import java.util.List;
+import java.util.Map;
 
 import com.relo.exception.FindException;
 
@@ -15,12 +16,12 @@ public class ZzimService {
 		return dao.selectById(id);
 	}
 
-	public void addZzim(ZzimVo vo) throws FindException {
-		dao.insertZzim(vo);
+	public void addZzim(Map<String, Object> map) throws FindException {
+		dao.insertZzim(map);
 	}
 
-	public void delZzim(ZzimVo vo) throws FindException {
-		dao.deleteZzim(vo);
+	public void delZzim(Map<String, Object> map) throws FindException {
+		dao.deleteZzim(map);
 	}
 
 	public void delZzimAll(int pNum) throws FindException {
