@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.relo.product.ProductDao">
+	<resultMap id="ProductVo" type="com.relo.product.ProductVo"
+		autoMapping="true">
+		<association property="StockVo" javaType="StockVo"
+			autoMapping="true">
+			<association property="SizesVo" javaType="SizesVo"
+				autoMapping="true">
+				<id column="size_category_num" property="sizeCategoryNum" />
+				<result column="size_category_name"
+					property="sizeCategoryName" />
+			</association>
+		</association>
+	</resultMap>
+	<select id="selectSNumByPNum" resultType="int" parameterType="int">
+		select s_num from product
+		where p_num=#{pNum}
+	</select>
+
+	<select id="selectAllByPStatusIs8" resultMap="ProductVo">
+		select s.*, sp.*,
+		p.p_end_date,
+		p.p_num
+		from stock s, product p, sizes sp
+		where
+		s.s_num=p.s_num
+		and sp.size_category_num = s.size_category_num
+		and
+		p.p_status=8
+		order by p.p_end_date desc
+	</select>
+
+	<update id="updateWhenReBid" parameterType="int">
+		update stock
+		<set>
+			s_return = 3
+		</set>
+		where s_num=#{sNum}
+	</update>
+
+	<delete id="deleteReBiddingProduct" parameterType="int">
+		delete from
+		product
+		where p_num=#{pNum}
+	</delete>
+</mapper>

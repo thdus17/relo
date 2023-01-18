@@ -1,0 +1,53 @@
+package com.relo.member;
+
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+
+import com.relo.exception.FindException;
+import com.relo.resource.Factory;
+
+public class MemberDaoOracle implements MemberDao {
+	private SqlSessionFactory sqlSessionFactory;
+
+	public MemberDaoOracle() {
+		sqlSessionFactory = Factory.getSqlSessionFactory();
+	}
+
+	@Override
+	public void insert(MemberVo m) throws FindException {
+		SqlSession session = sqlSessionFactory.openSession();
+		MemberDao dao = (MemberDao) session.getMapper(MemberDao.class);
+
+		dao.insert(m);
+
+		session.commit();
+		session.close();
+	}
+
+	@Override
+	public MemberVo select(String id) throws FindException {
+		SqlSession session = sqlSessionFactory.openSession();
+		MemberDao dao = (MemberDao) session.getMapper(MemberDao.class);
+		MemberVo m = dao.select(id);
+		session.close();
+		return m;
+	}
+
+	@Override
+	public void update(MemberVo m) throws FindException {
+		SqlSession session = sqlSessionFactory.openSession();
+		MemberDao dao = (MemberDao) session.getMapper(MemberDao.class);
+		dao.update(m);
+		session.commit();
+		session.close();
+	}
+
+	@Override
+	public void delete(String id) throws FindException {
+		SqlSession session = sqlSessionFactory.openSession();
+		MemberDao dao = (MemberDao) session.getMapper(MemberDao.class);
+		dao.delete(id);
+		session.commit();
+		session.close();
+	}
+}

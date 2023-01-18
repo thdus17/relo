@@ -1,4 +1,4 @@
-package com.relo.notice.vo;
+package com.relo.notice;
 
 import java.util.Date;
 

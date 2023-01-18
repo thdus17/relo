@@ -1,4 +1,4 @@
-package com.relo.member.vo;
+package com.relo.member;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

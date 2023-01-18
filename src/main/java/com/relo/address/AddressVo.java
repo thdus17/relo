@@ -1,4 +1,4 @@
-package com.relo.address.vo;
+package com.relo.address;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
