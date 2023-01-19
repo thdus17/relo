@@ -2,6 +2,8 @@ package com.relo.reply;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,5 +24,6 @@ public class ReplyVo {
 	private int styleNum;
 	private String id;
 	private String repContent;
+	@JsonFormat(timezone = "Asia/Seoul", pattern = "yy-MM-dd")
 	private Date repDate;
 }

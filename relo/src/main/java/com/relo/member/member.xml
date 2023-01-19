@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.relo.member.MemberDao">
+	<resultMap id="MemberVo" type="com.relo.member.MemberVo"
+		autoMapping="true">
+	</resultMap>
+
+	<insert id="insert" parameterType="MemberVo">
+		insert into
+		member(id,pwd,tel,email,type,birth,m_name)
+		values(#{id},#{pwd},#{tel},#{email},#{type},#{birth},#{mName})
+	</insert>
+
+	<select id="select" parameterType="String" resultType="MemberVo">
+		select * from member where
+		id=#{id}
+	</select>
+	
+	<select id="findId" parameterType="map" resultType="MemberVo">
+		select * from member
+		where m_name = #{mName} 
+		and email = #{email}
+	</select>
+
+	<update id="update" parameterType="MemberVo">
+		update member
+		<set>
+			<if test='pwd != null'>pwd=#{pwd},</if>
+			<if test='tel != null'>
+				tel=#{tel},
+			</if>
+			<if test='email != null'>email=#{email},</if>
+			<if test='mName != null'>
+				m_name=#{mName}
+			</if>
+		</set>
+		where id=#{id}
+	</update>
+
+	<delete id="delete" parameterType="String">
+		delete from member where id=#{id}
+	</delete>
+</mapper>

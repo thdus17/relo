@@ -1,4 +1,4 @@
-package com.relo.stock_delivery;
+package com.relo.stockDelivery;
 import java.util.Date;
 
 import lombok.AllArgsConstructor;
@@ -13,9 +13,9 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 
-public class Stock_DeliveryVo {
-	private int s_num;
-	private int std_status;
-	private String std_trackin_info;
-	private Date std_start_date;
+public class StockDeliveryVo {
+	private int sNum;
+	private int stdStatus;
+	private String stdTrackinInfo;
+	private Date stdStartDate;
 }
