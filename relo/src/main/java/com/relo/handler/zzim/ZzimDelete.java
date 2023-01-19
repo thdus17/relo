@@ -20,6 +20,7 @@ public class ZzimDelete implements Handler {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
+		response.addHeader("Access-Control-Allow-Origin", "*");
 		String id = request.getParameter("id");
 		int pNum = Integer.parseInt(request.getParameter("pNum"));
 

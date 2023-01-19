@@ -6,6 +6,13 @@
 			<collection property ="product" ofType ="com.relo.product.ProductVo" autoMapping="true">
 			<id column="p_num" property ="pNum" />
 				<association property ="stockVo" javaType ="com.relo.stock.StockVo" autoMapping="true">
+				<result column = "s_name" property = "sName" /> 
+				<result column = "s_color" property = "sColor" /> 
+				<result column = "s_hope_price" property = "sHopePrice" /> 
+				<result column = "s_grade" property = "sGrade" /> 
+				<association property="sizes" javaType ="com.relo.sizes.SizesVo">
+				<result column = "size_category_name" property = "sizeCategoryName"/>
+				</association>
 				</association>
 				<collection property ="auction" ofType="com.relo.auction.AuctionVo" autoMapping="true">
 				<result column ="max_price" property ="aPrice"/>
@@ -14,9 +21,12 @@
 	</resultMap> 
 	
 	<select id = "selectById" parameterType="String" resultMap ="ZzimVo">
-	SELECT z.id, z.p_num, s_name, s_type, s_color, s_hope_price, s_grade, p_end_date, a.max_price
-	FROM product p, stock s, zzim z, (SELECT p_num, max(a_price) as max_price FROM auction GROUP BY p_num) a 
-	WHERE p.p_num = z.p_num AND s.s_num = p.s_num AND p.p_num = a.p_num(+) and z.id=#{id}
+	SELECT z.id, z.p_num, s_file, s_brand, s_name, s_type, sz.size_category_name, s_color, s_hope_price, s_grade, p_end_date, a.max_price
+	FROM product p, stock s, zzim z, (SELECT p_num, max(a_price) as max_price FROM auction GROUP BY p_num) a, sizes sz
+	WHERE p.p_num = z.p_num 
+	AND s.s_num = p.s_num 
+	AND s.size_category_num = sz.size_category_num 
+	AND p.p_num = a.p_num(+) and z.id=#{id}
 	</select>
 
 	<insert id = "insertZzim" parameterType="map">

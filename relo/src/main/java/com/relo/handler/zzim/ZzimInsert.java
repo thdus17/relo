@@ -20,16 +20,19 @@ public class ZzimInsert implements Handler {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
+		response.addHeader("Access-Control-Allow-Origin", "*");
 		String id = request.getParameter("id");
 		int pNum = Integer.parseInt(request.getParameter("pNum"));
 
 		// 테스트용
 		// String id = "bbb";
+
 		// int pNum = 7;
 		Map<String, Object> map = new HashMap<>();
 		map.put("id", id);
 		map.put("pNum", pNum);
 		ZzimService service = new ZzimService();
+
 		try {
 			service.addZzim(map);
 		} catch (FindException e) {
