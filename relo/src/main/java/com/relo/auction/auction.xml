@@ -34,13 +34,13 @@ insert into auction values(auction_seq.nextval,#{id}, #{pNum}, #{aPrice})
 <select id="selectById" resultType="int" parameterType="map">
 select a_num from auction
 where id = #{id}
-and p_num=#{p_num}
+and p_num=#{pNum}
 </select>
 
 <!-- 위의 값이 존재하면 update 문 -->
 <update id="updateAPrice" parameterType="map">
-	update auction set a_price=#{a_price}
-	where a_num=#{a_num}
+	update auction set a_price=#{aPrice}
+	where a_num=#{aNum}
 </update>
 
 <!-- 회원의 입찰 시도한 내역 sql - 필터링은 나중에 ^^,,

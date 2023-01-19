@@ -42,9 +42,9 @@ public class AuctionService {
 		}
 	}
 	
-	public List<AuctionVo> selectIngListById(Map map) throws FindException {
+	public List<AuctionVo> getIngListById(String id) throws FindException {
 		try {
-			List<AuctionVo> list = dao.selectIngListById("aaa");
+			List<AuctionVo> list = dao.selectIngListById(id);
 			for (AuctionVo vo : list) {
 				System.out.println(vo);
 			}
@@ -56,9 +56,9 @@ public class AuctionService {
 		return null;
 	}
 	
-	public List<AuctionDTO> selectEndListById(Map map) throws FindException {
+	public List<AuctionDTO> getEndListById(String id) throws FindException {
 		try {
-			List<AuctionDTO> list = dao.selectEndListById("aaa");
+			List<AuctionDTO> list = dao.selectEndListById(id);
 			for (AuctionDTO dto : list) {
 				System.out.println(dto);
 			}

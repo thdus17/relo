@@ -2,23 +2,27 @@ package com.relo.handler.auction;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.relo.auction.AuctionService;
+import com.relo.auction.AuctionVo;
 import com.relo.exception.FindException;
 import com.relo.handler.Handler;
 
-public class AuctionAdd implements Handler {
+public class AuctionIngListById implements Handler {
 
 	@Override
-	public String process(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	public String process(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		try {
 			request.setCharacterEncoding("UTF-8");
@@ -31,47 +35,25 @@ public class AuctionAdd implements Handler {
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		
 		String id = request.getParameter("id");
-		int pNum = Integer.parseInt(request.getParameter("pNum"));
-		String aPrice = request.getParameter("aPrice");
-		
 		AuctionService service = new AuctionService();
 		
-		Map map = new HashMap();
+		List<AuctionVo> list = new ArrayList<>();
 		
-		map.put("id", id);
-		map.put("pNum", pNum);
-		
-		int aNum = 0;
 		ObjectMapper mapper = new ObjectMapper();
-		
+		mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
 		try {
-			//입찰 시도시, 기존에 입찰한 이력이 있는지 조회
-			aNum = service.getById(map);
-			map.put("aPrice", aPrice);
-			if (aNum>0) {
-				service.addAuction(map);
-				String jsonStr = "입찰 완료";
-				return jsonStr;
-			}
-			else {
-				Map map1 = new HashMap();
-				map1.put("aPrice", aPrice);
-				map1.put("aNum", aNum);
-				service.editAuction(map);
-				
-				String jsonStr = "재입찰 완료";
-				return jsonStr;
-			}
+			list = service.getIngListById(id);
+			String jsonStr = mapper.writeValueAsString(list);
+			return jsonStr;
 		} catch (FindException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Map<String, String> map1 = new HashMap<>();
-			map1.put("msg", e.getMessage());
+			Map<String, String> map = new HashMap<>();
+			map.put("msg", e.getMessage());
 			
-			String jsonStr = mapper.writeValueAsString(map1);
+			String jsonStr = mapper.writeValueAsString(map);
 			return jsonStr;
 		}
-		
 	}
 
 }
