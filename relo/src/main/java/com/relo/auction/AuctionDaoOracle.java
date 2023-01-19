@@ -17,40 +17,7 @@ public class AuctionDaoOracle implements AuctionDao {
 	public AuctionDaoOracle() {
 		sqlSessionFactory = Factory.getSqlSessionFactory();
 	}
-	@Override
-	public List<ProductVo> selectByPStatus ()  throws FindException {
-		SqlSession session = sqlSessionFactory.openSession();
-//		Auction mapper = (Auction) session.getMapper(Auction.class);
-		List<ProductVo> list = session.selectList("com.relo.mybatis.auction.AuctionDao.selectByPStatus");		
-		session.close();
-		return list;
-	}
 	
-	@Override
-	public List<ProductVo> selectByDStatus()  throws FindException{
-		SqlSession session = sqlSessionFactory.openSession();
-		AuctionDao mapper = (AuctionDao) session.getMapper(AuctionDao.class);
-		List<ProductVo> list = mapper.selectByDStatus();		
-		session.close();
-		return list;
-	}
-	
-	@Override
-	public List<ProductVo> selectPageByPStatus(Map map) throws FindException {
-		SqlSession session = sqlSessionFactory.openSession();
-//		Auction mapper = (Auction) session.getMapper(Auction.class);
-		List<ProductVo> list = session.selectList("com.relo.mybatis.auction.AuctionDao.selectPageByPStatus", map);		
-		session.close();
-		return list;
-	}
-	
-	@Override
-	public List<ProductVo> selectPageByDStatus(Map map) throws FindException {
-		SqlSession session = sqlSessionFactory.openSession();
-		List<ProductVo> list = session.selectList("com.relo.mybatis.auction.AuctionDao.selectPageByDStatus", map);		
-		session.close();
-		return list;
-	}
 	
 	@Override
 	public void insert(Map map) throws FindException {
@@ -60,12 +27,99 @@ public class AuctionDaoOracle implements AuctionDao {
 		session.close();
 		
 	}
+	@Override
+	public int selectById(Map map) throws FindException {
+		// TODO Auto-generated method stub
+		SqlSession session = sqlSessionFactory.openSession();
+		int aNum = session.selectOne("com.relo.mybatis.auction.AuctionDao.selectById", map);		
+		session.close();
+		return aNum;
+	}
+
+
+	@Override
+	public void update(Map map) throws FindException {
+		// TODO Auto-generated method stub
+		SqlSession session = sqlSessionFactory.openSession();
+		session.update("com.relo.mybatis.auction.AuctionDao.updateAPrice", map);
+		session.commit();
+		session.close();
+	}
+
+
+	@Override
+	public List<AuctionVo> selectIngListById(String id) throws FindException {
+		// TODO Auto-generated method stub
+		SqlSession session = sqlSessionFactory.openSession();
+//		Auction mapper = (Auction) session.getMapper(Auction.class);
+		List<AuctionVo> list = session.selectList("com.relo.mybatis.auction.AuctionDao.selectIngListById", id);		
+		session.close();
+		return list;
+	}
+
+
+	@Override
+	public List<AuctionDTO> selectEndListById(String id) throws FindException {
+		// TODO Auto-generated method stub
+		SqlSession session = sqlSessionFactory.openSession();
+		List<AuctionDTO> list = session.selectList("com.relo.mybatis.auction.AuctionDao.selectEndListById", id);		
+		session.close();
+		return list;
+	}
+
+
 	public static void main(String[] args) {
 		AuctionDaoOracle dao = new AuctionDaoOracle();
-//		System.out.println(dao.selectByPStatus());
+		
+		//selectById
+//		Map map = new HashMap();
+//		map.put("id", "aaa");
+//		map.put("p_num", 3);
+//		try {
+//			int aNum = dao.selectById(map);
+//			System.out.println(aNum);
+//		} catch (FindException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		
+//		//update test
+//		Map map = new HashMap();
+//		map.put("a_num", 7);
+//		map.put("a_price", 230000);
+//		try {
+//			dao.update(map);
+//		} catch (FindException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		
+//		//selectIngListById
+//		try {
+//			List<AuctionVo> list = dao.selectIngListById("aaa");
+//			for (AuctionVo vo : list) {
+//				System.out.println(vo);
+//			}
+//		} catch (FindException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		
+//		//selectEndListById
+//		try {
+//			List<AuctionDTO> list = dao.selectEndListById("aaa");
+//			for (AuctionDTO dto : list) {
+//				System.out.println(dto);
+//			}
+//		} catch (FindException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		
+//		selectListByPStatus6 구매자
 //		List<ProductVo> list;
 //		try {
-//			list = dao.selectByDStatus();
+//			list = dao.selectByPStatus();
 //			for (ProductVo vo : list) {
 //				System.out.println(vo);
 //			}
@@ -74,17 +128,18 @@ public class AuctionDaoOracle implements AuctionDao {
 //			e.printStackTrace();
 //		}
 		
-		Map map = new HashMap();
-		map.put("id", "aaa");
-		map.put("pNum", 4);
-		map.put("aPrice", 860000);
-		
-		try {
-			dao.insert(map);
-		} catch (FindException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		insert 부분
+//		Map map = new HashMap();
+//		map.put("id", "bbb");
+//		map.put("pNum", 4);
+//		map.put("aPrice", 870000);
+//		
+//		try {
+//			dao.insert(map);
+//		} catch (FindException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
 	}
 }

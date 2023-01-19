@@ -15,11 +15,12 @@ import lombok.ToString;
 @ToString
 
 //product p, auction a, sizes sz, stock s, a_max am
-public class AuctionVo {
+public class AuctionDTO {
 	private int aNum;
 	private String id;
 	private ProductVo product;
 	private int aPrice;
+	private int maxPrice;
 	
 }
 

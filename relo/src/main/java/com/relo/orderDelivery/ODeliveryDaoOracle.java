@@ -1,4 +1,4 @@
-package com.relo.order_delivery;
+package com.relo.orderDelivery;
 
 import java.util.HashMap;
 import java.util.Map;

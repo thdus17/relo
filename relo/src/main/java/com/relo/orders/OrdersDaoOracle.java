@@ -43,6 +43,22 @@ public class OrdersDaoOracle implements OrdersDao {
 	}
 	
 	@Override
+	public List<OrdersVo> selectPageByDStatus(Map map) throws FindException {
+		SqlSession session = sqlSessionFactory.openSession();
+		List<OrdersVo> list = session.selectList("com.relo.mybatis.orders.OrdersDao.selectPageByDStatus", map);		
+		session.close();
+		return list;
+	}
+	
+	@Override
+	public List<OrdersVo> selectByDStatus()  throws FindException{
+		SqlSession session = sqlSessionFactory.openSession();
+		List<OrdersVo> list = session.selectList("com.relo.mybatis.orders.OrdersDao.selectByDStatus");		
+		session.close();
+		return list;
+	}
+	
+	@Override
 	public void insert(Map map) throws FindException {
 		SqlSession session = sqlSessionFactory.openSession();
 		session.insert("com.relo.mybatis.orders.OrdersDao.insertOrders", map);
@@ -61,9 +77,22 @@ public class OrdersDaoOracle implements OrdersDao {
 	public static void main(String[] args) {
 		OrdersDaoOracle dao = new OrdersDaoOracle();
 		
+//		selectByDStatus3
+		List<OrdersVo> list;
+		try {
+			list = dao.selectByDStatus();
+			for (OrdersVo vo : list) {
+				System.out.println(vo);
+			}
+		} catch (FindException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+//		update 주소록
 //		Map map = new HashMap();
-//		map.put("oNum", 4);
-//		map.put("addrNum", 3);
+//		map.put("oNum", 8);
+//		map.put("addrNum", 5);
 //		
 //		try {
 //			dao.updateAddrNum(map);
@@ -73,19 +102,20 @@ public class OrdersDaoOracle implements OrdersDao {
 //		}
 		
 		
-		Map map = new HashMap();
-		map.put("aNum", 5);
-		map.put("addrNum", 2);
-		map.put("oMemo", "문 앞에 둬주셈");
-		try {
-			dao.insert(map);
-			System.out.println(map.get("oNum"));
-		} catch (FindException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		insert 후 해당 o_num 받아오기
+//		Map map = new HashMap();
+//		map.put("aNum", 5);
+//		map.put("addrNum", 2);
+//		map.put("oMemo", "문 앞에 둬주셈");
+//		try {
+//			dao.insert(map);
+//			System.out.println(map.get("oNum"));
+//		} catch (FindException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
-		
+//		//List 회원 주문목록, 주문상세 test
 //		List<OrdersVo> list;
 //		try {
 ////			list = dao.selectOrderListById("aaa");

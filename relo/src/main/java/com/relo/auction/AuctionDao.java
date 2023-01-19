@@ -7,20 +7,22 @@ import com.relo.exception.FindException;
 import com.relo.product.ProductVo;
 
 public interface AuctionDao {
-	// 낙찰된 상품들 리스트, 관리자 페이지에서 낙찰된 상품들을 확인
-	// 낙찰자들에게 결제 요청을 보내기 위함
-	public List<ProductVo> selectByPStatus() throws FindException;
 	
-	// 구매확정된 상품들 리스트, 관리자 페이지에서 구매확정된 상품들을 확인
-	// 판매자에게 정산을 해주기 위함
-	public List<ProductVo> selectByDStatus()  throws FindException;
-	
-	// 낙찰된 상품들 리스트, 관리자 페이지에서 낙찰된 상품들을 확인 페이징
-	public List<ProductVo> selectPageByPStatus(Map map) throws FindException;
-	
-	// 구매확정된 상품들 리스트, 관리자 페이지에서 구매확정된 상품들을 확인 페이징
-	public List<ProductVo> selectPageByDStatus(Map map)  throws FindException;
 	
 	// 입찰할 시 정보 insert
 	public void insert(Map map) throws FindException;
+	
+	//이미 입찰 시도를 했는지 체크하는 sql 문 추가
+	public int selectById(Map map) throws FindException;
+	
+	//위의 값이 존재하면 update 문
+	public void update(Map map) throws FindException;
+	
+	/*회원의 입찰 시도한 내역 sql - 필터링은 나중에 ^^,,
+	상품 사진, 상품명, 상품 사이즈, 입찰가, 상품번호
+	입찰시도한 것들 중 진행중인 경매*/
+	public List<AuctionVo> selectIngListById(String id) throws FindException;
+	
+	//회원의 입찰 시도한 내역 중 경매 종료, 해당 회원이 낙찰됐는지 상태
+	public List<AuctionDTO> selectEndListById(String id) throws FindException;
 }

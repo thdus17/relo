@@ -1,15 +1,10 @@
 package com.relo.orders;
 
 import java.sql.Date;
-import java.util.List;
 
 import com.relo.address.AddressVo;
-import com.relo.auction.AuctionVo;
-import com.relo.member.MemberVo;
-import com.relo.order_delivery.ODeliveryVo;
-import com.relo.product.ProductVo;
-import com.relo.sizes.SizesVo;
-import com.relo.stock.StockVo;
+import com.relo.orderDelivery.ODeliveryVo;
+import com.relo.successfulBid.ScBidVo;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,29 +20,22 @@ import lombok.ToString;
 
 public class OrdersVo {
 	private int oNum;
-	private ProductVo product;
-	//ProductVo 멤버변수
-/*	private int pNum;
-//	private StockVo stock;
-//	private List<AuctionVo> a;
-//	private ODeliveryVo od;
-//	private Date pStartDate;
-//	private Date pEndDate;
-//	private int pStatus;*/
-	
+	private ScBidVo scbid;
 	private AddressVo address;
-	/*
-	 * private int addrNum;
-	private MemberVo memberVo;
-	private String addrName;
-	private int addrPostNum;
-	private String addrTel;
-	private String addr;
-	private String addrDetail;
-	private String addrRecipient;
-	private int addrType;
-	 */
 	private String oMemo;
 	private Date oDate;
-	private SizesVo sizes;
+	private ODeliveryVo od;
 }
+
+//p.p_num, o.o_num, s.s_file, 
+//s.s_name, sz.size_category_name, 
+//a.a_price, o.o_date, od.d_status
+
+/*o.o_num, o.o_date, p.p_num , 
+ * s.s_name , sz.size_category_name, 
+ * a.a_price, od.d_status,
+ * od.d_trackin_info, 
+ * od.d_complete_day, 
+ * ad.addr_num, ad.addr_recipient, 
+ * ad.addr_tel, ad.addr, 
+ * ad.addr_detail*/
