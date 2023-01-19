@@ -1,7 +1,6 @@
 package com.relo.stock;
 
 
-import com.relo.account.AccountVo;
 import com.relo.member.MemberVo;
 import com.relo.sizes.SizesVo;
 
@@ -34,7 +33,14 @@ public class StockVo {
 	private String sellerComment;
 	private String managerComment;
 	private int sReturn;
-
+	
+	
+	
+	
+	
+	
+	
+	
 	public StockVo(int sNum, MemberVo m, SizesVo sizes, String sBrand, String sName, int sOriginPrice,
 			String sColor, String sType, String sFile, int sHopeDays, String sellerComment, int sReturn) {
 		this.sNum = sNum;

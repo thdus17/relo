@@ -15,7 +15,6 @@ import lombok.ToString;
 @ToString
 
 public class AccountVo {
-
 	private MemberVo m;
 	private String bankAccount;
 	private String bankCode;
