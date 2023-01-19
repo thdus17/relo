@@ -8,16 +8,28 @@
       <result column="style_num" property="styleNum" />
       <result column="hash_name" property="hashName" />
    </resultMap>
+
 	<!-- 스타일태그 추가 -->
 	<insert id="addStyleTag">
 		insert into style_tag values(hash_seq.nextval,#{styleNum}, #{hashName})
-		
 	</insert>
+
 	<!-- 스타일태그 리스트 -->
 	<select id="styleTagList" resultType="StyleTagVo">
+		<![CDATA[
 		select hash_name
 		from style_tag
+		 WHERE ROWNUM >= 1 AND ROWNUM <= 7
 		group by hash_name
 		order by count(*) desc
+		   ]]>
+	</select>
+	
+	<!-- 해당 게시물 태그 리스트 출력 -->
+	<select id="styleTagDetail" parameterType="int" resultType="StyleTagVo">
+		select *
+		from style_tag
+		where style_num = #{styleNum}
+		order by style_num desc
 	</select>
 </mapper>       

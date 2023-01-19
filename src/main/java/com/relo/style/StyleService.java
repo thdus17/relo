@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.relo.exception.FindException;
-import com.relo.page.PageBean;
 
 public class StyleService {
 
@@ -21,34 +20,56 @@ public class StyleService {
 	public void delStyle(StyleVo vo) throws FindException{
 		dao.delStyle(vo);
 	}
-	//게시물 삭제
+	//게시물 수정
 	public void updateStyle(StyleVo vo) throws FindException{
 		dao.updateStyle(vo);
 	}
-	//게시물 아이디 검색래서 목록 출력
-	public List<StyleVo> selectStyleId(String id) throws FindException{
-		return dao.selectStyleId(id);
+	//게시물 아이디 검색해서 목록 출력
+	public StylePageBean<StyleVo> selectStyleId(int currentPage,String id) throws FindException{
+		List<StyleVo> list = dao.selectStyleId(id);
+		int totalCnt = dao.cntStyleList();
+		StylePageBean<StyleVo> pb = new StylePageBean(currentPage, list, totalCnt);
+		return pb;
 	}
 	//게시물 태그 검색해서 목록 출력
-	public List<StyleVo> selectStyleTag(String hashName) throws FindException{
-		return dao.selectStyleTag(hashName);
+	public StylePageBean<StyleVo> selectStyleTag(int currentPage,String hashName) throws FindException{
+		List<StyleVo> list = dao.selectStyleTag(hashName);
+		int totalCnt = dao.cntStyleList();
+		StylePageBean<StyleVo> pb = new StylePageBean(currentPage, list, totalCnt);
+		return pb;
+	}
+	//게시물 목록 출력 + 페이지 테스트
+	public StylePageBean<StyleVo> selectStyleList(int currentPage,HashMap<String,Object> condition) throws FindException{
+		List<StyleVo> list = dao.selectStyleList(condition);
+		int totalCnt = dao.cntStyleList();
+		StylePageBean<StyleVo> pb = new StylePageBean(currentPage, list, totalCnt);
+		return pb;
 	}
 	//게시물 상세조회
 	public List<StyleVo> selectStyleDetail(int styleNum) throws FindException{
 		return dao.selectStyleDetail(styleNum);
 	}
-	//게시물 목록 출력
-	public List<StyleVo> selectStyleList(HashMap<String,Object> styleCode) throws FindException{
-		return dao.selectStyleList(styleCode);
+
+	//게시물 상세조회2
+	public StyleVo styleDetail(int styleNum) throws FindException{
+		return dao.styleDetail(styleNum);
 	}
-
-	//게시물 목록 출력 + 페이지 테스트
-	public PageBean<StyleVo> selectStyleListPageTest(int currentPage,HashMap<String,Object> styleCode) throws FindException{
-		int totalCnt = dao.cntStyleList();
-		List<StyleVo> list = dao.selectStyleList(styleCode);
-
-		PageBean<StyleVo> pb = new PageBean(currentPage, list, totalCnt);
-		return pb;
-	}
-
+//	//게시물 목록 출력
+//	public List<StyleVo> selectStyleList(HashMap<String,Object> styleCode) throws FindException{
+//		return dao.selectStyleList(styleCode);
+//	}
+	
+//	public static void main(String[] args) throws FindException {
+//		StyleService sService = new StyleService();
+//		ReplyService rService = new ReplyService();
+//		StyleTagService tService = new StyleTagService();
+//		int styleNum = 16;
+//		List<ReplyVo> repList = rService.detailRep(styleNum);
+//		List<StyleTagVo> tagList = tService.styleTagDetail(styleNum);
+//		
+//		StyleVo vo = sService.styleDetail(styleNum);
+//		vo.setRepList(repList);
+//		vo.setTagList(tagList);
+//		System.out.println(vo);
+//	}
 }

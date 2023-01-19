@@ -63,11 +63,11 @@ public class ReplyDaoOracle implements ReplyDao {
 //	테스트 완료
 	public static void main(String[] args) throws FindException {
 		ReplyDaoOracle dao = new ReplyDaoOracle();
-//		dao.addReply(new ReplyVo(0,3,"aaa","굳",null));
-//		dao.delReply(new ReplyVo(8,0,"aaa",null,null));
-		int cnt = dao.cntReply(1);
+		dao.addReply(new ReplyVo(0,16,"bbb","예쁘다",null));
+//		dao.delReply(new ReplyVo(0,16,"aaa",null,null));
+		int cnt = dao.cntReply(16);
 		System.out.println(cnt);
-		List<ReplyVo> list = dao.detailRep(1);
+		List<ReplyVo> list = dao.detailRep(16);
 		System.out.println(list);
 //		dao.updateRep(new ReplyVo(1,0,"bbb","짱",null));
 	}

@@ -1,4 +1,4 @@
-package com.relo.handler.reply;
+package com.relo.handler.style;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -10,11 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.relo.exception.FindException;
 import com.relo.handler.Handler;
-import com.relo.reply.ReplyService;
-import com.relo.reply.ReplyVo;
+import com.relo.style.StyleService;
+import com.relo.style.StyleVo;
 
-public class AddHandler implements Handler {
-	//댓글 추가
+public class DelHandler implements Handler {
+	//스타일 게시판 삭제
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
@@ -23,13 +23,11 @@ public class AddHandler implements Handler {
 		
 		int styleNum = Integer.parseInt(request.getParameter("styleNum"));
 		String id = request.getParameter("id");
-		String repContent = request.getParameter("repContent"); 
-		
+		StyleService service = new StyleService();
 		ObjectMapper mapper = new ObjectMapper();
-		ReplyService service = new ReplyService();
 		try {
-			service.addReply(new ReplyVo(0,styleNum,id,repContent,null));
-			String jsonStr = mapper.writeValueAsString("댓글 작성완료");
+			service.delStyle(new StyleVo(styleNum,id,"","",null,0));
+			String jsonStr = mapper.writeValueAsString("게시물 삭제 성공");
 			return jsonStr;
 		} catch (FindException e) {
 			e.printStackTrace();

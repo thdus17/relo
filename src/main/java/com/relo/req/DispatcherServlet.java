@@ -3,6 +3,7 @@ package com.relo.req;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
@@ -10,7 +11,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -109,16 +109,21 @@ public class DispatcherServlet extends HttpServlet {
 		
 		//모두 process 메서드를 갖고 있기에 그걸 호출해서 view페이지 경로를 반환 받음 
 		//	여기서 redirect인지 forward인지 확인해서 맞는 방법으로 보내줌
-		String view = handler.process(request, response);
-		if (view.startsWith("redirect:")) {
-			String path = view.split(":")[1];
-			response.sendRedirect(request.getContextPath() + path);
-		} else if(view.startsWith("responsebody/")) {
-			response.getWriter().append(view.split("/")[1]);
-		} else {
-			RequestDispatcher dis = request.getRequestDispatcher(view);
-			dis.forward(request, response);
-		}
+//		String view = handler.process(request, response);
+//		if (view.startsWith("redirect:")) {
+//			String path = view.split(":")[1];
+//			response.sendRedirect(request.getContextPath() + path);
+//		} else if(view.startsWith("responsebody/")) {
+//			response.getWriter().append(view.split("/")[1]);
+//		} else {
+//			RequestDispatcher dis = request.getRequestDispatcher(view);
+//			dis.forward(request, response);
+//		}
+		
+		String jsonResult = handler.process(request, response);
+		response.setContentType("application/json;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(jsonResult);
 	}
 
 	/**

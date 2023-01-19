@@ -14,7 +14,7 @@ import com.relo.reply.ReplyService;
 import com.relo.reply.ReplyVo;
 
 public class DelHandler implements Handler {
-
+	//댓글 삭제
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws IOException {
 

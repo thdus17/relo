@@ -13,23 +13,24 @@ import com.relo.handler.Handler;
 import com.relo.reply.ReplyService;
 import com.relo.reply.ReplyVo;
 
-public class AddHandler implements Handler {
-	//댓글 추가
+public class EditHandler implements Handler{
+
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		
+		//댓글 수정
 		response.setContentType("application/json;charset=UTF-8");
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		
-		int styleNum = Integer.parseInt(request.getParameter("styleNum"));
 		String id = request.getParameter("id");
-		String repContent = request.getParameter("repContent"); 
+		int repNum = Integer.parseInt(request.getParameter("repNum"));
+		String repContent = request.getParameter("repContent");
 		
-		ObjectMapper mapper = new ObjectMapper();
 		ReplyService service = new ReplyService();
+		ObjectMapper mapper = new ObjectMapper();
+		
 		try {
-			service.addReply(new ReplyVo(0,styleNum,id,repContent,null));
-			String jsonStr = mapper.writeValueAsString("댓글 작성완료");
+			service.updateRep(new ReplyVo(repNum,0,id,repContent,null));
+			String jsonStr = mapper.writeValueAsString("댓글 수정 성공");
 			return jsonStr;
 		} catch (FindException e) {
 			e.printStackTrace();

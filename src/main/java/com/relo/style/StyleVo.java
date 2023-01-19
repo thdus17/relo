@@ -26,13 +26,13 @@ import lombok.ToString;
 public class StyleVo {
 	private int styleNum;
 	private String id;
-	private List<StyleTagVo> tagList;
-	private List<ReplyVo> replist;
 	private String styleContent;
 	private String styleFile;
 	@JsonFormat(timezone = "Asia/Seoul", pattern = "yy-MM-dd")
 	private Date styleDate;
 	private int styleLikes;
+	private List<StyleTagVo> tagList;
+	private List<ReplyVo> repList;
 
 	
 	public StyleVo(int styleNum, String id, String styleContent, String styleFile, Date styleDate, int styleLikes) {

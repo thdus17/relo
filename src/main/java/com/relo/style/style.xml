@@ -74,13 +74,8 @@
 	</select>
 	
 	<select id="styleDetail" parameterType="int" resultType="StyleVo">
-		select a.style_num, a.id, b.hash_name, a.style_file,
-		a.style_date, a.style_likes
-		from style a
-		join style_tag b
-		on a.style_num
-		= b.style_num
-		where a.style_num = #{styleNum}
+		select * from style
+		where style_num = #{styleNum}
 	</select>
 
 	<!-- 게시물 총 개수 -->

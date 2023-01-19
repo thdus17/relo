@@ -17,4 +17,8 @@ public class StyleTagService {
 	public List<String> styleTagList() throws FindException{
 		return dao.styleTagList();
 	}
+	
+	public List<StyleTagVo> styleTagDetail(int styleNum) throws FindException{
+		return dao.styleTagDetail(styleNum);
+	}
 }
