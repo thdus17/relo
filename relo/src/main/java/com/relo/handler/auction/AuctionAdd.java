@@ -47,18 +47,24 @@ public class AuctionAdd implements Handler {
 			//입찰 시도시, 기존에 입찰한 이력이 있는지 조회
 			aNum = service.getById(map);
 			map.put("aPrice", aPrice);
+			Map result = new HashMap();
+			result.put("aPrice", aPrice);
+			result.put("id", id);
 			if (aNum != null) {
 				Map map1 = new HashMap();
 				map1.put("aPrice", aPrice);
 				map1.put("aNum", aNum);
 				service.editAuction(map1);
-				
-				String jsonStr = "재입찰 완료";
+
+				result.put("msg", "재입찰 완료");
+				String jsonStr = mapper.writeValueAsString(result);
 				return jsonStr;
 			}
 			else {
 				service.addAuction(map);
-				String jsonStr = "입찰 완료";
+				result.put("msg", "입찰 완료");
+				String jsonStr = mapper.writeValueAsString(result);
+				
 				return jsonStr;
 			}
 		} catch (FindException e) {

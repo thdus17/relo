@@ -2,6 +2,7 @@ package com.relo.handler.orders;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,11 +10,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.relo.exception.FindException;
 import com.relo.handler.Handler;
 import com.relo.orderDelivery.ODeliveryService;
 import com.relo.orders.OrdersService;
+import com.relo.orders.OrdersVo;
 
 public class OrdersAdd implements Handler {
 
@@ -43,10 +46,14 @@ public class OrdersAdd implements Handler {
 		OrdersService service = new OrdersService();
 		ODeliveryService service2 = new ODeliveryService();
 		ObjectMapper mapper = new ObjectMapper();
-
+		
+		mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        mapper.setDateFormat(dateFormat);
+        
 		try {
 			int oNum = service.addOrders(map);
-
+			
 			Map map3 = new HashMap();
 			map3.put("oNum", oNum);
 
@@ -60,10 +67,13 @@ public class OrdersAdd implements Handler {
 			map3.put("dTrackinInfo", trackin);
 			service2.addODelivery(map3);
 			
-			Map map2 = new HashMap();
-			map2.put("msg", "주문이 완료되었습니다.");
-			map2.put("oNum", oNum);
-			String jsonStr = mapper.writeValueAsString(map2);
+			OrdersVo vo = service.getOrderDetailByNum(oNum);
+			
+			Map result = new HashMap();
+			result = mapper.convertValue(vo, Map.class);
+			
+			result.put("msg", "주문이 완료되었습니다.");
+			String jsonStr = mapper.writeValueAsString(result);
 			return jsonStr;
 		} catch (FindException e) {
 			// TODO Auto-generated catch block

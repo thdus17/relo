@@ -13,6 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.relo.exception.FindException;
 import com.relo.handler.Handler;
 import com.relo.orders.OrdersService;
+import com.relo.orders.OrdersVo;
 
 public class OrdersEdit implements Handler {
 
@@ -43,10 +44,12 @@ public class OrdersEdit implements Handler {
 		
 		try {
 			service.editAddrNum(map);
-			Map map2 = new HashMap();
-			map2.put("msg", "배송지 주소 수정이 완료되었습니다.");
+			Map result = new HashMap();
 			
-			String jsonStr = mapper.writeValueAsString(map2);
+			OrdersVo vo = service.getOrderDetailByNum(oNum);
+			result = mapper.convertValue(vo, Map.class);
+			result.put("msg", "배송지 주소 수정이 완료되었습니다.");
+			String jsonStr = mapper.writeValueAsString(result);
 			return jsonStr;
 		} catch (FindException e) {
 			// TODO Auto-generated catch block

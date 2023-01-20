@@ -85,7 +85,7 @@ where rn between #{start} and #{end}
 
 <!-- 회원의 주문 상세 띄우기 -->
 <select id="selectOrdersDetail" resultMap="ordersMap" parameterType="int">
-select o.o_num, o.o_date, p.p_num , s.s_name , sz.size_category_name, a.a_price, od.d_status, od.d_trackin_info, od.d_complete_day, ad.addr_num, ad.addr_recipient, ad.addr_tel, ad.addr, ad.addr_detail
+select o.o_num, o.o_date, p.p_num , s.s_file, s.s_name , sz.size_category_name, a.a_price, od.d_status, od.d_trackin_info, od.d_complete_day, ad.addr_num, ad.addr_recipient, ad.addr_tel, ad.addr, ad.addr_detail
 from product p, stock s, sizes sz, auction a, orders o, order_delivery od, address ad
 where o.o_num=#{o_num}
 and sz.size_category_num = s.size_category_num

@@ -2,6 +2,7 @@ package com.relo.handler.auction;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -41,6 +42,8 @@ public class AuctionIngListById implements Handler {
 		
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        mapper.setDateFormat(dateFormat);
 		try {
 			list = service.getIngListById(id);
 			String jsonStr = mapper.writeValueAsString(list);

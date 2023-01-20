@@ -38,6 +38,7 @@ public class ODeliveryConfirmed implements Handler {
 		try {
 			service.editStatus3(oNum);
 			Map<String, String> map = new HashMap<>();
+			map.put("dStatus", "3");
 			map.put("msg", "구매확정이 완료되었습니다.");
 			String jsonStr = mapper.writeValueAsString(map);
 			return jsonStr;

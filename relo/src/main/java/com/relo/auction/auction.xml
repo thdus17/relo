@@ -47,7 +47,7 @@ and p_num=#{pNum}
 	상품 사진, 상품명, 상품 사이즈, 입찰가, 상품번호
 	입찰시도한 것들 중 진행중인 경매 -->
 <select id="selectIngListById" resultMap="auctionMap" parameterType="String">
-select a.a_num, p.p_num, s.s_file, s.s_name, sz.size_category_name, a.a_price
+select a.a_num, p.p_num, p.p_end_date, s.s_file, s.s_name, sz.size_category_name, a.a_price
 from sizes sz, stock s, product p, auction a
 where a.id=#{id}
 and sz.size_category_num=s.size_category_num
@@ -58,7 +58,7 @@ and p.p_status=4
 
 <!-- 회원의 입찰 시도한 내역 중 경매 종료, 해당 회원이 낙찰됐는지 상태 -->
 <select id="selectEndListById" resultMap="auctionDtoMap" parameterType="String">
-select a.a_num, p.p_num, s.s_file, s.s_name, sz.size_category_name, a.a_price, am.max_price "max_price", p.p_status
+select a.a_num, p.p_num, s.s_file, s.s_name, sz.size_category_name, a.a_price, am.max_price "max_price", p.p_status, p.p_end_date
 from sizes sz, stock s, product p, auction a, a_max am
 where a.id=#{id}
 and sz.size_category_num=s.size_category_num

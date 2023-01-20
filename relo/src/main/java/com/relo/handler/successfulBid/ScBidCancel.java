@@ -42,6 +42,7 @@ public class ScBidCancel implements Handler {
 			
 			Map<String, String> map = new HashMap<>();
 			map.put("msg", "낙찰 포기가 완료되었습니다.");
+			map.put("flag", "true");
 			String jsonStr = mapper.writeValueAsString(map);
 			return jsonStr;
 		} catch (FindException e) {
