@@ -13,7 +13,7 @@ public interface AuctionDao {
 	public void insert(Map map) throws FindException;
 	
 	//이미 입찰 시도를 했는지 체크하는 sql 문 추가
-	public int selectById(Map map) throws FindException;
+	public Integer selectById(Map map) throws FindException;
 	
 	//위의 값이 존재하면 update 문
 	public void update(Map map) throws FindException;

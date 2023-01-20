@@ -1,6 +1,5 @@
 package com.relo.auction;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,7 +7,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 import com.relo.exception.FindException;
-import com.relo.product.ProductVo;
 import com.relo.resource.Factory;
 
 public class AuctionDaoOracle implements AuctionDao {
@@ -28,10 +26,10 @@ public class AuctionDaoOracle implements AuctionDao {
 		
 	}
 	@Override
-	public int selectById(Map map) throws FindException {
+	public Integer selectById(Map map) throws FindException {
 		// TODO Auto-generated method stub
 		SqlSession session = sqlSessionFactory.openSession();
-		int aNum = session.selectOne("com.relo.mybatis.auction.AuctionDao.selectById", map);		
+		Integer aNum  = session.selectOne("com.relo.mybatis.auction.AuctionDao.selectById", map);		
 		session.close();
 		return aNum;
 	}

@@ -90,10 +90,10 @@
 		where p_num = (
 		select p_num
 		from auction
-		where a_num=#{a_num})
+		where a_num=#{aNum})
 	</update>
 	
-	<select id="searchProdList" parameterType = "Map"  resultMap="productMap">
+	<select id="searchProdList" parameterType = "Map"  resultMap="ProductMap">
 SELECT * FROM (SELECT rownum rn, t.* FROM (SELECT p.p_num, s.s_num, s.s_name, s.s_hope_price, s.s_file, a.max_price, p.p_end_date, s.s_type
 FROM product p, stock s,(SELECT p_num, max(a_price) as max_price FROM auction GROUP BY p_num) a
 WHERE p.s_num = s.s_num AND p.p_num = a.p_num(+) AND p_status = 4
@@ -111,7 +111,7 @@ WHERE p.s_num = s.s_num AND p.p_num = a.p_num(+) AND p_status = 4
 ) t ) WHERE rn BETWEEN 1 AND 20
 </select>	
 
-<select id = "searchProdListZzim" resultMap ="productMap">
+<select id = "searchProdListZzim" resultMap ="ProductMap">
 SELECT * FROM (SELECT rownum rn, t.* FROM (SELECT p.p_num, s.s_num, s.s_name, s.s_hope_price, s.s_file, a.max_price
 FROM product p, stock s, (SELECT p_num, max(a_price) as max_price FROM auction GROUP BY p_num) a, 
 (SELECT p_num, count(*) zcount FROM zzim GROUP BY p_num ORDER BY zcount) z
@@ -119,7 +119,7 @@ WHERE p.s_num = s.s_num AND p.p_num = a.p_num(+) AND p_status = 4 AND p.p_num = 
 ORDER BY z.zcount desc) t ) WHERE rn BETWEEN 1 AND 20
 </select>
 
-<select id ="searchProdListNoTender" parameterType = "Map" resultMap ="productMap">
+<select id ="searchProdListNoTender" parameterType = "Map" resultMap ="ProductMap">
 SELECT * FROM (SELECT rownum rn, t.* FROM (SELECT p.p_num, s.s_num, s.s_name, s.s_hope_price, s.s_file, p.p_end_date, s.s_type
 FROM product p , stock s 
 WHERE p.s_num = s.s_num AND p_status = 4 AND NOT p_num IN (SELECT p_num FROM auction)
@@ -131,14 +131,14 @@ WHERE p.s_num = s.s_num AND p_status = 4 AND NOT p_num IN (SELECT p_num FROM auc
 ORDER BY p_end_date ) t ) WHERE rn BETWEEN 1 AND 20
 </select>
 
-<select id = "searchProdListByName" parameterType = "string" resultMap = "productMap">
+<select id = "searchProdListByName" parameterType = "string" resultMap = "ProductMap">
 SELECT * FROM (SELECT rownum rn, t.* FROM (SELECT p.p_num, s.s_num, s.s_name, s.s_hope_price, s.s_file, a.max_price, p.p_end_date, s.s_type
 FROM product p, stock s, (SELECT p_num, max(a_price) as max_price FROM auction GROUP BY p_num) a
 WHERE p.s_num = s.s_num AND p.p_num = a.p_num(+) AND p_status = 4 AND s_name Like #{se}
 ORDER BY p_end_date) t ) WHERE rn BETWEEN 1 AND 20
 </select>
 
-<select id = "recentTender"  parameterType ="Map" resultMap="productMap">
+<select id = "recentTender"  parameterType ="Map" resultMap="ProductMap">
 	SELECT * FROM 
 		(SELECT rownum rn, t.* FROM 
 			(SELECT p.p_num, a.id, a_price
@@ -148,7 +148,7 @@ ORDER BY p_end_date) t ) WHERE rn BETWEEN 1 AND 20
 		) WHERE rn BETWEEN 1 AND 20
 </select>
 
-<select id = "productDetail" parameterType = "int" resultMap = "productMap">
+<select id = "productDetail" parameterType = "int" resultMap = "ProductMap">
 SELECT distinct s.s_num, s_file, p.p_end_date, s_hope_price, (SELECT max(a_price) FROM auction WHERE p_num = #{pNum}) max_price,
 manager_comment, sz.size_category_name, s_brand, s_name, s_color, s_origin_price, s_grade
 FROM stock s, product p, auction a, sizes sz

@@ -45,67 +45,6 @@
 	</association>
 </resultMap>
 
-<!-- <resultMap id="ordersMap1" type="OrdersVo" autoMapping="true">
-	<id property="oNum" column="o_num"/>
-	
-	<association property="product" javaType="ProductVo" autoMapping="true" columnPrefix="pro_">
-		<id property="pNum" column="p_num"/>
-		<association property="stock" javaType="StockVo" autoMapping="true">
-			<result property="sName" column="s_name"/>
-		</association>
-		<collection property="a" ofType="Auction" autoMapping="true" columnPrefix="a_">
-			<id property="aPrice" column="a_price" /> 
-		</collection>
-	</association>
-	
-	<association property="sizes" javaType="Sizes" autoMapping="true">
-		<result property="sizeCategoryName" column="size_category_name"/>
-	</association>
-</resultMap> -->
-
-<!-- <resultMap id="ordersdetailMap" type="Orders" autoMapping="true">
-	<id property="oNum" column="o_num"/>
-	
-	<association property="product" javaType="Product" autoMapping="true" columnPrefix="pro_">
-		<id property="pNum" column="p_num"/>
-		<association property="stock" javaType="Stock" autoMapping="true">
-			<result property="sName" column="s_name"/>
-		</association>
-		<association property="od" javaType="ODelivery" autoMapping="true">
-			<result property="dStatus" column="d_status"/>
-			<result property="dTrackinInfo" column="d_trackin_info"/>
-			<result property="dCompleteDay" column="d_complete_day"/>
-		</association>
-		<collection property="a" ofType="Auction" autoMapping="true" columnPrefix="a_">
-			<id property="aPrice" column="a_price" /> 
-		</collection>
-	</association>
-	
-	<association property="sizes" javaType="Sizes" autoMapping="true">
-		<result property="sizeCategoryName" column="size_category_name"/>
-	</association>
-	<association property="address" javaType="Address" autoMapping="true">
-		<result property="addrNum" column="addr_num"/>
-		<result property="addrRecipient" column="addr_recipient"/>
-		<result property="addrTel" column="addr_tel"/>
-		<result property="addr" column="addr"/>
-		<result property="addrDetail" column="addr_detail"/>
-	</association>
-</resultMap> -->
-
-<!-- <resultMap id="ordersMap" type="ProductVo" autoMapping="true">
-	<id property="pNum" column="p_num"/>
-	<association property="stock" javaType="StockVo" autoMapping="true">
-		<result property="id" column="id"/>
-	</association>
-	<association property="od" javaType="ODelivery" autoMapping="true">
-	</association>
-	<collection property="a" ofType="Auction" autoMapping="true">
-		<result property="id" column="buy_id"/>
-		<result property="aPrice" column="a_price"/>
-	</collection>
-</resultMap> -->
-
 <!-- 회원별 주문목록 띄우기 -->
 <select id="selectOrdersList" resultMap="ordersMap" parameterType="String">
 select p.p_num, o.o_num, s.s_file, s.s_name, sz.size_category_name, a.a_price, o.o_date, od.d_status

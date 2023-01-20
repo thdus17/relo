@@ -11,6 +11,7 @@ public class ScBidService {
 		dao = new ScBidDaoOracle();
 	}
 	
+	//낙찰tb에 insert 넣는 거 트리거로 있음!!!
 	public void addCatch(int aNum) throws FindException{
 		try {
 			dao.insert(aNum);

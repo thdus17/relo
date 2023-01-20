@@ -31,7 +31,7 @@ insert into auction values(auction_seq.nextval,#{id}, #{pNum}, #{aPrice})
 </insert>
 
 <!-- 이미 입찰 시도를 했는지 체크하는 sql 문 추가 -->
-<select id="selectById" resultType="int" parameterType="map">
+<select id="selectById" resultType="Integer" parameterType="map">
 select a_num from auction
 where id = #{id}
 and p_num=#{pNum}

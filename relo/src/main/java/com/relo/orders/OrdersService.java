@@ -1,5 +1,6 @@
 package com.relo.orders;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -12,13 +13,9 @@ public class OrdersService {
 	}
 	
 	public List<OrdersVo> getOrderListById(String id) throws FindException{
-		List<OrdersVo> list;
+		List<OrdersVo> list = new ArrayList<>();
 		try {
 			list = dao.selectOrderListById(id);
-			
-			for (OrdersVo vo : list) {
-				System.out.println(vo);
-			}
 			return list;
 		} catch (FindException e) {
 		// TODO Auto-generated catch block
@@ -30,8 +27,6 @@ public class OrdersService {
 	public OrdersVo getOrderDetailByNum(int oNum) throws FindException{
 		try {
 			OrdersVo vo = dao.selectOrderDetailByNum(oNum);
-
-			System.out.println(vo);
 			return vo;
 		} catch (FindException e) {
 			// TODO Auto-generated catch block
@@ -41,7 +36,7 @@ public class OrdersService {
 	}
 	
 	public List<OrdersVo> getByDStatus()  throws FindException{
-		List<OrdersVo> list;
+		List<OrdersVo> list = new ArrayList<>();
 		try {
 			list = dao.selectByDStatus();
 			for (OrdersVo vo : list) {
@@ -60,7 +55,6 @@ public class OrdersService {
 		try {
 			dao.insert(map);
 			oNum = (int) map.get("oNum");
-			System.out.println(map.get("oNum"));
 		} catch (FindException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

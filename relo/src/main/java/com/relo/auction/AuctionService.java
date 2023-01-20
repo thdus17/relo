@@ -21,8 +21,8 @@ public class AuctionService {
 			e.printStackTrace();
 		}
 	}
-	public int getById(Map map) throws FindException {
-		int aNum = 0;
+	public Integer getById(Map map) throws FindException {
+		Integer aNum = 0;
 		try {
 			aNum = dao.selectById(map);
 			System.out.println(aNum);

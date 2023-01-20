@@ -38,14 +38,9 @@ public class ProductService {
 	};
 
 	public void editStatus8(int aNum) throws FindException{
-		try {
-			dao.updateStatus8(aNum);
-		} catch (FindException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		dao.updateStatus8(aNum);
 	}
-		public List<ProductVo> getProdList(Map<String, Object> condition) throws FindException {
+	public List<ProductVo> getProdList(Map<String, Object> condition) throws FindException {
 
 		return dao.searchProdList(condition);
 	}

@@ -3,18 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.relo.mybatis.scBid.ScBidDao">
-<!-- <resultMap id="productMap" type="ProductVo" autoMapping="true">
-	<id property="pNum" column="p_num"/>
-	<association property="stock" javaType="StockVo" autoMapping="true">
-		<result property="sName" column="s_name"/>
-	</association>
-	
-	<collection property="auction" ofType="AuctionVo" autoMapping="true">
-		<id property="aNum" column="a_num" /> 
-		<result property="id" column="id"/>
-		<result property="aPrice" column="a_price"/>
-	</collection>
-</resultMap>  -->
+
 <resultMap id="scBidMap" type="ScBidVo" autoMapping="true">
 	<association property="a" javaType="AuctionVo" autoMapping="true">
 		<association property="product" javaType="ProductVo" autoMapping="true">
@@ -32,7 +21,7 @@
 	<!-- 구매자가 구매 취소할 경우, 낙찰tb에서 값 삭제 -->
 	<delete id="deleteCatch" parameterType="int">
 		delete from catch
-		where a_num = #{a_num}
+		where a_num = #{aNum}
 	</delete>
 	
 	<!-- 낙찰 상품 목록 관리자에게 출력 -->
