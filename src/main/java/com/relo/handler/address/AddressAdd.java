@@ -21,13 +21,25 @@ public class AddressAdd implements Handler {
 			throws ServletException, IOException {
 		response.setContentType("application/json;charset=utf-8");
 		response.addHeader("Access-Control-Allow-Origin", "*");
-
-		String a = request.getParameter("a");
+		
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
+		
+		String id = request.getParameter("id");
+		String addrName = request.getParameter("addrName");
+		int addrPostNum = Integer.parseInt(request.getParameter("addrPostNum"));
+		String addrTel = request.getParameter("addrTel");
+		String addr = request.getParameter("addr");
+		String addrDetail = request.getParameter("addrDetail");
+		String addrRecipient = request.getParameter("addrRecipient");
+		int addrType = Integer.parseInt(request.getParameter("addrType"));
+		
 		// flag 값이 1인 경우 주소지는 그냥 주소지로 등록, 그 외의 경우(0인 경우)는 insert 후 type을 0으로 업데이트 
 		int flag = Integer.parseInt(request.getParameter("flag"));
 
 		ObjectMapper mapper = new ObjectMapper();
-		AddressVo address = mapper.readValue(a, AddressVo.class);
+		AddressVo address = new AddressVo(0, id, addrName, addrPostNum, addrTel, addr, addrDetail, addrRecipient, addrType);
 		AddressService service = new AddressService();
 		try {
 			if (flag == 1) {

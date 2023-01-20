@@ -1,43 +1,45 @@
-package com.relo.handler.address;
+package com.relo.handler.member;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.relo.address.AddressService;
-import com.relo.address.AddressVo;
 import com.relo.exception.FindException;
 import com.relo.handler.Handler;
+import com.relo.member.MemberService;
+import com.relo.member.MemberVo;
 
-public class AddressList implements Handler {
+public class MemberUpdate implements Handler{
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("application/json;charset=utf-8");
 		response.addHeader("Access-Control-Allow-Origin", "*");
-
-		HttpSession session = request.getSession(false);
-		String loginId = (String) session.getAttribute("loginId");
-
+		
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
+		
+		String id = request.getParameter("id");
+		String pwd = request.getParameter("pwd");
+		String tel = request.getParameter("tel");
+		String email = request.getParameter("email");
+		String mName = request.getParameter("mName");
+		
+		MemberVo member = new MemberVo(id, pwd, tel, email, 0, null, mName);
+		
 		ObjectMapper mapper = new ObjectMapper();
-		AddressService service = new AddressService();
-		List<AddressVo> list = null;
+
+		MemberService service = new MemberService();
 		try {
-			list = service.getAllById(loginId);
-			String jsonStr = mapper.writeValueAsString(list);
-			if(list.size() == 0) {
-				String message = "등록된 주소지 없음";
-				jsonStr = mapper.writeValueAsString(message);
-			}
-			return jsonStr;
+			service.editMember(member);
+			return null;
 		} catch (FindException e) {
 			e.printStackTrace();
 			Map<String, String> map = new HashMap<>();
@@ -46,4 +48,5 @@ public class AddressList implements Handler {
 			return jsonStr;
 		}
 	}
+
 }

@@ -9,11 +9,16 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.relo.exception.FindException;
 import com.relo.handler.Handler;
 import com.relo.product.ProductService;
 import com.relo.product.ProductVo;
+import com.relo.sizes.SizesVo;
+import com.relo.stock.StockVo;
 
 public class ProducIsPStatus8tList implements Handler {
 
@@ -25,10 +30,27 @@ public class ProducIsPStatus8tList implements Handler {
 
 		ObjectMapper mapper = new ObjectMapper();
 		ProductService service = new ProductService();
+		JSONArray arr = new JSONArray();
 		List<ProductVo> list = null;
 		try {
 			list = service.getAllPStatusIs8();
-			String jsonStr = mapper.writeValueAsString(list);
+			int cnt = 0;
+			for (ProductVo p : list) {
+				JSONObject obj = new JSONObject();
+				JSONObject obj1 = new JSONObject();
+				
+				obj.put("product"+p.getPNum()+"day", p.getPEndDate());
+				obj.put("product"+p.getPNum(), p.getPNum());
+				
+				StockVo s = p.getStockVo();
+				obj1.put("stock"+cnt, s);
+				
+				arr.add(obj);
+				arr.add(obj1);
+
+				cnt++;
+			}
+			String jsonStr = mapper.writeValueAsString(arr);
 			return jsonStr;
 		} catch (FindException e) {
 			e.printStackTrace();

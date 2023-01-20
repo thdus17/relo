@@ -22,10 +22,18 @@ public class NoticeUpdate implements Handler {
 		response.setContentType("application/json;charset=utf-8");
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		
-		String n = request.getParameter("n");
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
 		
+		int nNum = Integer.parseInt(request.getParameter("nNum"));
+		String nTitle = request.getParameter("nTitle");
+		String nContent = request.getParameter("nContent");
+		int nCategory = Integer.parseInt(request.getParameter("nCategory"));
+		String nFile = request.getParameter("nFile");
+
 		ObjectMapper mapper = new ObjectMapper();
-		NoticeVo notice = mapper.readValue(n, NoticeVo.class);
+		NoticeVo notice = new NoticeVo(nNum, null, nTitle, nContent, null, nCategory, nFile);
 		NoticeService service = new NoticeService();
 		try {
 			service.editNotice(notice);

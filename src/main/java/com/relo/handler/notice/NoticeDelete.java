@@ -23,14 +23,17 @@ public class NoticeDelete implements Handler {
 
 		ObjectMapper mapper = new ObjectMapper();
 		NoticeService service = new NoticeService();
-		String jsonStr = null;
+
 		try {
 			service.delNotice(nNum);
-			return null;
-		} catch (FindException e) {
+			String message = "삭제되었음";
+			String jsonStr = mapper.writeValueAsString(message);
+			return jsonStr;
+		} catch (FindException | JsonProcessingException e) {
 			e.printStackTrace();
 			Map<String, String> map = new HashMap<>();
 			map.put("msg", e.getMessage());
+			String jsonStr = null;
 			try {
 				jsonStr = mapper.writeValueAsString(map);
 			} catch (JsonProcessingException e1) {

@@ -1,5 +1,7 @@
 package com.relo.member;
 
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
@@ -23,6 +25,15 @@ public class MemberDaoOracle implements MemberDao {
 		session.commit();
 		session.close();
 	}
+	
+	@Override
+	public MemberVo findId(Map<String,String> param) throws FindException {
+		SqlSession session = sqlSessionFactory.openSession();
+		MemberDao dao = (MemberDao) session.getMapper(MemberDao.class);
+		MemberVo m = dao.findId(param);
+		session.close();
+		return m;
+	}
 
 	@Override
 	public MemberVo select(String id) throws FindException {
@@ -41,7 +52,17 @@ public class MemberDaoOracle implements MemberDao {
 		session.commit();
 		session.close();
 	}
-
+	
+	
+	@Override
+	public int checkOutTerms(String id) throws FindException {
+		SqlSession session = sqlSessionFactory.openSession();
+		MemberDao dao = (MemberDao) session.getMapper(MemberDao.class);
+		int num = dao.checkOutTerms(id);
+		session.close();
+		return num;
+	}
+	
 	@Override
 	public void delete(String id) throws FindException {
 		SqlSession session = sqlSessionFactory.openSession();
@@ -49,5 +70,9 @@ public class MemberDaoOracle implements MemberDao {
 		dao.delete(id);
 		session.commit();
 		session.close();
+	}
+	public static void main(String[] args) throws FindException {
+		MemberDao dao = new MemberDaoOracle();
+		System.out.println(dao.checkOutTerms("ddd"));
 	}
 }

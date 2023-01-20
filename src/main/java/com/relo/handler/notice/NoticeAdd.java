@@ -22,10 +22,18 @@ public class NoticeAdd implements Handler {
 		response.setContentType("application/json;charset=utf-8");
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		
-		String n = request.getParameter("n");
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
+		
+		String id = request.getParameter("id");
+		String nTitle = request.getParameter("nTitle");
+		String nContent = request.getParameter("nContent");
+		int nCategory = Integer.parseInt(request.getParameter("nCategory"));
+		String nFile = request.getParameter("nFile");
 		
 		ObjectMapper mapper = new ObjectMapper();
-		NoticeVo notice = mapper.readValue(n, NoticeVo.class);
+		NoticeVo notice = new NoticeVo(0, id, nTitle, nContent, null, nCategory, nFile);
 		NoticeService service = new NoticeService();
 		try {
 			service.addNotice(notice);

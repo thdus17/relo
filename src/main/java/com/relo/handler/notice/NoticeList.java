@@ -1,6 +1,7 @@
 package com.relo.handler.notice;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +28,8 @@ public class NoticeList implements Handler {
 		String s = request.getParameter("category");
 
 		ObjectMapper mapper = new ObjectMapper();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        mapper.setDateFormat(dateFormat);
 		NoticeService service = new NoticeService();
 		List<NoticeVo> list = null;
 		try {

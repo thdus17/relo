@@ -7,13 +7,13 @@ import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.relo.address.AddressService;
 import com.relo.address.AddressVo;
 import com.relo.exception.FindException;
 import com.relo.handler.Handler;
-import com.relo.notice.NoticeVo;
 
 public class AddressUpdate implements Handler {
 
@@ -23,12 +23,29 @@ public class AddressUpdate implements Handler {
 		response.setContentType("application/json;charset=utf-8");
 		response.addHeader("Access-Control-Allow-Origin", "*");
 
-		String a = request.getParameter("a");
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
+		
+		HttpSession session = request.getSession(false);
+		String loginId = (String) session.getAttribute("loginId");
+		
+		int addrNum = Integer.parseInt(request.getParameter("addrNum"));
+		String addrName = request.getParameter("addrName");
+		int addrPostNum = Integer.parseInt(request.getParameter("addrPostNum"));
+		String addrTel = request.getParameter("addrTel");
+		String addr = request.getParameter("addr");
+		String addrDetail = request.getParameter("addrDetail");
+		String addrRecipient = request.getParameter("addrRecipient");
+		int addrType = Integer.parseInt(request.getParameter("addrType"));
 
 		ObjectMapper mapper = new ObjectMapper();
-		AddressVo address = mapper.readValue(a, AddressVo.class);
+		AddressVo address = new AddressVo(addrNum, null, addrName, addrPostNum, addrTel, addr, addrDetail, addrRecipient, addrType);
 		AddressService service = new AddressService();
 		try {
+			if(addrType == 0) {
+				service.changeAddrTypeIs0(loginId);
+			}
 			service.editAddress(address);
 			return null;
 		} catch (FindException e) {

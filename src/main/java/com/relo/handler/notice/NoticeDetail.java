@@ -1,6 +1,7 @@
 package com.relo.handler.notice;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,7 +9,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -28,6 +28,8 @@ public class NoticeDetail implements Handler {
 		int nNum = Integer.parseInt(request.getParameter("nNum"));
 
 		ObjectMapper mapper = new ObjectMapper();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        mapper.setDateFormat(dateFormat);
 		NoticeService service = new NoticeService();
 		
 		try {

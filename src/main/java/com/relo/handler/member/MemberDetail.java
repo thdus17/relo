@@ -1,6 +1,7 @@
 package com.relo.handler.member;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,6 +26,9 @@ public class MemberDetail implements Handler {
 		String id = request.getParameter("id");
 		
 		ObjectMapper mapper = new ObjectMapper();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        mapper.setDateFormat(dateFormat);
+        
 		MemberService service = new MemberService();
 		try {
 			MemberVo m = service.getOne(id);
