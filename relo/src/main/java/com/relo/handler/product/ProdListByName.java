@@ -49,6 +49,7 @@ public class ProdListByName implements Handler {
 				obj.put("sName", svo.getSName());
 				obj.put("sHopePrice", svo.getSHopePrice());
 				obj.put("sName", svo.getSName());
+				obj.put("sFile", svo.getSFile());
 				List<AuctionVo> alist = pvo.getAuction();
 				for (AuctionVo avo : alist) {
 					obj.put("aPrice", avo.getAPrice());

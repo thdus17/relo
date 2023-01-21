@@ -53,6 +53,6 @@
 	    <mapper resource="com/relo/stock/stock.xml" />
 	    <mapper resource="com/relo/zzim/zzim.xml" />
 	    <mapper resource="com/relo/account/account.xml" />
-	    <mapper resource="com/relo/stockDelivery/StockDeliveryMapper.xml" />
+	    
 	</mappers>
 </configuration>

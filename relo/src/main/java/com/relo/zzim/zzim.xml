@@ -5,7 +5,7 @@
 		<id column="id" property ="id" />
 			<collection property ="product" ofType ="com.relo.product.ProductVo" autoMapping="true">
 			<id column="p_num" property ="pNum" />
-				<association property ="stockVo" javaType ="com.relo.stock.StockVo" autoMapping="true">
+				<association property ="stock" javaType ="com.relo.stock.StockVo" autoMapping="true">
 				<result column = "s_name" property = "sName" /> 
 				<result column = "s_color" property = "sColor" /> 
 				<result column = "s_hope_price" property = "sHopePrice" /> 

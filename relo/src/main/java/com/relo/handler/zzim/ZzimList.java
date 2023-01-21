@@ -63,6 +63,7 @@ public class ZzimList implements Handler {
 					product.put("sName", svo.getSName());
 					product.put("sType", svo.getSType());
 					product.put("sColor", svo.getSColor());
+					product.put("sGrade", svo.getSGrade());
 					product.put("sHopePrice", svo.getSHopePrice());
 					SizesVo szvo = svo.getSizes();
 					product.put("sizeCategoryName", szvo.getSizeCategoryName());
