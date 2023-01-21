@@ -1,4 +1,4 @@
-package com.relo.orderdelivery;
+package com.relo.orderDelivery;
 
 import java.sql.Date;
 
@@ -17,6 +17,6 @@ import lombok.ToString;
 public class ODeliveryVo {
 	private int oNum;
 	private int dStatus;
-	private String dTrackinIinfo;
+	private String dTrackinInfo;
 	private Date dCompleteDay;
 }

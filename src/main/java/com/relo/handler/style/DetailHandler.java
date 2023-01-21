@@ -23,6 +23,9 @@ public class DetailHandler implements Handler {
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+		
 		response.setContentType("application/json;charset=UTF-8");
 		response.addHeader("Access-Control-Allow-Origin", "*");
 
@@ -39,8 +42,13 @@ public class DetailHandler implements Handler {
 			vo.setRepList(repList);
 			vo.setTagList(tagList);
 			int repCnt = rService.cntReply(styleNum);
-			String jsonStr = mapper.writeValueAsString(vo);
-			jsonStr += "댓글 개수:"+repCnt;
+			
+			Map map = new HashMap<>();
+			map.put("vo", vo);
+			map.put("replyCnt", repCnt);
+//			String jsonStr = mapper.writeValueAsString(vo);
+//			jsonStr += "댓글 개수:"+repCnt;
+			String jsonStr = mapper.writeValueAsString(map);
 			return jsonStr;
 		} catch (FindException e) {
 			e.printStackTrace();

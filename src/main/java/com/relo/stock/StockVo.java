@@ -1,6 +1,8 @@
 package com.relo.stock;
 
-import com.relo.account.AccountVo;
+
+import com.relo.member.MemberVo;
+import com.relo.sizes.SizesVo;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,9 +17,10 @@ import lombok.ToString;
 @ToString
 
 public class StockVo {
+
 	private int sNum;
-	private String id;
-	private int sizeCategoryNum;
+	private MemberVo m;
+	private SizesVo sizes;
 	private String sBrand;
 	private String sName;
 	private int sOriginPrice;
@@ -30,6 +33,35 @@ public class StockVo {
 	private String sellerComment;
 	private String managerComment;
 	private int sReturn;
-	private AccountVo accountVo;
+	
+	
+	
+	
+	
+	
+	
+	
+	public StockVo(int sNum, MemberVo m, SizesVo sizes, String sBrand, String sName, int sOriginPrice,
+			String sColor, String sType, String sFile, int sHopeDays, String sellerComment, int sReturn) {
+		this.sNum = sNum;
+		this.m = m;
+		this.sizes = sizes;
+		this.sBrand = sBrand;
+		this.sName = sName;
+		this.sOriginPrice = sOriginPrice;
+		this.sColor = sColor;
+		this.sType = sType;
+		this.sFile = sFile;
+		this.sHopeDays = sHopeDays;
+		this.sellerComment = sellerComment;
+		this.sReturn = sReturn;
+	}
 
+
+
+
+
+	
+	
+	
 }

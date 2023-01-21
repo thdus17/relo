@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 
 import com.relo.auction.AuctionVo;
-import com.relo.orderdelivery.ODeliveryVo;
 import com.relo.stock.StockVo;
 
 import lombok.AllArgsConstructor;
@@ -21,10 +20,10 @@ import lombok.ToString;
 
 public class ProductVo {
 	private int pNum;
-	private StockVo stockVo;
-	private List<AuctionVo> action;
+//	private int s_num;
+	private StockVo stock;
+	private List<AuctionVo> auction;
 	private Date pStartDate;
 	private Date pEndDate;
 	private int pStatus;
-	private ODeliveryVo od;
 }

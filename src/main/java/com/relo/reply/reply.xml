@@ -25,7 +25,6 @@
 		join reply b
 		on a.style_num = b.style_num
 		where a.style_num = #{styleNum}
-		group by a.style_num
 	</select>
 	<!-- 댓글 리스트 -->
 	<select id="detailRep" parameterType="int" resultType="ReplyVo">

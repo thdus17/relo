@@ -27,6 +27,10 @@ public class ListHandler implements Handler {
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		//스타일 게시판 메인
+		
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+		
 		response.setContentType("application/json;charset=UTF-8");
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		
@@ -39,12 +43,13 @@ public class ListHandler implements Handler {
 		String hashName = request.getParameter("hashName");
 		String id = request.getParameter("id");
 		List<String> tagList = null;
+		Map map = new HashMap<>();
 		
 		try {
 			tagList = tService.styleTagList();
 		} catch (FindException e) {
 			e.printStackTrace();
-			Map<String, String> map = new HashMap<>();
+			map = new HashMap<>();
 			map.put("msg", e.getMessage());
 			String jsonStr = mapper.writeValueAsString(map);
 			return jsonStr;
@@ -53,12 +58,13 @@ public class ListHandler implements Handler {
 		if(id!=null) {
 			try {
 				StylePageBean<StyleVo> pb = service.selectStyleId(currentPage,id);
-				String jsonStr = mapper.writeValueAsString(tagList);
-				jsonStr += mapper.writeValueAsString(pb);
+				map.put("pb", pb);
+				map.put("tagList", tagList);
+				String jsonStr = mapper.writeValueAsString(map);
+//				jsonStr += mapper.writeValueAsString(pb);
 				return jsonStr;
 			} catch (FindException e) {
 				e.printStackTrace();
-				Map<String, String> map = new HashMap<>();
 				map.put("msg", e.getMessage());
 				String jsonStr = mapper.writeValueAsString(map);
 				return jsonStr;
@@ -66,12 +72,13 @@ public class ListHandler implements Handler {
 		}else if(hashName!=null) {
 			try {
 				StylePageBean<StyleVo> pb = service.selectStyleTag(currentPage,hashName);
-				String jsonStr = mapper.writeValueAsString(tagList);
-				jsonStr += mapper.writeValueAsString(pb);
+				map.put("pb", pb);
+				map.put("tagList", tagList);
+				String jsonStr = mapper.writeValueAsString(map);
+//				jsonStr += mapper.writeValueAsString(pb);
 				return jsonStr;
 			} catch (FindException e) {
 				e.printStackTrace();
-				Map<String, String> map = new HashMap<>();
 				map.put("msg", e.getMessage());
 				String jsonStr = mapper.writeValueAsString(map);
 				return jsonStr;
@@ -81,14 +88,16 @@ public class ListHandler implements Handler {
 			condition.put("styleCode", styleCode);
 			try {
 				StylePageBean<StyleVo> pb = service.selectStyleList(currentPage,condition);
-				String jsonStr = mapper.writeValueAsString(tagList);
-				jsonStr += mapper.writeValueAsString(pb);
+				map.put("pb", pb);
+				map.put("tagList", tagList);
+				String jsonStr = mapper.writeValueAsString(map);
+//				jsonStr += mapper.writeValueAsString(pb);
 				return jsonStr;
 			
 				
 			} catch (FindException e) {
 				e.printStackTrace();
-				Map<String, String> map = new HashMap<>();
+				map = new HashMap<>();
 				map.put("msg", e.getMessage());
 				String jsonStr = mapper.writeValueAsString(map);
 				return jsonStr;

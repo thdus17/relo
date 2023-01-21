@@ -31,7 +31,10 @@ public class LikesHandler implements Handler {
 		if(likes.equals("likes")) {
 			try {
 				service.addLikes(new LikesVo(styleNum,id));
-				String jsonStr = mapper.writeValueAsString("좋아요 성공");
+				Map<String, String> map = new HashMap<>();
+				map.put("msg", "좋아요 성공");
+				map.put("flag", "true");
+				String jsonStr = mapper.writeValueAsString(map);
 				return jsonStr;
 			} catch (FindException e) {
 				e.printStackTrace();
@@ -43,7 +46,10 @@ public class LikesHandler implements Handler {
 		}else if (likes.equals("cancle")) {
 			try {
 				service.delLikes(new LikesVo(styleNum,id));
-				String jsonStr = mapper.writeValueAsString("좋아요 취소 성공");
+				Map<String, String> map = new HashMap<>();
+				map.put("msg", "좋아요 취소 성공");
+				map.put("flag", "true");
+				String jsonStr = mapper.writeValueAsString(map);
 				return jsonStr;
 			} catch (FindException e) {
 				e.printStackTrace();

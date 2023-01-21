@@ -19,7 +19,7 @@
 		<![CDATA[
 		select hash_name
 		from style_tag
-		 WHERE ROWNUM >= 1 AND ROWNUM <= 7
+		 WHERE ROWNUM >= 1 AND ROWNUM <= 6
 		group by hash_name
 		order by count(*) desc
 		   ]]>

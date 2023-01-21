@@ -11,6 +11,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -107,8 +108,8 @@ public class DispatcherServlet extends HttpServlet {
 		System.out.println(url);
 		Handler handler = map.get(url); //명령어로 등록되어있는 handler 객체를 꺼냄
 		
-		//모두 process 메서드를 갖고 있기에 그걸 호출해서 view페이지 경로를 반환 받음 
-		//	여기서 redirect인지 forward인지 확인해서 맞는 방법으로 보내줌
+//		모두 process 메서드를 갖고 있기에 그걸 호출해서 view페이지 경로를 반환 받음 
+//			여기서 redirect인지 forward인지 확인해서 맞는 방법으로 보내줌
 //		String view = handler.process(request, response);
 //		if (view.startsWith("redirect:")) {
 //			String path = view.split(":")[1];
