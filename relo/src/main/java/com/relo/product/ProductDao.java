@@ -6,7 +6,7 @@ import java.util.Map;
 import com.relo.exception.FindException;
 
 public interface ProductDao {
-
+	
 	//관리자가 재고에서 상품으로 등록
 	public void insertProduct(Map map) throws FindException;
 	

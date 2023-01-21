@@ -1,6 +1,7 @@
 package com.relo.product;
 
-import java.util.HashMap;
+
+
 import java.util.List;
 import java.util.Map;
 
@@ -9,8 +10,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 
 import com.relo.exception.FindException;
 import com.relo.resource.Factory;
-import com.relo.stock.StockDaoOracle;
-import com.relo.stock.StockVo;
+
 
 
 
@@ -20,6 +20,7 @@ public class ProductDaoOracle implements ProductDao {
 	public ProductDaoOracle() {
 		sqlSessionFactory = Factory.getSqlSessionFactory();
 	}
+	
 	
 	//관리자가 재고에서 상품으로 등록
 	@Override
@@ -212,7 +213,12 @@ public class ProductDaoOracle implements ProductDao {
 
 //		System.out.println(dao.selectByIdProductDetail(map));
 
-//		System.out.println(dao.selectByIdProduct("bbb"));
+//		try {
+//			System.out.println(dao.selectByIdProduct("fff"));
+//		} catch (FindException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
 		
 //		System.out.println(dao.selectByEndProduct("aaa"));

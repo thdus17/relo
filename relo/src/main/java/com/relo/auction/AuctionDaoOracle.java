@@ -1,14 +1,14 @@
 package com.relo.auction;
 
-import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
+
 import com.relo.exception.FindException;
-import com.relo.product.ProductVo;
 import com.relo.resource.Factory;
 
 public class AuctionDaoOracle implements AuctionDao {
@@ -18,11 +18,20 @@ public class AuctionDaoOracle implements AuctionDao {
 		sqlSessionFactory = Factory.getSqlSessionFactory();
 	}
 	
+	//상품번호 별 최고가
+	@Override
+	public AuctionVo maxPriceByPNum(int pNum) throws FindException{
+		SqlSession session = sqlSessionFactory.openSession();
+		AuctionDao mapper = (AuctionDao) session.getMapper(AuctionDao.class);
+		AuctionVo vo = mapper.maxPriceByPNum(pNum);
+		session.close();
+		return vo;
+	};
 	
 	@Override
 	public void insert(Map map) throws FindException {
 		SqlSession session = sqlSessionFactory.openSession();
-		session.insert("com.relo.mybatis.auction.AuctionDao.insertAuction", map);
+		session.insert("com.relo.auction.AuctionDao.insertAuction", map);
 		session.commit();
 		session.close();
 		
@@ -31,7 +40,7 @@ public class AuctionDaoOracle implements AuctionDao {
 	public int selectById(Map map) throws FindException {
 		// TODO Auto-generated method stub
 		SqlSession session = sqlSessionFactory.openSession();
-		int aNum = session.selectOne("com.relo.mybatis.auction.AuctionDao.selectById", map);		
+		int aNum = session.selectOne("com.relo.auction.AuctionDao.selectById", map);		
 		session.close();
 		return aNum;
 	}
@@ -41,7 +50,7 @@ public class AuctionDaoOracle implements AuctionDao {
 	public void update(Map map) throws FindException {
 		// TODO Auto-generated method stub
 		SqlSession session = sqlSessionFactory.openSession();
-		session.update("com.relo.mybatis.auction.AuctionDao.updateAPrice", map);
+		session.update("com.relo.auction.AuctionDao.updateAPrice", map);
 		session.commit();
 		session.close();
 	}
@@ -52,7 +61,7 @@ public class AuctionDaoOracle implements AuctionDao {
 		// TODO Auto-generated method stub
 		SqlSession session = sqlSessionFactory.openSession();
 //		Auction mapper = (Auction) session.getMapper(Auction.class);
-		List<AuctionVo> list = session.selectList("com.relo.mybatis.auction.AuctionDao.selectIngListById", id);		
+		List<AuctionVo> list = session.selectList("com.relo.auction.AuctionDao.selectIngListById", id);		
 		session.close();
 		return list;
 	}
@@ -62,7 +71,7 @@ public class AuctionDaoOracle implements AuctionDao {
 	public List<AuctionDTO> selectEndListById(String id) throws FindException {
 		// TODO Auto-generated method stub
 		SqlSession session = sqlSessionFactory.openSession();
-		List<AuctionDTO> list = session.selectList("com.relo.mybatis.auction.AuctionDao.selectEndListById", id);		
+		List<AuctionDTO> list = session.selectList("com.relo.auction.AuctionDao.selectEndListById", id);		
 		session.close();
 		return list;
 	}
@@ -70,7 +79,12 @@ public class AuctionDaoOracle implements AuctionDao {
 
 	public static void main(String[] args) {
 		AuctionDaoOracle dao = new AuctionDaoOracle();
-		
+		try {
+			System.out.println(dao.maxPriceByPNum(1));
+		} catch (FindException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		//selectById
 //		Map map = new HashMap();
 //		map.put("id", "aaa");

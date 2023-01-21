@@ -21,7 +21,6 @@ import lombok.ToString;
 
 public class ProductVo {
 	private int pNum;
-//	private int s_num;
 	private StockVo stock;
 	private List<AuctionVo> auction;
 	private Date pStartDate;

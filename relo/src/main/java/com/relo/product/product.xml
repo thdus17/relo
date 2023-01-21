@@ -13,7 +13,7 @@
 			</collection>
 	</resultMap>
 
-	<resultMap id="ProductVo" type="com.relo.product.ProductVo"
+	<resultMap id="ProductVo" type="ProductVo"
 		autoMapping="true">
 		<association property="stock" javaType="StockVo"
 			autoMapping="true">
@@ -27,8 +27,7 @@
 	</resultMap>
 
 
-
-	<!-- 관리자가 재고에서 상품으로 등록 등록안됨 -->
+	<!-- 관리자가 재고에서 상품으로 등록 -->
 	<insert id="insertProduct" parameterType="map">
 		insert into
 		product(p_num, s_num,p_start_date,p_end_date, p_status)
@@ -41,17 +40,20 @@
 		select
 		p.s_file,p.s_name,s.SIZE_CATEGORY_NAME,p.P_STATUS,p.p_num,p.s_grade,p.s_hope_price
 		from p_info p , sizes s
-		where id=#{id}  and p.size_category_num = s.size_category_num
+		where p.id=#{id}  and p.size_category_num = s.size_category_num
 	</select>
-
+	
+	
+	
+	
+	
 	<!-- 판매자 판매내역 상세 페이지 옥션 계좌는 account에서 따로 -->
-
 	<select id="selectByIdProductDetail" parameterType="map"
 		resultMap="ProductMap">
 		<choose>
 			<when test="price == sHopePrice">
 				select
-				p.s_file,p.s_name,s.SIZE_CATEGORY_NAME,p.P_STATUS,P_END_DATE,p.s_hope_price,p.s_grade
+				p.s_file,p.s_name,s.SIZE_CATEGORY_NAME,p.P_STATUS,p.P_END_DATE,p.s_hope_price,p.s_grade
 				from p_info p,sizes s
 				where p.id=#{id} and p.p_num=#{pNum} and p.size_category_num = s.size_category_num
 			</when>
@@ -93,7 +95,7 @@
 		where a_num=#{a_num})
 	</update>
 	
-	<select id="searchProdList" parameterType = "Map"  resultMap="productMap">
+	<select id="searchProdList" parameterType = "Map"  resultMap="ProductMap">
 SELECT * FROM (SELECT rownum rn, t.* FROM (SELECT p.p_num, s.s_num, s.s_name, s.s_hope_price, s.s_file, a.max_price, p.p_end_date, s.s_type
 FROM product p, stock s,(SELECT p_num, max(a_price) as max_price FROM auction GROUP BY p_num) a
 WHERE p.s_num = s.s_num AND p.p_num = a.p_num(+) AND p_status = 4
@@ -111,7 +113,7 @@ WHERE p.s_num = s.s_num AND p.p_num = a.p_num(+) AND p_status = 4
 ) t ) WHERE rn BETWEEN 1 AND 20
 </select>	
 
-<select id = "searchProdListZzim" resultMap ="productMap">
+<select id = "searchProdListZzim" resultMap ="ProductMap">
 SELECT * FROM (SELECT rownum rn, t.* FROM (SELECT p.p_num, s.s_num, s.s_name, s.s_hope_price, s.s_file, a.max_price
 FROM product p, stock s, (SELECT p_num, max(a_price) as max_price FROM auction GROUP BY p_num) a, 
 (SELECT p_num, count(*) zcount FROM zzim GROUP BY p_num ORDER BY zcount) z
@@ -119,7 +121,7 @@ WHERE p.s_num = s.s_num AND p.p_num = a.p_num(+) AND p_status = 4 AND p.p_num = 
 ORDER BY z.zcount desc) t ) WHERE rn BETWEEN 1 AND 20
 </select>
 
-<select id ="searchProdListNoTender" parameterType = "Map" resultMap ="productMap">
+<select id ="searchProdListNoTender" parameterType = "Map" resultMap ="ProductMap">
 SELECT * FROM (SELECT rownum rn, t.* FROM (SELECT p.p_num, s.s_num, s.s_name, s.s_hope_price, s.s_file, p.p_end_date, s.s_type
 FROM product p , stock s 
 WHERE p.s_num = s.s_num AND p_status = 4 AND NOT p_num IN (SELECT p_num FROM auction)
@@ -131,14 +133,14 @@ WHERE p.s_num = s.s_num AND p_status = 4 AND NOT p_num IN (SELECT p_num FROM auc
 ORDER BY p_end_date ) t ) WHERE rn BETWEEN 1 AND 20
 </select>
 
-<select id = "searchProdListByName" parameterType = "string" resultMap = "productMap">
+<select id = "searchProdListByName" parameterType = "string" resultMap = "ProductMap">
 SELECT * FROM (SELECT rownum rn, t.* FROM (SELECT p.p_num, s.s_num, s.s_name, s.s_hope_price, s.s_file, a.max_price, p.p_end_date, s.s_type
 FROM product p, stock s, (SELECT p_num, max(a_price) as max_price FROM auction GROUP BY p_num) a
 WHERE p.s_num = s.s_num AND p.p_num = a.p_num(+) AND p_status = 4 AND s_name Like #{se}
 ORDER BY p_end_date) t ) WHERE rn BETWEEN 1 AND 20
 </select>
 
-<select id = "recentTender"  parameterType ="Map" resultMap="productMap">
+<select id = "recentTender"  parameterType ="Map" resultMap="ProductMap">
 	SELECT * FROM 
 		(SELECT rownum rn, t.* FROM 
 			(SELECT p.p_num, a.id, a_price
@@ -148,7 +150,7 @@ ORDER BY p_end_date) t ) WHERE rn BETWEEN 1 AND 20
 		) WHERE rn BETWEEN 1 AND 20
 </select>
 
-<select id = "productDetail" parameterType = "int" resultMap = "productMap">
+<select id = "productDetail" parameterType = "int" resultMap = "ProductMap">
 SELECT distinct s.s_num, s_file, p.p_end_date, s_hope_price, (SELECT max(a_price) FROM auction WHERE p_num = #{pNum}) max_price,
 manager_comment, sz.size_category_name, s_brand, s_name, s_color, s_origin_price, s_grade
 FROM stock s, product p, auction a, sizes sz

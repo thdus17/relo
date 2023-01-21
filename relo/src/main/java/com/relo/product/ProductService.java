@@ -11,7 +11,7 @@ public class ProductService {
 	public ProductService() {
 		dao = new ProductDaoOracle();
 	}
-
+	
 	// 관리자가 재고에서 상품으로 등록
 	public void addProduct(Map map) throws FindException{
 		dao.insertProduct(map);
