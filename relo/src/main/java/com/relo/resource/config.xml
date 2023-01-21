@@ -18,13 +18,13 @@
 	    <typeAlias alias="ScBidVo" type="com.relo.successfulBid.ScBidVo" />
 	    <typeAlias alias="MemberVo" type="com.relo.member.MemberVo"/>
 	    <typeAlias alias="AuctionDTO" type="com.relo.auction.AuctionDTO"/>
-	    <!-- <typeAlias alias="AccountVo" type="com.relo.account.AccountVo" /> -->
-	    <!-- <typeAlias alias="LikesVo" type="com.relo.likes.LikesVo" />
+	    <typeAlias alias="AccountVo" type="com.relo.account.AccountVo" />
+	    <typeAlias alias="LikesVo" type="com.relo.likes.LikesVo" />
 	    <typeAlias alias="StyleTagVo" type="com.relo.styletag.StyleTagVo" />
 	    <typeAlias alias="ReplyVo" type="com.relo.reply.ReplyVo" />
 	    <typeAlias alias="StyleVo" type="com.relo.style.StyleVo"/>
 	    <typeAlias alias="NoticeVo" type="com.relo.notice.NoticeVo"/>
-	    <typeAlias alias="ZzimVo" type="com.relo.zzim.ZzimVo"/> -->
+	    <typeAlias alias="ZzimVo" type="com.relo.zzim.ZzimVo"/>
 	</typeAliases>
 	<environments default="mybatis_test">
 		<environment id="mybatis_test">
@@ -43,7 +43,7 @@
 		<mapper resource="com/relo/successfulBid/scBid.xml" />
 		<mapper resource="com/relo/product/product.xml" />
 		<mapper resource="com/relo/orderDelivery/oDelivery.xml" />
-		<!-- <mapper resource="com/relo/likes/likes.xml"/>
+		<mapper resource="com/relo/likes/likes.xml"/>
 	    <mapper resource="com/relo/styletag/styleTag.xml" />
 	    <mapper resource="com/relo/reply/reply.xml" />
 	    <mapper resource="com/relo/style/style.xml" />
@@ -52,7 +52,7 @@
 	    <mapper resource="com/relo/address/address.xml" />
 	    <mapper resource="com/relo/stock/stock.xml" />
 	    <mapper resource="com/relo/zzim/zzim.xml" />
-	    <mapper resource="com/relo/account/account.xml" /> -->
-	    <!--<mapper resource="com/relo/stockDelivery/StockDeliveryMapper.xml" />-->
+	    <mapper resource="com/relo/account/account.xml" />
+	    <mapper resource="com/relo/stockDelivery/StockDeliveryMapper.xml" />
 	</mappers>
 </configuration>

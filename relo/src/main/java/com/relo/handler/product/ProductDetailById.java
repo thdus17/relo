@@ -35,8 +35,8 @@ public class ProductDetailById implements Handler {
 		
 		HttpSession session = request.getSession();
 		
-		//String id = (String) session.getAttribute("loginId");
-		String id = request.getParameter("id");
+		String id = (String) session.getAttribute("loginId");
+		//String id = request.getParameter("id");
 		m.put("id", id);
 		
 		int pNum = Integer.parseInt(request.getParameter("pNum"));
@@ -53,7 +53,6 @@ public class ProductDetailById implements Handler {
 				int price = sHopePrice;
 				m.put("price", price);
 				ProductVo vo = service.getByIdProductDetail(m);
-				System.out.println("경매입찰없을때:" + vo);
 				arr.add(vo);
 				ObjectMapper mapper = new ObjectMapper();
 				String jsonStr = mapper.writeValueAsString(arr);
@@ -62,7 +61,6 @@ public class ProductDetailById implements Handler {
 				int price = auctionVo.getAPrice();
 				m.put("price", price);
 				ProductVo vo = service.getByIdProductDetail(m);
-				System.out.println("경매입찰있을때:" + vo);
 				arr.add(vo);
 				ObjectMapper mapper = new ObjectMapper();
 				String jsonStr = mapper.writeValueAsString(arr);
