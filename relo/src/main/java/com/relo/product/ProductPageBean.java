@@ -6,8 +6,8 @@ import lombok.Getter;
 
 @Getter
 public class ProductPageBean<T> {
-	public final static int CNT_PER_PAGE = 3;
-	public final static int CNT_PER_PAGE_GROUP = 2;
+	public final static int CNT_PER_PAGE = 3; // 한페이지에서 보여질 개수
+	public final static int CNT_PER_PAGE_GROUP = 2; // 페이지 번호에서 보여질 번호
 	private List<T> list;
 	private int totalCnt;
 	private int totalPage;

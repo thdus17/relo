@@ -6,7 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter @Setter
+
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
@@ -17,5 +19,16 @@ public class MemberVo {
 	private String email;
 	private int type;
 	private String birth;
-	private String m_name;
+	private String mName;
+	private int outTerm;
+
+	public MemberVo(String id, String pwd, String tel, String email, int type, String birth, String mName) {
+		this.id = id;
+		this.pwd = pwd;
+		this.tel = tel;
+		this.email = email;
+		this.type = type;
+		this.birth = birth;
+		this.mName = mName;
+	}
 }

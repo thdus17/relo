@@ -1,5 +1,7 @@
 package com.relo.auction;
 
+import com.relo.product.ProductVo;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,10 +14,13 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 
+//product p, auction a, sizes sz, stock s, a_max am
 public class AuctionVo {
-	private int a_num;
+	private int aNum;
 	private String id;
-	private int p_num;
-	private int a_price;
+	private ProductVo product;
+	private int aPrice;
 	
 }
+
+

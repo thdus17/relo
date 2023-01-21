@@ -22,7 +22,7 @@ public class ProductVo {
 	private int pNum;
 //	private int s_num;
 	private StockVo stock;
-	private List<AuctionVo> a;
+	private List<AuctionVo> auction;
 	private Date pStartDate;
 	private Date pEndDate;
 	private int pStatus;

@@ -12,6 +12,6 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class SizesVo {
-	private int size_category_num;
-	private String size_category_name;
+	private int sizeCategoryNum;
+	private String sizeCategoryName;
 }

@@ -57,7 +57,7 @@ public class ZzimList implements Handler {
 					product.put("pNum", p.getPNum());
 					String strEndDate = dateformat.format(p.getPEndDate());
 					product.put("pEndDate", strEndDate);
-					StockVo svo = p.getStockVo();
+					StockVo svo = p.getStock();
 					product.put("sFile", svo.getSFile());
 					product.put("sBrand", svo.getSBrand());
 					product.put("sName", svo.getSName());

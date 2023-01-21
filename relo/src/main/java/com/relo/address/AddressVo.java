@@ -11,13 +11,13 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class AddressVo {
-	private int addr_num;
+	private int addrNum;
 	private String id;
-	private String addr_name;
-	private int addr_post_num;
-	private String addr_tel;
+	private String addrName;
+	private int addrPostNum;
+	private String addrTel;
 	private String addr;
-	private String addr_detail;
-	private String addr_recipient;
-	private int addr_type;
+	private String addrDetail;
+	private String addrRecipient;
+	private int addrType;
 }

@@ -2,6 +2,8 @@ package com.relo.successfulBid;
 
 import java.sql.Date;
 
+import com.relo.auction.AuctionVo;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +16,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 
-public class ScAuctionVo {
-	private int a_num;
-	private Date c_time;
+//catch c, auction a, product p, stock s
+public class ScBidVo {
+	private AuctionVo a;
+	private Date cTime;
 }

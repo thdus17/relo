@@ -8,8 +8,7 @@ import lombok.ToString;
 
 //	   style_num   number NOT NULL ,
 //	   id   varchar2(50) ,
-@Getter
-@Setter
+@Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString

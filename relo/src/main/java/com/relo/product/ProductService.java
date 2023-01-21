@@ -12,25 +12,55 @@ public class ProductService {
 		dao = new ProductDaoOracle();
 	}
 
+	// 관리자가 재고에서 상품으로 등록
+	public void addProduct(Map map) throws FindException {
+		dao.insertProduct(map);
+	};
+
+	// 판매자 판매내역 진행중 페이지
+	public List<ProductVo> getByIdProduct(String id) throws FindException {
+		return dao.selectByIdProduct(id);
+	};
+
+	// 판매자 판매내역 진행중 상세 페이지
+	public ProductVo getByIdProductDetail(Map map) throws FindException {
+		return dao.selectByIdProductDetail(map);
+	};
+
+	// 판매자 판매내역 종료 페이지
+	public List<ProductVo> getByEndProduct(String id) throws FindException {
+		return dao.selectByEndProduct(id);
+	};
+
+	// 판매자 판매내역 종료 페이지 디테일
+	public ProductVo getByEndProductDetail(String id) throws FindException {
+		return dao.selectByEndProductDetail(id);
+	};
+
+	public void editStatus8(int aNum) throws FindException{
+	      dao.updateStatus8(aNum);
+	   }
+	
+
 	public List<ProductVo> getProdList(Map<String, Object> condition) throws FindException {
 
 		return dao.searchProdList(condition);
 	}
 
-	public List<ProductVo> getProdListZzim() throws FindException {
-		return dao.searchProdListZzim();
+	public List<ProductVo> getProdListZzim(Map<String, Object> condition) throws FindException {
+		return dao.searchProdListZzim(condition);
 	}
 
 	public List<ProductVo> getProdListNoTender(Map<String, Object> condition) throws FindException {
 		return dao.searchProdListNoTender(condition);
 	}
 
-	public List<ProductVo> getProdListByName(String prodName) throws FindException {
-		return dao.searchProdListByName(prodName);
+	public List<ProductVo> getProdListByName(String searchvalue) throws FindException {
+		return dao.searchProdListByName(searchvalue);
 	}
 
-	public List<ProductVo> getrecentTender(Map<String, Object> condition) throws FindException {
-		return dao.recentTender(condition);
+	public List<ProductVo> getrecentTender(int pNum) throws FindException {
+		return dao.recentTender(pNum);
 	}
 
 	public ProductVo getProductDetail(int pNum) throws FindException {
@@ -45,30 +75,20 @@ public class ProductService {
 		return dao.totalCnt();
 	}
 
-//	public ProductPageBean<ProductVo> findAll(int currentPage) throws FindException {
-//		ProductDao dao;
-//		dao = new ProductDaoOracle();
-//		/*
-//		 * currentPage startRow endRow 1 1 3 //2 4 6// 3 7 9
-//		 */
-//		int cntPerPage = 3; // 한페이지에 보여줄 최대목록수
-//		int startRow = (currentPage - 1) * cntPerPage + 1;
-//		int endRow = currentPage * cntPerPage;
-//		// return dao.selectAll(startRow, endRow);
-//		List<Product> list = dao.selectAll(startRow, endRow);
-//
-//		int totalCnt = dao.totalCnt(); // 총상품수
-//		/*
-//		 * int cntPerPageGroup = 2; //페이지그룹의 보여줄페이지수 int totalPage =
-//		 * (int)Math.ceil((double)totalCnt/cntPerPage); int startPage =
-//		 * (currentPage-1)/cntPerPageGroup*cntPerPageGroup+1; int endPage = startPage +
-//		 * cntPerPageGroup -1 ; Map<String, Object> map = new HashMap<>();
-//		 * map.put("list", list); map.put("totalCnt", totalCnt); map.put("totalPage",
-//		 * totalPage); map.put("startPage", startPage); map.put("endPage", endPage);
-//		 * map.put("currentPage", currentPage); return map;
-//		 */
-//		PageBean<Product> pb = new PageBean(currentPage, list, totalCnt);
-//		return pb;}
-//	
+	public int getSNumByPNum(int pNum) throws FindException {
+		return dao.selectSNumByPNum(pNum);
+	}
 
+	public List<ProductVo> getAllPStatusIs8() throws FindException {
+
+		return dao.selectAllByPStatusIs8();
+	}
+
+	public void editWhenReBid(int sNum) throws FindException {
+		dao.updateWhenReBid(sNum);
+	}
+
+	public void delReBiddingProduct(int sNum) throws FindException {
+		dao.deleteReBiddingProduct(sNum);
+	}
 }
