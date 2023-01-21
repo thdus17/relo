@@ -1,6 +1,7 @@
 package com.relo.handler.product;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,43 +14,48 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.relo.auction.AuctionVo;
 import com.relo.exception.FindException;
 import com.relo.handler.Handler;
 import com.relo.product.ProductService;
 import com.relo.product.ProductVo;
-import com.relo.sizes.SizesVo;
 import com.relo.stock.StockVo;
 
-public class ProducIsPStatus8tList implements Handler {
+public class ProdListByName implements Handler {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		response.setContentType("application/json;charset=utf-8");
+			throws IOException, ServletException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json; charset=UTF-8");
 		response.addHeader("Access-Control-Allow-Origin", "*");
 
-		ObjectMapper mapper = new ObjectMapper();
+		String prodName = request.getParameter("prodName");
+		SimpleDateFormat dateformat = new SimpleDateFormat("yyyy년 MM월 dd일");
 		ProductService service = new ProductService();
+		ObjectMapper mapper = new ObjectMapper();
 		JSONArray arr = new JSONArray();
-		List<ProductVo> list = null;
+		String searchvalue = "%" + prodName + "%";
 		try {
-			list = service.getAllPStatusIs8();
-			int cnt = 0;
-			for (ProductVo p : list) {
-				JSONObject obj = new JSONObject();
-				JSONObject obj1 = new JSONObject();
-				
-				obj.put("product"+p.getPNum()+"day", p.getPEndDate());
-				obj.put("product"+p.getPNum(), p.getPNum());
-				
-				StockVo s = p.getStock();
-				obj1.put("stock"+cnt, s);
-				
-				arr.add(obj);
-				arr.add(obj1);
+			List<ProductVo> plist = service.getProdListByName(searchvalue);
 
-				cnt++;
+			for (ProductVo pvo : plist) {
+				JSONObject obj = new JSONObject();
+				obj.put("pNum", pvo.getPNum());
+				String strEndDate = dateformat.format(pvo.getPEndDate());
+				obj.put("pEndDate", strEndDate);
+				StockVo svo = pvo.getStock();
+				obj.put("sName", svo.getSName());
+				obj.put("sHopePrice", svo.getSHopePrice());
+				obj.put("sName", svo.getSName());
+				List<AuctionVo> alist = pvo.getAuction();
+				for (AuctionVo avo : alist) {
+					obj.put("aPrice", avo.getAPrice());
+				}
+				arr.add(obj);
 			}
+
 			String jsonStr = mapper.writeValueAsString(arr);
 			return jsonStr;
 		} catch (FindException e) {
@@ -59,5 +65,7 @@ public class ProducIsPStatus8tList implements Handler {
 			String jsonStr = mapper.writeValueAsString(map);
 			return jsonStr;
 		}
+
 	}
+
 }

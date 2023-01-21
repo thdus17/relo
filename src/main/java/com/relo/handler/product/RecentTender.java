@@ -13,46 +13,46 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.relo.auction.AuctionVo;
 import com.relo.exception.FindException;
 import com.relo.handler.Handler;
 import com.relo.product.ProductService;
 import com.relo.product.ProductVo;
-import com.relo.sizes.SizesVo;
-import com.relo.stock.StockVo;
 
-public class ProducIsPStatus8tList implements Handler {
+public class RecentTender implements Handler {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		response.setContentType("application/json;charset=utf-8");
+			throws IOException, ServletException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json; charset=UTF-8");
 		response.addHeader("Access-Control-Allow-Origin", "*");
 
-		ObjectMapper mapper = new ObjectMapper();
-		ProductService service = new ProductService();
-		JSONArray arr = new JSONArray();
-		List<ProductVo> list = null;
-		try {
-			list = service.getAllPStatusIs8();
-			int cnt = 0;
-			for (ProductVo p : list) {
-				JSONObject obj = new JSONObject();
-				JSONObject obj1 = new JSONObject();
-				
-				obj.put("product"+p.getPNum()+"day", p.getPEndDate());
-				obj.put("product"+p.getPNum(), p.getPNum());
-				
-				StockVo s = p.getStock();
-				obj1.put("stock"+cnt, s);
-				
-				arr.add(obj);
-				arr.add(obj1);
+		int pNum = Integer.parseInt(request.getParameter("pNum"));
 
-				cnt++;
+		ProductService service = new ProductService();
+		ObjectMapper mapper = new ObjectMapper();
+		JSONObject tender = null;
+		JSONArray arr = new JSONArray();
+		try {
+			List<ProductVo> tlist = service.getrecentTender(pNum);
+			for (ProductVo p : tlist) {
+				List<AuctionVo> alist = p.getAuction();
+				for (AuctionVo a : alist) {
+					tender = new JSONObject();
+					tender.put("pNum", pNum);
+					tender.put("id", a.getId());
+					tender.put("aPrice", a.getAPrice());
+					arr.add(tender);
+
+				}
+
 			}
 			String jsonStr = mapper.writeValueAsString(arr);
 			return jsonStr;
 		} catch (FindException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 			Map<String, String> map = new HashMap<>();
 			map.put("msg", e.getMessage());
@@ -60,4 +60,5 @@ public class ProducIsPStatus8tList implements Handler {
 			return jsonStr;
 		}
 	}
+
 }
