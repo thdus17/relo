@@ -13,6 +13,10 @@ public class AuctionService {
 		dao = new AuctionDaoOracle();
 	}
 	
+	public AuctionVo maxPriceByPNum(int pNum) throws FindException{
+		return dao.maxPriceByPNum(pNum);
+	}
+
 	public void addAuction(Map map) throws FindException {
 		try {
 			dao.insert(map);

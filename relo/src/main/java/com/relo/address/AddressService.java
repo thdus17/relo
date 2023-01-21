@@ -23,6 +23,10 @@ public class AddressService {
 		return dao.selectAllById(id);
 	}
 
+	public void changeAddrTypeIs0(String id) throws FindException {
+		dao.changeAddrTypeIs0(id);
+	}
+	
 	public void editAddress(AddressVo a) throws FindException {
 		dao.update(a);
 	}

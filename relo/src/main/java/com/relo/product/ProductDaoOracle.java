@@ -1,6 +1,5 @@
 package com.relo.product;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,10 +8,6 @@ import org.apache.ibatis.session.SqlSessionFactory;
 
 import com.relo.exception.FindException;
 import com.relo.resource.Factory;
-import com.relo.stock.StockDaoOracle;
-import com.relo.stock.StockVo;
-
-
 
 public class ProductDaoOracle implements ProductDao {
 	private SqlSessionFactory sqlSessionFactory;
@@ -20,61 +15,62 @@ public class ProductDaoOracle implements ProductDao {
 	public ProductDaoOracle() {
 		sqlSessionFactory = Factory.getSqlSessionFactory();
 	}
-	
-	//관리자가 재고에서 상품으로 등록
+
+	// 관리자가 재고에서 상품으로 등록
 	@Override
-	public void insertProduct(Map map) throws FindException{
+	public void insertProduct(Map map) throws FindException {
 		SqlSession session = sqlSessionFactory.openSession();
 		ProductDao mapper = (ProductDao) session.getMapper(ProductDao.class);
 		mapper.insertProduct(map);
 		session.commit();
 		session.close();
 	}
-	
-	//판매자 판매내역 진행중 페이지
-	public List<ProductVo> selectByIdProduct(String id) throws FindException{
+
+	// 판매자 판매내역 진행중 페이지
+	public List<ProductVo> selectByIdProduct(String id) throws FindException {
 		SqlSession session = sqlSessionFactory.openSession();
 		ProductDao mapper = (ProductDao) session.getMapper(ProductDao.class);
 		List<ProductVo> list = mapper.selectByIdProduct(id);
 		session.close();
 		return list;
 	}
-	
-	//판매자 판매내역 진행중 상세 페이지
-	public ProductVo selectByIdProductDetail(Map map) throws FindException{
+
+	// 판매자 판매내역 진행중 상세 페이지
+	public ProductVo selectByIdProductDetail(Map map) throws FindException {
 		SqlSession session = sqlSessionFactory.openSession();
 		ProductDao mapper = (ProductDao) session.getMapper(ProductDao.class);
 		ProductVo vo = mapper.selectByIdProductDetail(map);
 		session.close();
 		return vo;
 	}
-	
-	//판매자 판매내역 종료 페이지 
-	public List<ProductVo> selectByEndProduct(String id) throws FindException{
+
+	// 판매자 판매내역 종료 페이지
+	public List<ProductVo> selectByEndProduct(String id) throws FindException {
 		SqlSession session = sqlSessionFactory.openSession();
 		ProductDao mapper = (ProductDao) session.getMapper(ProductDao.class);
 		List<ProductVo> list = mapper.selectByEndProduct(id);
 		session.close();
 		return list;
 	}
-	
-	//판매자 판매내역 종료 페이지 디테일
-    public ProductVo selectByEndProductDetail(String id) throws FindException {
+
+	// 판매자 판매내역 종료 페이지 디테일
+	public ProductVo selectByEndProductDetail(String id) throws FindException {
 		SqlSession session = sqlSessionFactory.openSession();
-	//	ProductDao mapper = (ProductDao) session.getMapper(ProductDao.class);
-		ProductVo vo = session.selectOne("com.relo.product.ProductDao.selectByEndProductDetail",id);
+		// ProductDao mapper = (ProductDao) session.getMapper(ProductDao.class);
+		ProductVo vo = session.selectOne("com.relo.product.ProductDao.selectByEndProductDetail", id);
 		session.close();
 		return vo;
-    }
+	}
+
 	@Override
-	public void updateStatus8(int aNum) throws FindException{
+	public void updateStatus8(int aNum) throws FindException {
 		// TODO Auto-generated method stub
 		SqlSession session = sqlSessionFactory.openSession();
 		session.update("com.relo.product.ProductDao.update8", aNum);
 		session.commit();
 		session.close();
 	}
-	
+
 	// 상품 전체 목록(전체/상의/하의/신발 + 최신순/마감순)
 	@Override
 	public List<ProductVo> searchProdList(Map<String, Object> condition) throws FindException {
@@ -87,10 +83,10 @@ public class ProductDaoOracle implements ProductDao {
 
 	// 찜하기 순 전체 상품목록(필터없음)
 	@Override
-	public List<ProductVo> searchProdListZzim() throws FindException {
+	public List<ProductVo> searchProdListZzim(Map<String, Object> condition) throws FindException {
 		SqlSession session = sqlSessionFactory.openSession();
 		ProductDao dao = (ProductDao) session.getMapper(ProductDao.class);
-		List<ProductVo> list = dao.searchProdListZzim();
+		List<ProductVo> list = dao.searchProdListZzim(condition);
 		return list;
 	}
 
@@ -143,6 +139,17 @@ public class ProductDaoOracle implements ProductDao {
 		session.close();
 	}
 
+	// 상품 입찰가 수정
+	@Override
+	public void updateTender(Map<String, Object> tMap) throws FindException {
+		// TODO Auto-generated method stub
+		SqlSession session = sqlSessionFactory.openSession();
+		ProductDao dao = (ProductDao) session.getMapper(ProductDao.class);
+		dao.updateTender(tMap);
+		session.commit();
+		session.close();
+	}
+
 	// 총 상품수 구하기
 	@Override
 	public int totalCnt() throws FindException {
@@ -153,6 +160,7 @@ public class ProductDaoOracle implements ProductDao {
 		session.close();
 		return totalCnt;
 	}
+
 	@Override
 	public int selectSNumByPNum(int pNum) throws FindException {
 		SqlSession session = sqlSessionFactory.openSession();
@@ -189,20 +197,19 @@ public class ProductDaoOracle implements ProductDao {
 		session.close();
 	}
 
-	
 //	public static void main(String[] args) {
 //		ProductDaoOracle dao = new ProductDaoOracle();
- //       Map map = new HashMap<>();
+	// Map map = new HashMap<>();
 //	    map.put("sHopePrice", 700088);
-  //      map.put("sNum", 8);
+	// map.put("sNum", 8);
 //		StockDaoOracle sdao = new StockDaoOracle();
 //		StockVo vo = sdao.selectBySNum(13);
-		
+
 //		Map map = new HashMap<>();
 //		map.put("sNum", 13);
 //		map.put("pEndDate", vo.getSHopeDays());
 //		dao.insertProduct(map);
-		
+
 //		dao.insertProduct(map);
 
 //		map.put("pNum", 10);
@@ -213,11 +220,9 @@ public class ProductDaoOracle implements ProductDao {
 //		System.out.println(dao.selectByIdProductDetail(map));
 
 //		System.out.println(dao.selectByIdProduct("bbb"));
-		
-		
+
 //		System.out.println(dao.selectByEndProduct("aaa"));
 //		System.out.println(dao.selectByEndProductDetail("aaa"));
 //}
-		
 
 }

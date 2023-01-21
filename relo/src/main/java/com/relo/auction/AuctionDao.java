@@ -8,6 +8,8 @@ import com.relo.product.ProductVo;
 
 public interface AuctionDao {
 	
+	//상품번호 별 최고가
+	public AuctionVo maxPriceByPNum(int pNum) throws FindException;
 	
 	// 입찰할 시 정보 insert
 	public void insert(Map map) throws FindException;

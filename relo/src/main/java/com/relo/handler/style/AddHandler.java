@@ -25,6 +25,8 @@ public class AddHandler implements Handler {
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		//스타일 게시판 작성
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
 		response.setContentType("application/json;charset=UTF-8");
 		response.addHeader("Access-Control-Allow-Origin", "*");
 

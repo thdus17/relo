@@ -18,6 +18,8 @@ public class DelHandler implements Handler {
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
 		response.setContentType("application/json;charset=UTF-8");
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		

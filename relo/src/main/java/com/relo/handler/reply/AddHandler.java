@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,8 +17,11 @@ import com.relo.reply.ReplyVo;
 public class AddHandler implements Handler {
 	//댓글 추가
 	@Override
-	public String process(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public String process(HttpServletRequest request, HttpServletResponse response) 
+			throws IOException, ServletException {
 		
+		response.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json;charset=UTF-8");
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		

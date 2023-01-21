@@ -23,7 +23,24 @@
 		</association>
 	</association>
 </resultMap>
+<resultMap id="AuctionMap" type="AuctionVo" autoMapping="true">
+	<id property="aNum" column="a_num"/>
+	<result property="aPrice" column="max_price" />
+	<association property="product" javaType="ProductVo" autoMapping="true">
+		<association property="stock" javaType="StockVo" autoMapping="true">
+			<association property="sizes" javaType="SizesVo" autoMapping="true">
+			</association>
+		</association>
+	</association>
+</resultMap>
 
+<!-- 판매자 판매내역 상세 페이지로 들어가는데 입찰여부 확인-->
+<select id="maxPriceByPNum" resultMap="AuctionMap" parameterType="int">
+select a.p_num, max(a.a_price) as max_price 
+from auction a,product p
+where #{p.pNum} = a.p_num
+group by a.p_num
+</select>
 
 <!-- 가격 입력 후 입찰하기 누르면 insert문 -->
 <insert id="insertAuction" parameterType="map">

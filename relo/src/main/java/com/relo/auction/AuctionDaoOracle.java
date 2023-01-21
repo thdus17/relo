@@ -17,6 +17,16 @@ public class AuctionDaoOracle implements AuctionDao {
 	}
 	
 	
+	//상품번호 별 최고가
+	@Override
+	public AuctionVo maxPriceByPNum(int pNum) throws FindException{
+		SqlSession session = sqlSessionFactory.openSession();
+		AuctionDao mapper = (AuctionDao) session.getMapper(AuctionDao.class);
+		AuctionVo vo = mapper.maxPriceByPNum(pNum);
+		session.close();
+		return vo;
+	};
+
 	@Override
 	public void insert(Map map) throws FindException {
 		SqlSession session = sqlSessionFactory.openSession();

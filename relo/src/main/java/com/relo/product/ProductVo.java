@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 
 import com.relo.auction.AuctionVo;
-import com.relo.orderDelivery.ODeliveryVo;
 import com.relo.stock.StockVo;
 
 import lombok.AllArgsConstructor;
@@ -28,8 +27,3 @@ public class ProductVo {
 	private Date pEndDate;
 	private int pStatus;
 }
-
-/*p.p_num, a.a_num, a.id, 
- * a.a_price, s.s_file, s.s_name, 
- * p.p_end_date
- */

@@ -24,6 +24,10 @@ public class EditHandler implements Handler {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+		
 		response.setContentType("application/json;charset=UTF-8");
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		
@@ -55,7 +59,7 @@ public class EditHandler implements Handler {
 				tagVo = new StyleTagVo(0,vo.getStyleNum(),s);
 				Tservice.addStyleTag(tagVo);
 				}
-			String jsonStr = mapper.writeValueAsString(vo);
+			String jsonStr = mapper.writeValueAsString("수정완료");
 			return jsonStr;
 		} catch (FindException e) {
 			e.printStackTrace();

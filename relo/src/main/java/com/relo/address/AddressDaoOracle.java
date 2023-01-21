@@ -53,6 +53,15 @@ public class AddressDaoOracle implements AddressDao{
 		session.commit();
 		session.close();
 	}
+	
+	@Override
+	public void changeAddrTypeIs0(String id) throws FindException {
+		SqlSession session = sqlSessionFactory.openSession();
+		AddressDao dao = (AddressDao) session.getMapper(AddressDao.class);
+		dao.changeAddrTypeIs0(id);
+		session.commit();
+		session.close();
+	}
 
 	@Override
 	public void delete(int addrNum) throws FindException{
@@ -62,4 +71,5 @@ public class AddressDaoOracle implements AddressDao{
 		session.commit();
 		session.close();
 	}
+
 }

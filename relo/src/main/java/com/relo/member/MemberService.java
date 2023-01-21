@@ -26,6 +26,10 @@ public class MemberService {
 	public void editMember(MemberVo m) throws FindException {
 		dao.update(m);
 	}
+	
+	public int checkOutTerms(String id) throws FindException{
+		return dao.checkOutTerms(id);
+	}
 
 	public void delMember(String id) throws FindException {
 		dao.delete(id);

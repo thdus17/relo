@@ -106,20 +106,24 @@ WHERE p.s_num = s.s_num AND p.p_num = a.p_num(+) AND p_status = 4
 <choose>
 	<when test='orderkind == "pnumdesc"'>ORDER BY p.p_num DESC</when>
 	<when test='orderkind == "penddate"'>ORDER BY p.p_end_date ASC</when>
-	<otherwise></otherwise>
 </choose>
 ) t ) WHERE rn BETWEEN 1 AND 20
 </select>	
 
-<select id = "searchProdListZzim" resultMap ="ProductMap">
-SELECT * FROM (SELECT rownum rn, t.* FROM (SELECT p.p_num, s.s_num, s.s_name, s.s_hope_price, s.s_file, a.max_price
+<select id = "searchProdListZzim" parameterType = "map" resultMap ="ProductMap">
+SELECT * FROM (SELECT rownum rn, t.* FROM (SELECT p.p_num, s.s_num, s.s_name, s.s_hope_price, s.s_file, a.max_price, p.p_end_date, s.s_type
 FROM product p, stock s, (SELECT p_num, max(a_price) as max_price FROM auction GROUP BY p_num) a, 
 (SELECT p_num, count(*) zcount FROM zzim GROUP BY p_num ORDER BY zcount) z
-WHERE p.s_num = s.s_num AND p.p_num = a.p_num(+) AND p_status = 4 AND p.p_num = z.p_num
+WHERE p.s_num = s.s_num AND p.p_num = a.p_num(+) AND p_status = 4 AND p.p_num = z.p_num 
+<choose>
+	<when test='type == "신발"'>AND s.s_type = '신발'</when>
+	<when test='type == "상의"'>AND s.s_type = '상의'</when>
+	<when test='type == "하의"'>AND s.s_type = '하의'</when>
+</choose> 
 ORDER BY z.zcount desc) t ) WHERE rn BETWEEN 1 AND 20
 </select>
 
-<select id ="searchProdListNoTender" parameterType = "Map" resultMap ="ProductMap">
+<select id ="searchProdListNoTender" parameterType = "map" resultMap ="ProductMap">
 SELECT * FROM (SELECT rownum rn, t.* FROM (SELECT p.p_num, s.s_num, s.s_name, s.s_hope_price, s.s_file, p.p_end_date, s.s_type
 FROM product p , stock s 
 WHERE p.s_num = s.s_num AND p_status = 4 AND NOT p_num IN (SELECT p_num FROM auction)
@@ -134,7 +138,7 @@ ORDER BY p_end_date ) t ) WHERE rn BETWEEN 1 AND 20
 <select id = "searchProdListByName" parameterType = "string" resultMap = "ProductMap">
 SELECT * FROM (SELECT rownum rn, t.* FROM (SELECT p.p_num, s.s_num, s.s_name, s.s_hope_price, s.s_file, a.max_price, p.p_end_date, s.s_type
 FROM product p, stock s, (SELECT p_num, max(a_price) as max_price FROM auction GROUP BY p_num) a
-WHERE p.s_num = s.s_num AND p.p_num = a.p_num(+) AND p_status = 4 AND s_name Like #{se}
+WHERE p.s_num = s.s_num AND p.p_num = a.p_num(+) AND p_status = 4 AND s_name Like #{searchvalue}
 ORDER BY p_end_date) t ) WHERE rn BETWEEN 1 AND 20
 </select>
 

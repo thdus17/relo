@@ -7,21 +7,21 @@ import com.relo.exception.FindException;
 
 public interface ProductDao {
 
-	//관리자가 재고에서 상품으로 등록
+	// 관리자가 재고에서 상품으로 등록
 	public void insertProduct(Map map) throws FindException;
-	
-	//판매자 판매내역 진행중 페이지
+
+	// 판매자 판매내역 진행중 페이지
 	public List<ProductVo> selectByIdProduct(String id) throws FindException;
-	
-	//판매자 판매내역 진행중 상세 페이지
+
+	// 판매자 판매내역 진행중 상세 페이지
 	public ProductVo selectByIdProductDetail(Map map) throws FindException;
-	
-	//판매자 판매내역 종료 페이지 
+
+	// 판매자 판매내역 종료 페이지
 	public List<ProductVo> selectByEndProduct(String id) throws FindException;
-	
-    //판매자 판매내역 종료 페이지 디테일
-    public ProductVo selectByEndProductDetail(String id) throws FindException;
-    
+
+	// 판매자 판매내역 종료 페이지 디테일
+	public ProductVo selectByEndProductDetail(String id) throws FindException;
+
 	// 낙찰자가 구매를 포기할 경우 상태 값 유찰됨(8)으로 변경
 	public void updateStatus8(int aNum) throws FindException;
 
@@ -41,12 +41,12 @@ public interface ProductDao {
 	 * @return
 	 * @throws FindException
 	 */
-	public List<ProductVo> searchProdListZzim() throws FindException;
+	public List<ProductVo> searchProdListZzim(Map<String, Object> condition) throws FindException;
 
 	/**
 	 * 상품 목록 중 한번도 입찰되지 않은 상품목록을 조회한다(전체/상의/하의/신발 + 마감임박순 동적SQL)
 	 * 
-	 * @param Map condition
+	 * @param sType : 상품타입
 	 * @return 한번도 입찰되지 않은 상품목록
 	 * @throws FindException
 	 */
@@ -88,13 +88,22 @@ public interface ProductDao {
 	public void insertTender(Map<String, Object> tMap) throws FindException;
 
 	/**
+	 * 상품 입찰가를 수정한다
+	 * 
+	 * @param tMap 입찰수정때 필요한 변수(id, p_num, a_price)
+	 * @throws FindException
+	 */
+	public void updateTender(Map<String, Object> tMap) throws FindException;
+
+	/**
 	 * 총 상품 수를 구한다
 	 * 
 	 * @return 총 상품 수
 	 * @throws FindException
 	 */
+
 	public int totalCnt() throws FindException;
-	
+
 	/*
 	 * 유찰된 상품 번호로 재고 번호를 검색한다.
 	 */
@@ -120,5 +129,5 @@ public interface ProductDao {
 	 * @param pNum 유찰된 상품 번호
 	 */
 	void deleteReBiddingProduct(int pNum) throws FindException;
-	
+
 }
