@@ -11,6 +11,7 @@ import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -34,6 +35,9 @@ public class AuctionIngListById implements Handler {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json; charset=UTF-8");
 		response.addHeader("Access-Control-Allow-Origin", "*");
+		
+//		HttpSession session = request.getSession(false);
+//		String loginId = String.valueOf(session.getAttribute("loginId"));
 		
 		String id = request.getParameter("id");
 		AuctionService service = new AuctionService();

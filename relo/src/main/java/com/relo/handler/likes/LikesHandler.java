@@ -12,6 +12,7 @@ import com.relo.exception.FindException;
 import com.relo.handler.Handler;
 import com.relo.likes.LikesService;
 import com.relo.likes.LikesVo;
+import com.relo.style.StyleService;
 
 public class LikesHandler implements Handler {
 	//likes가 likes로 받아오면 좋아요 +1
@@ -22,15 +23,17 @@ public class LikesHandler implements Handler {
 		response.setContentType("application/json;charset=UTF-8");
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		
-		LikesService service = new LikesService();
+		LikesService lService = new LikesService();
+		StyleService sService = new StyleService();
 		ObjectMapper mapper = new ObjectMapper();
+		//likes = 좋아요 + 1 이거나 -1 이거나 확인할 변수
 		String likes = request.getParameter("likes");
 		String id = request.getParameter("id");
 		int styleNum = Integer.parseInt(request.getParameter("styleNum"));
-
+		//likes = likes 이면 좋아요 +1
 		if(likes.equals("likes")) {
 			try {
-				service.addLikes(new LikesVo(styleNum,id));
+				lService.addLikes(new LikesVo(styleNum,id));
 				Map<String, String> map = new HashMap<>();
 				map.put("msg", "좋아요 성공");
 				map.put("flag", "true");
@@ -43,9 +46,11 @@ public class LikesHandler implements Handler {
 				String jsonStr = mapper.writeValueAsString(map);
 				return jsonStr;
 			}
+		//likes = cancle 이면 좋아요 -1	
 		}else if (likes.equals("cancle")) {
 			try {
-				service.delLikes(new LikesVo(styleNum,id));
+				lService.delLikes(new LikesVo(styleNum,id));
+				sService.styleLikesChange(styleNum);
 				Map<String, String> map = new HashMap<>();
 				map.put("msg", "좋아요 취소 성공");
 				map.put("flag", "true");

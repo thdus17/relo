@@ -71,6 +71,7 @@ and sz.size_category_num=s.size_category_num
 and s.s_num = p.s_num
 and p.p_num=a.p_num
 and p.p_status=4
+order by p_end_date desc
 </select>
 
 <!-- 회원의 입찰 시도한 내역 중 경매 종료, 해당 회원이 낙찰됐는지 상태 -->
@@ -83,6 +84,7 @@ and s.s_num = p.s_num
 and p.p_num=a.p_num
 and p.p_num=am.p_num
 and p.p_status in (6, 7, 8)
+order by p_end_date desc
 </select>
 
 </mapper>
