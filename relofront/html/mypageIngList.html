@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Relo</title>
+    <link href="../imgs/logo.png" rel="shortcut icon" type="image/x-icon" />
+    <link rel="stylesheet" href="../css/basic.css" />
+    <link rel="stylesheet" href="../css/mypageBasic.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="../js/basic.js"></script>
+    <script src="../js/mypage.js"></script>
+  </head>
+
+  <body>
+    <div id='wrapper'>
+    <header>
+      <div class="top">
+        <nav>
+        <ul>
+          <li class="notice">공지사항</li>
+          <li class="mypage">마이페이지</li>
+          <li class="login">로그인</li>
+          <li class="logout">로그아웃</li>
+        </ul>
+      </div>
+      <div class="bottom"></div>
+        <nav>
+        <ul>
+          <li class="home">HOME</li>
+          <li class="seller">SELL</li>
+          <li class="shop">SHOP</li>
+          <li class="styleboard">STYLE</li>  
+        </ul>
+        </nav>
+    </header>
+
+    <section>
+        <div class="snb_area">
+            <a href="/my" class="nuxt-link-active"
+              ><h2 class="snb_main_title">마이 페이지</h2></a
+            >
+            <nav class="snb">
+              <div class="snb_list">
+                <strong class="snb_title">쇼핑 정보</strong>
+                <ul data-v-7bcac446="" class="snb_menu">
+                  <li class="menu_item menu_on">
+                    <a href="/my/buying" aria-current="page" class="menu_link">
+                      구매 내역
+                    </a>
+                  </li>
+                  <li class="menu_item">
+                    <a href="/html/mypageIngList.html" class="menu_link"> 입찰 내역 </a>
+                  </li>
+                  <li class="menu_item">
+                    <a href="/my/inventory" class="menu_link"> 판매 내역 </a>
+                  </li>
+                  <li class="menu_item">
+                    <a href="/my/wish" class="menu_link"> 관심 상품 </a>
+                  </li>
+                </ul>
+              </div>
+              <div class="snb_list">
+                <strong class="snb_title">내 정보</strong>
+                <ul class="snb_menu">
+                  <li class="menu_item">
+                    <a href="/my/profile" class="menu_link"> 프로필 정보 </a>
+                  </li>
+                  <li class="menu_item">
+                    <a href="/my/address" class="menu_link"> 주소록 </a>
+                  </li>
+                  <li class="menu_item">
+                    <a href="/my/payment" class="menu_link"> 결제 정보 </a>
+                  </li>
+                  <li class="menu_item">
+                    <a href="/my/account" class="menu_link"> 판매 정산 계좌 </a>
+                  </li>
+                </ul>
+              </div>
+            </nav>
+          </div>
+          <div class="content_area">
+            <div class="my_auction">
+              <div class="content_title">
+                <div class="title">
+                  <h3>입찰 내역</h3>
+                  <!---->
+                </div>
+                <!---->
+              </div>
+              <div class="auction_list_tab">
+                <div class="tab_item">
+                  <a href="#" class="tab_link"
+                    ><dl class="tab_box">
+                      <dt class="title_ing">구매 입찰</dt>
+                      <dd class="count_ing">0</dd>
+                    </dl></a
+                  >
+                </div>
+                <div class="tab_item">
+                  <a href="#" class="tab_link"
+                    ><dl class="tab_box">
+                      <dt class="title_end">경매 종료</dt>
+                      <dd class="count_end">0</dd>
+                    </dl></a
+                  >
+                </div>
+              </div>
+      
+              <div class="auction_list">
+                <div class="auction_head">
+                  <div class="head_menu">
+                    <div class="auction_box">
+                      상품명
+                    </div>
+                    <div class="auction_box">
+                        사이즈
+                      </div>
+                    <div class="auction_box">
+                      입찰가
+                    </div>
+                    <div class="auction_box">
+                        경매 마감일
+                      </div>
+                  </div>
+                </div>
+                <div class="list_area">
+                  <div class="desc">
+                    <div class="item_area product">상품명</div>
+                    <div class="item_area size_name">사이즈</div>
+                    <div class="item_area auction_price">입찰가격</div>
+                    <div class="item_area end_date">마감일</div>
+                  </div>
+                </div>
+                <a href="#" class="shop"> SHOP 바로가기 </a>
+                <!----><!----><!----><!---->
+              </div>
+              <!---->
+            </div>
+          </div>
+    </section>
+    </div>
+    <footer>
+      <div class="customer_service">
+        <strong>고객센터 : 1234-5678</strong>
+        운영시간 평일 11:00 - 18:00 (토∙일, 공휴일 휴무) 점심시간 평일 13:00 -
+        14:00
+        <a href="#" class="btn solid small"> 자주 묻는 질문 </a>
+      </div>
+      <div class="menu_box">
+        <strong class="menu_title">이용안내</strong>
+        <ul class="menu_list">
+          <li class="menu_item">
+            <a href="#" class="menu_link">검수기준</a>
+          </li>
+          <li class="menu_item">
+            <a href="#" class="menu_link">이용정책</a>
+          </li>
+          <li class="menu_item">
+            <a href="#" class="menu_link">페널티 정책</a>
+          </li>
+          <li class="menu_item">
+            <a href="#" class="menu_link">커뮤니티 가이드라인</a>
+          </li>
+        </ul>
+        <strong class="menu_title">고객지원</strong>
+        <ul class="menu_list">
+          <li class="menu_item">
+            <a href="/notice" class="menu_link">공지사항</a>
+          </li>
+          <li class="menu_item">
+            <a href="/about" target="_blank" class="menu_link">서비스 소개</a>
+          </li>
+          <li class="menu_item">
+            <a href="/showroom" target="_blank" class="menu_link">쇼룸 안내</a>
+          </li>
+          <li class="menu_item">
+            <a href="/about/seller_reception" target="_blank" class="menu_link">판매자 방문접수</a>
+          </li>
+        </ul>
+      </div>
+          <div class="project_info">
+            RELO_PROJECT 최승혜 황예리 이현민 전계형
+            김경래&emsp;/&emsp;사업자등록번호 : 123-45-67890 &emsp;/&emsp;통신판매업 :
+            제2023-코스타시-0001호&emsp;/&emsp; 사업장소재지 : 경기 성남시
+            분당구 성남대로 34 하나프라자 6층 (13637) &emsp;
+            <p>© KOSTA RELO_PROJECT 2023</p>
+          </div>
+    </footer>
+  </body>
+</html>
