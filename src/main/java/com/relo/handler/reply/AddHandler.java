@@ -37,9 +37,7 @@ public class AddHandler implements Handler {
 			return jsonStr;
 		} catch (FindException e) {
 			e.printStackTrace();
-			Map<String, String> map = new HashMap<>();
-			map.put("msg", e.getMessage());
-			String jsonStr = mapper.writeValueAsString(map);
+			String jsonStr = mapper.writeValueAsString("댓글 작성오류");
 			return jsonStr;
 		}
 	}

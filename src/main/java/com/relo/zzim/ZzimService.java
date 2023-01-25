@@ -12,6 +12,10 @@ public class ZzimService {
 		dao = new ZzimDaoOracle();
 	}
 
+	public List<String> getAll(Map<String, Object> map) throws FindException {
+		return dao.selectAll(map);
+	}
+
 	public List<ZzimVo> getById(String id) throws FindException {
 		return dao.selectById(id);
 	}

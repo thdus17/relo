@@ -38,7 +38,17 @@ public class StyleTagDaoOracle implements StyleTagDao {
 		SqlSession session = sqlSessionFactory.openSession();
 		StyleTagDao dao = (StyleTagDao) session.getMapper(StyleTagDao.class);
 		List<StyleTagVo> list = dao.styleTagDetail(styleNum);
+		session.close();
 		return list;
+	}
+	//해당 게시품 태그 삭제
+	@Override
+	public void delStyleTag(int styleNum) throws FindException {
+		SqlSession session = sqlSessionFactory.openSession();
+		StyleTagDao dao = (StyleTagDao) session.getMapper(StyleTagDao.class);
+		dao.delStyleTag(styleNum);
+		session.commit();
+		session.close();
 	}
 	//테스트완료
 	public static void main(String[] args) throws FindException {

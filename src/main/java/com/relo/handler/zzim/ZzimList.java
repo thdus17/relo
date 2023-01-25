@@ -63,6 +63,7 @@ public class ZzimList implements Handler {
 					product.put("sName", svo.getSName());
 					product.put("sType", svo.getSType());
 					product.put("sColor", svo.getSColor());
+					product.put("sGrade", svo.getSGrade());
 					product.put("sHopePrice", svo.getSHopePrice());
 					SizesVo szvo = svo.getSizes();
 					product.put("sizeCategoryName", szvo.getSizeCategoryName());
@@ -73,9 +74,12 @@ public class ZzimList implements Handler {
 					arr.add(product);
 				}
 			}
+			System.out.println(list);
 			String jsonStr = mapper.writeValueAsString(arr);
 			return jsonStr;
-		} catch (FindException e) {
+		} catch (
+
+		FindException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			Map<String, String> map = new HashMap<>();

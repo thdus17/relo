@@ -16,4 +16,10 @@
 	<delete id="delLikes">
         delete from likes where style_num = #{styleNum} and id = #{id}
     </delete>
+    
+    <select id ="checkLikes" resultType="LikesVo">
+   		select * 
+		from likes	
+		where id = #{id} and style_num = #{styleNum}
+</select>
 </mapper>

@@ -96,6 +96,7 @@ public class StyleDaoOracle implements StyleDao {
 		SqlSession session = sqlSessionFactory.openSession();
 		StyleDao dao = (StyleDao) session.getMapper(StyleDao.class);
 		int cnt = dao.cntStyleList();
+		session.close();
 		return cnt;
 	}
 	//페이징 테스트
@@ -111,6 +112,16 @@ public class StyleDaoOracle implements StyleDao {
 			session.close();
 			return list;
 		}
+	//style_likes -1 으로 변경 시키기	
+		@Override
+		public void styleLikesChange(int styleNum) throws FindException {
+			SqlSession session = sqlSessionFactory.openSession();
+			StyleDao dao = (StyleDao) session.getMapper(StyleDao.class);
+			dao.styleLikesChange(styleNum);
+			session.commit();
+			session.close();
+		}
+		
 
 //	테스트완료	
 	public static void main(String[] args) throws FindException {
@@ -119,10 +130,10 @@ public class StyleDaoOracle implements StyleDao {
 //		dao.delStyle(new StyleVo(5,"fff",null,null,null,0));
 //		dao.updateStyle(new StyleVo(4,null,"#아디다스",null,null,0));
 //		dao.updateStyle(new StyleVo(4,null,null,null,"adidas.jpg",null,0));
-		String styleCode = "styleLikes";
-		HashMap<String, Object> condition = new HashMap<String, Object>();
-		condition.put("styleCode", styleCode);
-		List<StyleVo> list = dao.selectStyleList(condition);
+//		String styleCode = "styleLikes";
+//		HashMap<String, Object> condition = new HashMap<String, Object>();
+//		condition.put("styleCode", styleCode);
+//		List<StyleVo> list = dao.selectStyleList(condition);
 //		int cnt = dao.cntStyleList();
 //		int start = 0;
 //		int end = 3;
@@ -131,14 +142,14 @@ public class StyleDaoOracle implements StyleDao {
 //		List<StyleVo> list = dao.selectStyleList(condition);
 //		list = dao.selectStyleId("ccc");
 //		StyleVo vo = dao.styleDetail(1);
+//		dao.styleLikesZero(0);
 //		System.out.println(vo);
 //		System.out.println(list);
 //		list = dao.selectStyleTag("운동화");
-		for(StyleVo vo: list) {
-			System.out.println(vo);
-		}
+//		for(StyleVo vo: list) {
+//			System.out.println(vo);
+//		}
 //		System.out.println(cnt);
 	}
-	
 
 }

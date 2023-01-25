@@ -21,7 +21,7 @@ import com.relo.styletag.StyleTagService;
 import com.relo.styletag.StyleTagVo;
 
 public class EditHandler implements Handler {
-
+	//스타일 게시판 수정
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
@@ -31,30 +31,45 @@ public class EditHandler implements Handler {
 		response.setContentType("application/json;charset=UTF-8");
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		
-//		String saveDirectory = "C:\\255\\relo\\style";
-//		int maxPostSize = 100*1024;
-//		String encoding = "UTF-8";
-//		MultipartRequest mr = new MultipartRequest(request, saveDirectory, maxPostSize, encoding,new DefaultFileRenamePolicy());
+		String saveDirectory = "C:\\255\\MyWEB\\myfront\\relo\\imgs\\style";
+		int maxPostSize = 1000*1024;
+		String encoding = "UTF-8";
+		MultipartRequest mr = new MultipartRequest(request, saveDirectory, maxPostSize, encoding,new DefaultFileRenamePolicy());
 		
-		String styleContent= request.getParameter("styleContent");
-		int styleNum = Integer.parseInt(request.getParameter("styleNum"));
-		String file = request.getParameter("f");
+//		String styleContent= request.getParameter("styleContent");
+//		int styleNum = Integer.parseInt(request.getParameter("styleNum"));
+//		String file = request.getParameter("f");
 //		String fileName = file.getName();
 //		String imgPath = "/img/"+fileName;
-		
+		String id = mr.getParameter("id");
+		String styleContent = mr.getParameter("styleContent");
+		File file = mr.getFile("f");
+		String fileName = file.getName();
+		String imgPath = fileName;
+		int styleNum = Integer.parseInt(mr.getParameter("styleNum"));
 		StyleTagService Tservice = new StyleTagService();
 		StyleService service = new StyleService();
 		ObjectMapper mapper = new ObjectMapper();
 		
 		StyleTagVo tagVo = new StyleTagVo();
 		ArrayList<String> styleTag = new ArrayList<>();
-		StringTokenizer stk = new StringTokenizer(styleContent,"-");
+		//게시판 수정이 되면 해당 태그들 다 삭제 되고 새롭게 insert 된다.
+		
+		StringTokenizer stk = new StringTokenizer(styleContent,"#");
 		while(stk.hasMoreTokens()) {
 		styleTag.add(stk.nextToken().trim());
 		}
 		try {
-			service.updateStyle(new StyleVo(styleNum,null,styleContent,file,null,0 ));
 			StyleVo vo = service.styleDetail(styleNum);
+			String originFile = vo.getStyleFile();
+			File originF = new File(saveDirectory,originFile);
+			if(originF.exists()) {
+				originF.delete();
+				System.out.println("파일삭제");
+			}
+			service.updateStyle(new StyleVo(styleNum,null,styleContent,imgPath,null,0 ));
+			Tservice.delStyleTag(styleNum);
+			
 			for(String s : styleTag) {
 				tagVo = new StyleTagVo(0,vo.getStyleNum(),s);
 				Tservice.addStyleTag(tagVo);

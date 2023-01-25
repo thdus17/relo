@@ -54,6 +54,7 @@ public class ProductDetail implements Handler {
 			obj.put("sOriginPrice", svo.getSOriginPrice());
 			obj.put("sHopePrice", svo.getSHopePrice());
 			obj.put("sGrade", svo.getSGrade());
+			obj.put("sizeCategoryName", szvo.getSizeCategoryName());
 			for (AuctionVo avo : alist) {
 				obj.put("aPrice", avo.getAPrice());
 			}
