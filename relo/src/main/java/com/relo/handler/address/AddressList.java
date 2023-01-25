@@ -24,14 +24,14 @@ public class AddressList implements Handler {
 		response.setContentType("application/json;charset=utf-8");
 		response.addHeader("Access-Control-Allow-Origin", "*");
 
-		HttpSession session = request.getSession(false);
-		String loginId = (String) session.getAttribute("loginId");
-
+//		HttpSession session = request.getSession(false);
+//		String loginId = (String) session.getAttribute("loginId");
+		String id = request.getParameter("id");
 		ObjectMapper mapper = new ObjectMapper();
 		AddressService service = new AddressService();
 		List<AddressVo> list = null;
 		try {
-			list = service.getAllById(loginId);
+			list = service.getAllById(id);
 			String jsonStr = mapper.writeValueAsString(list);
 			if(list.size() == 0) {
 				String message = "등록된 주소지 없음";

@@ -18,7 +18,7 @@
 				<result column ="max_price" property ="aPrice"/>
 			</collection>	
 			</collection>	
-	</resultMap> 
+	</resultMap>
 	
 	<select id = "selectById" parameterType="String" resultMap ="ZzimVo">
 	SELECT z.id, z.p_num, s_file, s_brand, s_name, s_type, sz.size_category_name, s_color, s_hope_price, s_grade, p_end_date, a.max_price
@@ -28,16 +28,20 @@
 	AND s.size_category_num = sz.size_category_num 
 	AND p.p_num = a.p_num(+) and z.id=#{id}
 	</select>
-
+	
+	<select id = "selectAll" parameterType = "Map" resultType="Map">
+	select * from zzim where id =#{id} and p_num =#{pNum}
+	</select>
+	
 	<insert id = "insertZzim" parameterType="map">
 	INSERT INTO zzim VALUES(#{id}, #{pNum})
 	</insert>
 
-	<delete id ="deleteZzim" parameterType="ZzimVo">
+	<delete id ="deleteZzim" parameterType="map">
 	DELETE FROM zzim WHERE id = #{id} and p_num = #{pNum}
 	</delete>
 
-	<delete id = "deleteZzimAll">
+	<delete id = "deleteZzimAll" parameterType="int">
 	DELETE FROM zzim WHERE p_num = #{pNum}
 	</delete> 
 </mapper>

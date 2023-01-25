@@ -96,6 +96,7 @@ public class StyleDaoOracle implements StyleDao {
 		SqlSession session = sqlSessionFactory.openSession();
 		StyleDao dao = (StyleDao) session.getMapper(StyleDao.class);
 		int cnt = dao.cntStyleList();
+		session.close();
 		return cnt;
 	}
 	//페이징 테스트

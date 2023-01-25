@@ -19,7 +19,7 @@ import com.relo.styletag.StyleTagService;
 import com.relo.styletag.StyleTagVo;
 
 public class DetailHandler implements Handler {
-
+	//스타일 상세보기 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
@@ -36,11 +36,17 @@ public class DetailHandler implements Handler {
 		int styleNum = Integer.parseInt(request.getParameter("styleNum"));
 		
 		try {
+			//해당 게시판 댓글리스트 불러오기
 			List<ReplyVo> repList = rService.detailRep(styleNum);
+			//해당 게시판 태그리스트 불러오기
 			List<StyleTagVo> tagList = tService.styleTagDetail(styleNum);
+			//해당 게시판 상세 불러오기
 			StyleVo vo = sService.styleDetail(styleNum);
+			//게시판 객체에 댓글리스트 넣어주기
 			vo.setRepList(repList);
+			//게시판 객체에 태그리스트 넣어주기
 			vo.setTagList(tagList);
+			//게시판 댓글 개수 불러오기
 			int repCnt = rService.cntReply(styleNum);
 			
 			Map map = new HashMap<>();

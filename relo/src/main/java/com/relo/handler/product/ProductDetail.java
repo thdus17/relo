@@ -41,6 +41,7 @@ public class ProductDetail implements Handler {
 		JSONObject obj = new JSONObject();
 		try {
 			ProductVo pvo = service.getProductDetail(pNum);
+			System.out.println(pvo);
 			StockVo svo = pvo.getStock();
 			SizesVo szvo = svo.getSizes();
 			List<AuctionVo> alist = pvo.getAuction();

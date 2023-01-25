@@ -16,6 +16,15 @@ public class ZzimDaoOracle implements ZzimDao {
 		sqlSessionFactory = Factory.getSqlSessionFactory();
 	}
 
+	@Override // 찜목록 전체 조회
+	public List<String> selectAll(Map<String, Object> map) throws FindException {
+		SqlSession session = sqlSessionFactory.openSession();
+		ZzimDao dao = (ZzimDao) session.getMapper(ZzimDao.class);
+		List<String> list = dao.selectAll(map);
+		session.close();
+		return list;
+	}
+
 	// 사용자의 찜 목록 조회
 	@Override
 	public List<ZzimVo> selectById(String id) throws FindException {

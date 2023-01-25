@@ -10,11 +10,21 @@ public interface ZzimDao {
 	/**
 	 * 사용자의 상품 찜목록을 검색한다
 	 * 
+	 * 
+	 * @return : List<ZzimVo> 찜목록 전체(id, p_num)
+	 * @throws FindException
+	 */
+	public List<String> selectAll(Map<String, Object> map) throws FindException;
+
+	/**
+	 * 사용자의 상품 찜목록을 검색한다
+	 * 
 	 * @param id : 사용자 ID
 	 * @return : List<ZzimVo> 사용자의 상품 찜목록(id, p_num, s_name, s_type, s_color,
 	 *         s_hope_price, s_grade, p_end_date, a.max_price)
 	 * @throws FindException
 	 */
+
 	public List<ZzimVo> selectById(String id) throws FindException;
 
 	/**

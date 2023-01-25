@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -40,7 +41,8 @@ public class ZzimList implements Handler {
 		// if (cp != null && !"".equals(cp)) {
 		// currentPage = Integer.parseInt(cp);
 		// }
-		String id = request.getParameter("id");
+		HttpSession session = request.getSession(false);
+		String id = (String) session.getAttribute("loginId");
 
 		ObjectMapper mapper = new ObjectMapper();
 		ZzimService service = new ZzimService();
@@ -74,9 +76,12 @@ public class ZzimList implements Handler {
 					arr.add(product);
 				}
 			}
+			System.out.println(list);
 			String jsonStr = mapper.writeValueAsString(arr);
 			return jsonStr;
-		} catch (FindException e) {
+		} catch (
+
+		FindException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			Map<String, String> map = new HashMap<>();

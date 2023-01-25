@@ -21,4 +21,8 @@ public class StyleTagService {
 	public List<StyleTagVo> styleTagDetail(int styleNum) throws FindException{
 		return dao.styleTagDetail(styleNum);
 	}
+	
+	public void delStyleTag(int styleNum) throws FindException{
+		dao.delStyleTag(styleNum);
+	}
 }

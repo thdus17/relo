@@ -19,9 +19,9 @@ import com.relo.styletag.StyleTagService;
 public class ListHandler implements Handler {
 
 //		//내가 쓴 글 리스트 (id)
-//		service.selectStyleId(null);
+//		service.selectStyleId(id);
 //		//해시태그별 리스트 (hashName)
-//		service.selectStyleTag(null);
+//		service.selectStyleTag(hashName);
 //		//동적 쿼리 1.인기순(styleCode==styleLikes)-->default 2. 최신순(styleCode==null)
 //		service.selectStyleList(null);
 	@Override

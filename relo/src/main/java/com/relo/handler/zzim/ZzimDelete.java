@@ -7,7 +7,9 @@ import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.relo.exception.FindException;
 import com.relo.handler.Handler;
 import com.relo.zzim.ZzimService;
@@ -21,9 +23,10 @@ public class ZzimDelete implements Handler {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		response.addHeader("Access-Control-Allow-Origin", "*");
-		String id = request.getParameter("id");
+		HttpSession session = request.getSession(false);
+		String id = (String) session.getAttribute("loginId");
 		int pNum = Integer.parseInt(request.getParameter("pNum"));
-
+		ObjectMapper mapper = new ObjectMapper();
 		// 테스트용
 		// String id = "bbb";
 		// int pNum = 7;
@@ -33,11 +36,17 @@ public class ZzimDelete implements Handler {
 		ZzimService service = new ZzimService();
 		try {
 			service.delZzim(map);
+			String message = "찜하기가 삭제되었습니다.";
+			String jsonStr = mapper.writeValueAsString(message);
+			return jsonStr;
 		} catch (FindException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Map<String, String> map1 = new HashMap<>();
+			map.put("msg", e.getMessage());
+			String jsonStr = mapper.writeValueAsString(map1);
+			return jsonStr;
 		}
-		return "/zzim/list.do";
+
 	}
 
 }

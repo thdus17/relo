@@ -11,17 +11,17 @@ import com.relo.handler.Handler;
 
 public class MemberLogout implements Handler {
 
-   @Override
-   public String process(HttpServletRequest request, HttpServletResponse response)
-         throws ServletException, IOException {
-      response.setContentType("application/json;charset=utf-8");
-      response.addHeader("Access-Control-Allow-Origin", "*");
+	@Override
+	public String process(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		response.setContentType("application/json;charset=utf-8");
+		response.addHeader("Access-Control-Allow-Origin", "*");
 
-      HttpSession session = request.getSession(false);
-      String loginId = (String) session.getAttribute("loginId");
-      session.removeAttribute(loginId);
-      session.invalidate();
-      return null;
-   }
+		HttpSession session = request.getSession(false);
+		String loginId = (String) session.getAttribute("loginId");
+		session.removeAttribute(loginId);
+		session.invalidate();
+		return null;
+	}
 
 }
