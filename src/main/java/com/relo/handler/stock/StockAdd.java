@@ -26,9 +26,13 @@ public class StockAdd implements Handler {
 			throws IOException, ServletException {
 		
 		response.addHeader("Access-Control-Allow-Origin", "*");
-		StockService service = new StockService();
-		HttpSession session = request.getSession();
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
 		
+		StockService service = new StockService();
+		HttpSession session = request.getSession(false);
+
 		String id = (String) session.getAttribute("loginId");
 		
 		

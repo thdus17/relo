@@ -26,8 +26,6 @@
 		</association>
 	</resultMap>
 
-
-
 	<!-- 관리자가 재고에서 상품으로 등록 등록안됨 -->
 	<insert id="insertProduct" parameterType="map">
 		insert into
@@ -68,7 +66,7 @@
 	<select id="selectByEndProduct" resultMap="ProductMap">
 		select
 		p.s_file,p.s_name,s.SIZE_CATEGORY_NAME,p.P_STATUS,p.p_num
-		from p_info p , sizes s
+		from p_info p, sizes s
 		where p.id =#{id} and p.p_status = 6 and p.size_category_num = s.size_category_num
 	</select>
 

@@ -11,8 +11,6 @@
     </association>
 </resultMap>  
 
-
-
 	<select id="selectAll" resultType="StockVo">
 		SELECT * FROM STOCK
 	</select>

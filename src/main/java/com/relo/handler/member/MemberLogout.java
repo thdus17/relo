@@ -17,10 +17,10 @@ public class MemberLogout implements Handler {
 		response.setContentType("application/json;charset=utf-8");
 		response.addHeader("Access-Control-Allow-Origin", "*");
 
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
 		String loginId = (String) session.getAttribute("loginId");
-		session.invalidate();
 		session.removeAttribute(loginId);
+		session.invalidate();
 		return null;
 	}
 

@@ -27,13 +27,19 @@ public class MemberIdCheck implements Handler {
 		MemberService service = new MemberService();
 		try {
 			MemberVo m = service.getOne(id);
+			int status = -1;
+			Map<String, Object> map = new HashMap<>();
 			String message = "";
 			if (m != null) {
 				message = "중복된 아이디";
+				status = 0;
 			} else {
 				message = "사용 가능한 아이디";
+				status = 1;
 			}
-			String jsonStr = mapper.writeValueAsString(message);
+			map.put("message", message);
+			map.put("status", status);
+			String jsonStr = mapper.writeValueAsString(map);
 			return jsonStr;
 		} catch (FindException e) {
 			e.printStackTrace();

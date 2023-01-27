@@ -54,6 +54,12 @@ public class StyleService {
 	public StyleVo styleDetail(int styleNum) throws FindException{
 		return dao.styleDetail(styleNum);
 	}
+	
+	//style_likes -1 으로 변경 시키기
+	public void styleLikesChange(int styleNum) throws FindException{
+		dao.styleLikesChange(styleNum);
+	}
+	
 //	//게시물 목록 출력
 //	public List<StyleVo> selectStyleList(HashMap<String,Object> styleCode) throws FindException{
 //		return dao.selectStyleList(styleCode);

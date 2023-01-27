@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.relo.address.AddressService;
@@ -26,7 +27,10 @@ public class AddressAdd implements Handler {
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		
-		String id = request.getParameter("id");
+		HttpSession session = request.getSession();
+		session.setAttribute("loginId", "aaa");
+		
+		String id = (String) session.getAttribute("loginId");
 		String addrName = request.getParameter("addrName");
 		int addrPostNum = Integer.parseInt(request.getParameter("addrPostNum"));
 		String addrTel = request.getParameter("addrTel");
@@ -49,7 +53,9 @@ public class AddressAdd implements Handler {
 				address.setAddrType(0);
 				service.editAddress(address);
 			}
-			return null;
+			String message = "주소 추가 완료";
+			String jsonStr = mapper.writeValueAsString(message);
+			return jsonStr;
 		} catch (FindException e) {
 			e.printStackTrace();
 			Map<String, String> map = new HashMap<>();

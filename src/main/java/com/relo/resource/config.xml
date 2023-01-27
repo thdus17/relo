@@ -6,8 +6,11 @@
 		<setting name="mapUnderscoreToCamelCase" value="true" />
 		<!-- null인 경우, JDBC타입을 파라미터에 제공하지 않을때 null값을 처리한 JDBC타입을 명시 -->
 		<setting name="jdbcTypeForNull" value="NULL" />
+		<setting name="returnInstanceForEmptyRow" value="true" />
 	</settings>
 	<typeAliases>
+		<typeAlias alias="AuctionDTO"
+			type="com.relo.auction.AuctionDTO" />
 		<typeAlias alias="AuctionVo"
 			type="com.relo.auction.AuctionVo" />
 		<typeAlias alias="ProductVo"
@@ -16,7 +19,7 @@
 			type="com.relo.account.AccountVo" />
 		<typeAlias alias="StockVo" type="com.relo.stock.StockVo" />
 		<typeAlias alias="ODeliveryVo"
-			type="com.relo.order_delivery.ODeliveryVo" />
+			type="com.relo.orderDelivery.ODeliveryVo" />
 		<typeAlias alias="OrdersVo" type="com.relo.orders.OrdersVo" />
 		<typeAlias alias="SizesVo" type="com.relo.sizes.SizesVo" />
 		<typeAlias alias="AddressVo"
@@ -62,7 +65,5 @@
 		<mapper resource="com/relo/stock/stock.xml" />
 		<mapper resource="com/relo/zzim/zzim.xml" />
 		<mapper resource="com/relo/account/account.xml" />
-		<mapper
-			resource="com/relo/stockDelivery/StockDeliveryMapper.xml" />
 	</mappers>
 </configuration>

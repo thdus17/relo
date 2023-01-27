@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.relo.mybatis.auction.AuctionDao">
+<mapper namespace="com.relo.auction.AuctionDao">
 
 <resultMap id="auctionMap" type="AuctionVo" autoMapping="true">
 	<id property="aNum" column="a_num"/>

@@ -1,6 +1,7 @@
 package com.relo.handler.product;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,16 +34,20 @@ public class ProductDetailById implements Handler {
 		AccountService acService = new AccountService();
 		Map m = new HashMap<>();
 		
-		HttpSession session = request.getSession();
-		
-		//String id = (String) session.getAttribute("loginId");
-		String id = request.getParameter("id");
+		HttpSession session = request.getSession(false);
+//		session.setAttribute("loginId", "aaa");
+		String id = (String) session.getAttribute("loginId");
+		//String id = request.getParameter("id");
 		m.put("id", id);
 		
 		int pNum = Integer.parseInt(request.getParameter("pNum"));
 		
 		int sHopePrice = Integer.parseInt(request.getParameter("sHopePrice"));
 		m.put("sHopePrice", sHopePrice);
+		ObjectMapper mapper = new ObjectMapper();
+		
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		mapper.setDateFormat(dateFormat);
 		try {
 			AccountVo avo = acService.getByIdAccount(id);
 			JSONArray arr = new JSONArray();
@@ -53,18 +58,16 @@ public class ProductDetailById implements Handler {
 				int price = sHopePrice;
 				m.put("price", price);
 				ProductVo vo = service.getByIdProductDetail(m);
-				System.out.println("경매입찰없을때:" + vo);
 				arr.add(vo);
-				ObjectMapper mapper = new ObjectMapper();
+				
 				String jsonStr = mapper.writeValueAsString(arr);
 				return jsonStr;
 			}else {
 				int price = auctionVo.getAPrice();
 				m.put("price", price);
 				ProductVo vo = service.getByIdProductDetail(m);
-				System.out.println("경매입찰있을때:" + vo);
 				arr.add(vo);
-				ObjectMapper mapper = new ObjectMapper();
+//				ObjectMapper mapper = new ObjectMapper();
 				String jsonStr = mapper.writeValueAsString(arr);
 				return jsonStr;
 			}
@@ -74,7 +77,7 @@ public class ProductDetailById implements Handler {
 			e.printStackTrace();
 			Map<String, String> map = new HashMap<>();
 			map.put("msg", e.getMessage());
-			ObjectMapper mapper = new ObjectMapper();
+//			ObjectMapper mapper = new ObjectMapper();
 			String jsonStr = mapper.writeValueAsString(map);
 			return jsonStr;
 		}

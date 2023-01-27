@@ -24,8 +24,8 @@ public class StockDetailById implements Handler {
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		Map m = new HashMap<>();
 
-		HttpSession session = request.getSession();
-		session.setAttribute("loginId", "aaa");
+		HttpSession session = request.getSession(false);
+//		session.setAttribute("loginId", "aaa");
 		String id = (String) session.getAttribute("loginId");
 		m.put("id", id);
 

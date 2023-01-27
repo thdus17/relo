@@ -26,14 +26,16 @@ public class MemberAdd implements Handler {
 		response.setContentType("text/html;charset=utf-8");
 		
 		String id = request.getParameter("id");
+		System.out.println(id);
 		String pwd = request.getParameter("pwd");
+		System.out.println(pwd);
 		String tel = request.getParameter("tel");
 		String email = request.getParameter("email");
-		int type = Integer.parseInt(request.getParameter("type"));
 		String birth = request.getParameter("birth");
 		String mName = request.getParameter("mName");
 		
-		MemberVo member = new MemberVo(id, pwd, tel, email, type, birth, mName);
+		// 관리자 계정은 db에 넣어주기 때문에 판매자 및 구매자만 가입한다고 가정
+		MemberVo member = new MemberVo(id, pwd, tel, email, 2, birth, mName);
 		
 		ObjectMapper mapper = new ObjectMapper();
 		

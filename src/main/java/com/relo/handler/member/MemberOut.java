@@ -24,27 +24,34 @@ public class MemberOut implements Handler {
 		response.addHeader("Access-Control-Allow-Origin", "*");
 
 		String pwd = request.getParameter("pwd");
-		HttpSession session = (HttpSession) request.getSession(false);
+		HttpSession session = (HttpSession) request.getSession();
+		session.setAttribute("loginId", "ggg");
 		String loginId = (String) session.getAttribute("loginId");
 		
 		MemberService service = new MemberService();
 		ObjectMapper mapper = new ObjectMapper();
 		
+		int status = 0;
 		String message = "";
 		try {
 			MemberVo m = service.getOne(loginId);
+			System.out.println(m.getPwd());
 			if (pwd.equals(m.getPwd())) {
 				int num = service.checkOutTerms(loginId);
 				if (num != 1) {
-					message = "탈퇴 불가";
+					message = "탈퇴가 제한된 경우에 해당되므로 탈퇴할 수 없습니다.";
 				} else {
 					service.delMember(loginId);
-					message = "탈퇴됨";
+					status = 1;
+					message = "탈퇴되었습니다.";
 				}
 			} else {
-				message = "비밀번호 불일치로 탈퇴 불가";
+				message = "비밀번호 불일치로 탈퇴할 수 없습니다.";
 			}
-			String jsonStr = mapper.writeValueAsString(message);
+			Map<String,Object> map = new HashMap<>();
+			map.put("message", message);
+			map.put("status", status);
+			String jsonStr = mapper.writeValueAsString(map);
 			return jsonStr;
 		} catch (FindException e) {
 			e.printStackTrace();

@@ -89,6 +89,12 @@
 	order by style_likes desc, style_num desc 
 	</select>
 
+	<!-- style_likes -1 변경 시키기 -->
+	<update id="styleLikesChange" parameterType="int">
+		update style
+        set style_likes = style_likes-1
+		where style_num= #{styleNum}
+	</update>
 	<!-- 동적 쿼리로 변경 -->
 	<!-- <select id="selectStyleLikes" resultType="StyleVo"> select * from style 
 		order by style_likes desc, style_num desc </select> <select id="selectStyleNum" 

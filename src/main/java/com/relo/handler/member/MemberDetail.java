@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.relo.exception.FindException;
@@ -22,13 +23,15 @@ public class MemberDetail implements Handler {
 			throws ServletException, IOException {
 		response.setContentType("application/json;charset=utf-8");
 		response.addHeader("Access-Control-Allow-Origin", "*");
-		
-		String id = request.getParameter("id");
-		
+
+		HttpSession session = request.getSession();
+		session.setAttribute("loginId", "aaa");
+		String id = (String) session.getAttribute("loginId");
+
 		ObjectMapper mapper = new ObjectMapper();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        mapper.setDateFormat(dateFormat);
-        
+		mapper.setDateFormat(dateFormat);
+
 		MemberService service = new MemberService();
 		try {
 			MemberVo m = service.getOne(id);

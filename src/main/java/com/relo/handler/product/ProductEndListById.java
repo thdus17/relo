@@ -29,8 +29,8 @@ public class ProductEndListById implements Handler {
 		response.setContentType("application/json;charset=utf-8");
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		
-		HttpSession session = request.getSession();
-		
+		HttpSession session = request.getSession(false);
+//		session.setAttribute("loginId", "aaa");
 		String id = (String) session.getAttribute("loginId");
 	//	String id = request.getParameter("id");
 		ProductService service = new ProductService();

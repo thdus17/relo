@@ -28,8 +28,8 @@ public class StockListById implements Handler {
 			throws IOException, ServletException {
 		response.setContentType("application/json;charset=utf-8");
 		response.addHeader("Access-Control-Allow-Origin", "*");
-		HttpSession session = request.getSession();
-		
+		HttpSession session = request.getSession(false);
+//		session.setAttribute("loginId","aaa");
 		String id = (String) session.getAttribute("loginId");
 	//	String id = request.getParameter("id");
 		

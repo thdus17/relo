@@ -21,8 +21,8 @@ public class MemberLogin implements Handler {
 	public String process(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("application/json;charset=utf-8");
-		response.addHeader("Access-Control-Allow-Origin", "*");
-
+		response.addHeader("Access-Control-Allow-Origin", "http://192.168.0.6:5500");
+		response.addHeader("Access-Control-Allow-Credentials", "true");
 		String id = request.getParameter("id");
 		String pwd = request.getParameter("pwd");
 
@@ -38,7 +38,10 @@ public class MemberLogin implements Handler {
 					message = "아이디, 비밀번호 불일치";
 				else {
 					HttpSession session = request.getSession();
+					session.setAttribute("loginId", "aaa");
 					session.setAttribute("loginId", id);
+					System.out.println(session.getAttribute("loginId").toString());
+					System.out.println(session.isNew());
 					if (m.getType() == 1) // 관리자 모드
 						return null;
 					else

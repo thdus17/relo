@@ -24,7 +24,8 @@ public class AddressList implements Handler {
 		response.setContentType("application/json;charset=utf-8");
 		response.addHeader("Access-Control-Allow-Origin", "*");
 
-		HttpSession session = request.getSession(false);
+		HttpSession session = request.getSession();
+		session.setAttribute("loginId", "aaa");
 		String loginId = (String) session.getAttribute("loginId");
 
 		ObjectMapper mapper = new ObjectMapper();

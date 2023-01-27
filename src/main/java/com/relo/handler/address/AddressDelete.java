@@ -23,7 +23,8 @@ public class AddressDelete implements Handler {
 		response.addHeader("Access-Control-Allow-Origin", "*");
 
 		int addrNum = Integer.parseInt(request.getParameter("addrNum"));
-
+		System.out.println(addrNum);
+		
 		ObjectMapper mapper = new ObjectMapper();
 		AddressService service = new AddressService();
 		try {
