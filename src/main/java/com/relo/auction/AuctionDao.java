@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.relo.exception.FindException;
-import com.relo.product.ProductVo;
 
 public interface AuctionDao {
 	

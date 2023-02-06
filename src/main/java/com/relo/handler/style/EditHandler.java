@@ -9,6 +9,7 @@ import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.oreilly.servlet.MultipartRequest;
@@ -28,10 +29,12 @@ public class EditHandler implements Handler {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		
-		response.setContentType("application/json;charset=UTF-8");
-		response.addHeader("Access-Control-Allow-Origin", "*");
+		response.setContentType("application/json; charset=UTF-8");
+//		response.addHeader("Access-Control-Allow-Origin", "http://192.168.123.101:5500");
+		response.addHeader("Access-Control-Allow-Origin", "http://192.168.0.17:5500");
+		response.addHeader("Access-Control-Allow-Credentials", "true");//쿠키허용
 		
-		String saveDirectory = "C:\\255\\MyWEB\\myfront\\relo\\imgs\\style";
+		String saveDirectory = "/Users/skyleeb95/eclipse-workspace/Myweb/relo/imgs/style";
 		int maxPostSize = 1000*1024;
 		String encoding = "UTF-8";
 		MultipartRequest mr = new MultipartRequest(request, saveDirectory, maxPostSize, encoding,new DefaultFileRenamePolicy());
@@ -67,7 +70,7 @@ public class EditHandler implements Handler {
 				originF.delete();
 				System.out.println("파일삭제");
 			}
-			service.updateStyle(new StyleVo(styleNum,null,styleContent,imgPath,null,0 ));
+			service.updateStyle(new StyleVo(styleNum,null,styleContent,imgPath));
 			Tservice.delStyleTag(styleNum);
 			
 			for(String s : styleTag) {

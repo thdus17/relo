@@ -20,9 +20,12 @@ public class MemberLogin implements Handler {
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		response.setContentType("application/json;charset=utf-8");
-		response.addHeader("Access-Control-Allow-Origin", "*");
-
+//		response.addHeader("Access-Control-Allow-Origin", "http://192.168.123.101:5500");
+		response.addHeader("Access-Control-Allow-Origin", "http://192.168.0.17:5500");
+		response.addHeader("Access-Control-Allow-Credentials", "true");//쿠키허용
+		
 		String id = request.getParameter("id");
 		String pwd = request.getParameter("pwd");
 

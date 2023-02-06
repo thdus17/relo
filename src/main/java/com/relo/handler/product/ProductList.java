@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -17,6 +18,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.relo.auction.AuctionVo;
 import com.relo.exception.FindException;
 import com.relo.handler.Handler;
+import com.relo.member.MemberVo;
 import com.relo.product.ProductService;
 import com.relo.product.ProductVo;
 import com.relo.stock.StockVo;
@@ -29,8 +31,14 @@ public class ProductList implements Handler {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json; charset=UTF-8");
-		response.addHeader("Access-Control-Allow-Origin", "*");
-
+//		response.addHeader("Access-Control-Allow-Origin", "http://192.168.123.101:5500");
+		response.addHeader("Access-Control-Allow-Origin", "http://192.168.0.17:5500");
+		response.addHeader("Access-Control-Allow-Credentials", "true");//쿠키허용
+		
+		HttpSession session = request.getSession();
+		String loginId = (String) session.getAttribute("loginId");
+		System.out.print(loginId);
+		
 		String sType = request.getParameter("sType"); // 전체, 상의, 신발, 하의
 		System.out.println(sType);
 		String orderkind = request.getParameter("orderkind"); // 정렬 순서
@@ -69,7 +77,7 @@ public class ProductList implements Handler {
 				obj.put("sName", svo.getSName());
 				obj.put("sHopePrice", svo.getSHopePrice());
 				obj.put("sName", svo.getSName());
-				obj.put("sFile", svo.getSFile());
+				obj.put("sFile", svo.getSFile()); 
 				List<AuctionVo> alist = pvo.getAuction();
 				for (AuctionVo avo : alist) {
 					obj.put("aPrice", avo.getAPrice());

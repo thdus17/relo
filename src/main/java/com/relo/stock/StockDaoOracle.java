@@ -8,11 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.relo.account.AccountVo;
 import com.relo.exception.FindException;
-import com.relo.member.MemberVo;
 import com.relo.resource.Factory;
-import com.relo.sizes.SizesVo;
 
 public class StockDaoOracle implements StockDao {
 	private SqlSessionFactory sqlSessionFactory;

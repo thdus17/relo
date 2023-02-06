@@ -39,4 +39,4 @@
 		where style_num = #{styleNum}
 		order by style_num desc
 	</select>
-</mapper>       
+</mapper>         

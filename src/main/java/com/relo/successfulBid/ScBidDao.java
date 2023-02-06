@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.relo.exception.FindException;
-import com.relo.orders.OrdersVo;
-import com.relo.product.ProductVo;
 
 public interface ScBidDao {
 	// 낙찰된 상품들 리스트, 관리자 페이지에서 낙찰된 상품들을 확인

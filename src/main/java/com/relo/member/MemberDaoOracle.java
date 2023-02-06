@@ -74,5 +74,7 @@ public class MemberDaoOracle implements MemberDao {
 	public static void main(String[] args) throws FindException {
 		MemberDao dao = new MemberDaoOracle();
 		System.out.println(dao.checkOutTerms("ddd"));
+		MemberVo m = dao.select("aaa");
+		System.out.print(m);
 	}
 }

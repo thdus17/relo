@@ -43,4 +43,5 @@ public interface AddressDao {
 	 * @param addr_num 주소록 번호
 	 */
 	void delete(int addrNum) throws FindException;
+	
 }

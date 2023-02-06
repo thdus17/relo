@@ -86,4 +86,3 @@ public interface StyleDao {
 	//게시물 최신순 리스트
 //	public ArrayList<StyleVo> selectStyleNum();
 }
-

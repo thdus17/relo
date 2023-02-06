@@ -18,8 +18,12 @@ public class DelHandler implements Handler {
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json;charset=UTF-8");
-		response.addHeader("Access-Control-Allow-Origin", "*");
+//		response.addHeader("Access-Control-Allow-Origin", "http://192.168.123.101:5500");
+		response.addHeader("Access-Control-Allow-Origin", "http://192.168.0.17:5500");
+		response.addHeader("Access-Control-Allow-Credentials", "true");//쿠키허용
 		
 		String id = request.getParameter("id");
 		int repNum = Integer.parseInt(request.getParameter("repNum"));

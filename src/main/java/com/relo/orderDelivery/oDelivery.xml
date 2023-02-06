@@ -19,4 +19,3 @@ where o_num=#{oNum}
 </update>
 
 </mapper>
-

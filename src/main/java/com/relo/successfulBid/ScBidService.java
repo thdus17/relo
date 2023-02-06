@@ -3,7 +3,6 @@ package com.relo.successfulBid;
 import java.util.List;
 
 import com.relo.exception.FindException;
-import com.relo.product.ProductVo;
 
 public class ScBidService {
 	private ScBidDaoOracle dao;

@@ -35,12 +35,10 @@ public class StyleVo {
 	private List<ReplyVo> repList;
 
 	
-	public StyleVo(int styleNum, String id, String styleContent, String styleFile, Date styleDate, int styleLikes) {
+	public StyleVo(int styleNum, String id, String styleContent, String styleFile) {
 		this.styleNum= styleNum;
 		this.id = id;
 		this.styleContent = styleContent;
 		this.styleFile = styleFile;
-		this.styleDate = styleDate;
-		this.styleLikes = styleLikes;
 	}
 }

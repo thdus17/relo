@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.relo.exception.FindException;
@@ -28,16 +29,18 @@ public class ListHandler implements Handler {
 	public String process(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		//스타일 게시판 메인
 		
-		request.setCharacterEncoding("utf-8");
-		response.setCharacterEncoding("utf-8");
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json; charset=UTF-8");
+//		response.addHeader("Access-Control-Allow-Origin", "http://192.168.123.101:5500");
+		response.addHeader("Access-Control-Allow-Origin", "http://192.168.0.17:5500");
+		response.addHeader("Access-Control-Allow-Credentials", "true");//쿠키허용
 		
-		response.setContentType("application/json;charset=UTF-8");
-		response.addHeader("Access-Control-Allow-Origin", "*");
-		
+		HttpSession session = request.getSession();
+		String loginId = (String) session.getAttribute("loginId");
 		ObjectMapper mapper = new ObjectMapper();
 		StyleService service = new StyleService();
 		StyleTagService tService = new StyleTagService();
-		
 		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		String styleCode = request.getParameter("styleCode");
 		String hashName = request.getParameter("hashName");
@@ -57,9 +60,10 @@ public class ListHandler implements Handler {
 		
 		if(id!=null) {
 			try {
-				StylePageBean<StyleVo> pb = service.selectStyleId(currentPage,id);
+				StylePageBean<StyleVo> pb = service.selectStyleId(currentPage,loginId);
 				map.put("pb", pb);
 				map.put("tagList", tagList);
+				map.put("loginId", loginId);
 				String jsonStr = mapper.writeValueAsString(map);
 //				jsonStr += mapper.writeValueAsString(pb);
 				return jsonStr;
@@ -74,6 +78,7 @@ public class ListHandler implements Handler {
 				StylePageBean<StyleVo> pb = service.selectStyleTag(currentPage,hashName);
 				map.put("pb", pb);
 				map.put("tagList", tagList);
+				map.put("loginId", loginId);
 				String jsonStr = mapper.writeValueAsString(map);
 //				jsonStr += mapper.writeValueAsString(pb);
 				return jsonStr;
@@ -90,6 +95,7 @@ public class ListHandler implements Handler {
 				StylePageBean<StyleVo> pb = service.selectStyleList(currentPage,condition);
 				map.put("pb", pb);
 				map.put("tagList", tagList);
+				map.put("loginId", loginId);
 				String jsonStr = mapper.writeValueAsString(map);
 //				jsonStr += mapper.writeValueAsString(pb);
 				return jsonStr;

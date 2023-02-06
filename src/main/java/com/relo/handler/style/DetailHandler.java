@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.relo.exception.FindException;
@@ -27,8 +28,13 @@ public class DetailHandler implements Handler {
 		response.setCharacterEncoding("utf-8");
 		
 		response.setContentType("application/json;charset=UTF-8");
-		response.addHeader("Access-Control-Allow-Origin", "*");
-
+//		response.addHeader("Access-Control-Allow-Origin", "http://192.168.123.101:5500");
+		response.addHeader("Access-Control-Allow-Origin", "http://192.168.0.17:5500");
+		response.addHeader("Access-Control-Allow-Credentials", "true");//쿠키허용
+		
+		HttpSession session = request.getSession();
+		String loginId = (String) session.getAttribute("loginId");
+		
 		ObjectMapper mapper = new ObjectMapper();
 		StyleService sService = new StyleService();
 		ReplyService rService = new ReplyService();
@@ -52,6 +58,7 @@ public class DetailHandler implements Handler {
 			Map map = new HashMap<>();
 			map.put("vo", vo);
 			map.put("replyCnt", repCnt);
+			map.put("loginId", loginId);
 //			String jsonStr = mapper.writeValueAsString(vo);
 //			jsonStr += "댓글 개수:"+repCnt;
 			String jsonStr = mapper.writeValueAsString(map);

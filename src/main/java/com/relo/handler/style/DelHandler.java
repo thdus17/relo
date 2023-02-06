@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.relo.exception.FindException;
@@ -19,19 +20,23 @@ public class DelHandler implements Handler {
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
-		request.setCharacterEncoding("utf-8");
-		response.setCharacterEncoding("utf-8");
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json;charset=UTF-8");
-		response.addHeader("Access-Control-Allow-Origin", "*");
+//		response.addHeader("Access-Control-Allow-Origin", "http://192.168.123.101:5500");
+		response.addHeader("Access-Control-Allow-Origin", "http://192.168.0.17:5500");
+		response.addHeader("Access-Control-Allow-Credentials", "true");//쿠키허용
+		
+		HttpSession session = request.getSession();
+		String loginId = (String) session.getAttribute("loginId");
 		
 		int styleNum = Integer.parseInt(request.getParameter("styleNum"));
-		String id = request.getParameter("id");
 		StyleService service = new StyleService();
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			StyleVo vo =service.styleDetail(styleNum);
 			String fileName = vo.getStyleFile();
-			String saveDirectory = "C:\\255\\MyWEB\\myfront\\relo\\imgs\\style";
+			String saveDirectory = "/Users/skyleeb95/eclipse-workspace/Myweb/relo/imgs/style";
 			File file = new File(saveDirectory,fileName);
 			if(file.exists()) {
 				file.delete();
@@ -39,8 +44,7 @@ public class DelHandler implements Handler {
 			}else{
 				System.out.println("파일없엉");
 			}
-			
-			service.delStyle(new StyleVo(styleNum,id,"","",null,0));
+			service.delStyle(vo);
 			String jsonStr = mapper.writeValueAsString("게시물 삭제 성공");
 			
 			return jsonStr;

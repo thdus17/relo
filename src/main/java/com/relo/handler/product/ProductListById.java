@@ -1,7 +1,6 @@
-package com.relo.handler.stock;
+package com.relo.handler.product;
 
 import java.io.IOException;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +8,7 @@ import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -16,11 +16,12 @@ import org.json.simple.JSONObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.relo.exception.FindException;
 import com.relo.handler.Handler;
+import com.relo.product.ProductService;
+import com.relo.product.ProductVo;
 import com.relo.sizes.SizesVo;
-import com.relo.stock.StockService;
 import com.relo.stock.StockVo;
 
-public class StockListBySReturn implements Handler {
+public class ProductListById implements Handler {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response)
@@ -28,22 +29,29 @@ public class StockListBySReturn implements Handler {
 		response.setContentType("application/json;charset=utf-8");
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		
-		int sReturn = Integer.parseInt(request.getParameter("sReturn"));
+		HttpSession session = request.getSession();
+		
+		String id = (String) session.getAttribute("loginId");
+	//	String id = request.getParameter("id");
+		ProductService service = new ProductService();
 		ObjectMapper mapper = new ObjectMapper();
-		StockService service = new StockService();
 		JSONArray arr = new JSONArray();
-		List<StockVo> list;
+		List<ProductVo> list;
 		try {
-			list = service.getBySReturn(sReturn);
-			for(StockVo vo : list) {
-				JSONObject stock = new JSONObject();
-				stock.put("sNum", vo.getSNum());
-				SizesVo svo = vo.getSizes();
-				stock.put("sizeCategoryName", svo.getSizeCategoryName());
-				stock.put("sName", vo.getSName());
-				stock.put("sColor", vo.getSColor());
-				stock.put("sFile", vo.getSFile());
-				arr.add(stock);
+			list = service.getByIdProduct(id);
+			
+			for(ProductVo vo : list) {
+				JSONObject product = new JSONObject();
+				product.put("pNum", vo.getPNum());
+				product.put("pStatus", vo.getPStatus());
+				StockVo svo = vo.getStock();
+				product.put("sFile", svo.getSFile());
+				product.put("sName", svo.getSName());
+				product.put("sGrade", svo.getSGrade());
+				product.put("sHopePrice", svo.getSHopePrice());
+				SizesVo siVo = svo.getSizes();
+				product.put("sizeCategoryName", siVo.getSizeCategoryName());
+				arr.add(product);
 			}
 			String jsonStr = mapper.writeValueAsString(arr);
 			return jsonStr;
@@ -56,7 +64,6 @@ public class StockListBySReturn implements Handler {
 			String jsonStr = mapper.writeValueAsString(map);
 			return jsonStr;
 		}
-		
 	}
 
 }

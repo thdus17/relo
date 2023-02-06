@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -30,9 +31,14 @@ public class ProductDetail implements Handler {
 
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
-		response.setContentType("application/json; charset=UTF-8");
-		response.addHeader("Access-Control-Allow-Origin", "*");
-
+		response.setContentType("application/json;charset=UTF-8");
+		response.addHeader("Access-Control-Allow-Origin", "http://192.168.123.105:5500");
+		response.addHeader("Access-Control-Allow-Credentials", "true");//쿠키허용
+		
+		HttpSession session = request.getSession();
+		String loginId = (String) session.getAttribute("loginId");
+		System.out.print(loginId);
+		
 		int pNum = Integer.parseInt(request.getParameter("pNum"));
 		ProductService service = new ProductService();
 		ObjectMapper mapper = new ObjectMapper();
@@ -43,6 +49,7 @@ public class ProductDetail implements Handler {
 			ProductVo pvo = service.getProductDetail(pNum);
 			StockVo svo = pvo.getStock();
 			SizesVo szvo = svo.getSizes();
+			obj.put("sizeCategoryName", szvo.getSizeCategoryName());
 			List<AuctionVo> alist = pvo.getAuction();
 			obj.put("pNum", pNum);
 			obj.put("sFile", svo.getSFile());
@@ -54,7 +61,6 @@ public class ProductDetail implements Handler {
 			obj.put("sOriginPrice", svo.getSOriginPrice());
 			obj.put("sHopePrice", svo.getSHopePrice());
 			obj.put("sGrade", svo.getSGrade());
-			obj.put("sizeCategoryName", szvo.getSizeCategoryName());
 			for (AuctionVo avo : alist) {
 				obj.put("aPrice", avo.getAPrice());
 			}

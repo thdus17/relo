@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.relo.exception.FindException;
@@ -20,20 +21,26 @@ public class LikesHandler implements Handler {
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json;charset=UTF-8");
-		response.addHeader("Access-Control-Allow-Origin", "*");
+//		response.addHeader("Access-Control-Allow-Origin", "http://192.168.123.101:5500");
+		response.addHeader("Access-Control-Allow-Origin", "http://192.168.0.17:5500");
+		response.addHeader("Access-Control-Allow-Credentials", "true");//쿠키허용
 		
+		HttpSession session = request.getSession();
+		String loginId = (String) session.getAttribute("loginId");
+				
 		LikesService lService = new LikesService();
 		StyleService sService = new StyleService();
 		ObjectMapper mapper = new ObjectMapper();
 		//likes = 좋아요 + 1 이거나 -1 이거나 확인할 변수
 		String likes = request.getParameter("likes");
-		String id = request.getParameter("id");
 		int styleNum = Integer.parseInt(request.getParameter("styleNum"));
 		//likes = likes 이면 좋아요 +1
 		if(likes.equals("likes")) {
 			try {
-				lService.addLikes(new LikesVo(styleNum,id));
+				lService.addLikes(new LikesVo(styleNum,loginId));
 				String jsonStr = mapper.writeValueAsString("좋아요 성공");
 				return jsonStr;
 			} catch (FindException e) {
@@ -46,7 +53,7 @@ public class LikesHandler implements Handler {
 		//likes = cancle 이면 좋아요 -1	
 		}else if (likes.equals("cancle")) {
 			try {
-				lService.delLikes(new LikesVo(styleNum,id));
+				lService.delLikes(new LikesVo(styleNum,loginId));
 				sService.styleLikesChange(styleNum);
 				String jsonStr = mapper.writeValueAsString("좋아요 취소");
 				return jsonStr;

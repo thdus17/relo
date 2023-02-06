@@ -6,11 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
-import com.relo.auction.AuctionDao;
-import com.relo.auction.AuctionDaoOracle;
 import com.relo.exception.FindException;
-import com.relo.orders.OrdersVo;
-import com.relo.product.ProductVo;
 import com.relo.resource.Factory;
 
 public class ScBidDaoOracle implements ScBidDao {
