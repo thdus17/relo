@@ -35,4 +35,8 @@ public class AddressService {
 		dao.delete(addrNum);
 	}
 	
+	public AddressVo selectByNum(int addrNum) throws FindException{
+		return dao.selectByNum(addrNum);
+	}
+	
 }

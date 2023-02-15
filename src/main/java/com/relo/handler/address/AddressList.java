@@ -22,8 +22,8 @@ public class AddressList implements Handler {
 	public String process(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("application/json;charset=utf-8");
-//		response.addHeader("Access-Control-Allow-Origin", "http://192.168.123.101:5500");
-		response.addHeader("Access-Control-Allow-Origin", "http://192.168.0.17:5500");
+//		response.addHeader("Access-Control-Allow-Origin", "http://192.168.123.105:5500");
+		response.addHeader("Access-Control-Allow-Origin", "http://192.168.0.95:5500");
 		response.addHeader("Access-Control-Allow-Credentials", "true");//쿠키허용
 
 		HttpSession session = request.getSession(false);

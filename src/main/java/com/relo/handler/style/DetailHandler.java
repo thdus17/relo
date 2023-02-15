@@ -12,6 +12,8 @@ import javax.servlet.http.HttpSession;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.relo.exception.FindException;
 import com.relo.handler.Handler;
+import com.relo.likes.LikesService;
+import com.relo.likes.LikesVo;
 import com.relo.reply.ReplyService;
 import com.relo.reply.ReplyVo;
 import com.relo.style.StyleService;
@@ -28,8 +30,8 @@ public class DetailHandler implements Handler {
 		response.setCharacterEncoding("utf-8");
 		
 		response.setContentType("application/json;charset=UTF-8");
-//		response.addHeader("Access-Control-Allow-Origin", "http://192.168.123.101:5500");
-		response.addHeader("Access-Control-Allow-Origin", "http://192.168.0.17:5500");
+//		response.addHeader("Access-Control-Allow-Origin", "http://192.168.123.105:5500");
+		response.addHeader("Access-Control-Allow-Origin", "http://192.168.0.95:5500");
 		response.addHeader("Access-Control-Allow-Credentials", "true");//쿠키허용
 		
 		HttpSession session = request.getSession();
@@ -39,6 +41,7 @@ public class DetailHandler implements Handler {
 		StyleService sService = new StyleService();
 		ReplyService rService = new ReplyService();
 		StyleTagService tService = new StyleTagService();
+		LikesService lService = new LikesService();
 		int styleNum = Integer.parseInt(request.getParameter("styleNum"));
 		
 		try {
@@ -54,11 +57,18 @@ public class DetailHandler implements Handler {
 			vo.setTagList(tagList);
 			//게시판 댓글 개수 불러오기
 			int repCnt = rService.cntReply(styleNum);
+			//좋아요 눌렀는 지 확인 불러오기
+			LikesVo lVo = lService.checkLikes(new LikesVo(styleNum, loginId));
+			int likeCheck = 0;
+			if(lVo != null) {
+				likeCheck = 1;
+			}
 			
 			Map map = new HashMap<>();
 			map.put("vo", vo);
 			map.put("replyCnt", repCnt);
 			map.put("loginId", loginId);
+			map.put("likeCheck", likeCheck);
 //			String jsonStr = mapper.writeValueAsString(vo);
 //			jsonStr += "댓글 개수:"+repCnt;
 			String jsonStr = mapper.writeValueAsString(map);

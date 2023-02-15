@@ -18,5 +18,5 @@ public interface LikesDao {
 	 */
 	public void delLikes(LikesVo vo) throws FindException;
 	
-	public LikesVo checkLikes(int styleNum, String id) throws FindException;
+	public LikesVo checkLikes(LikesVo vo) throws FindException;
 }

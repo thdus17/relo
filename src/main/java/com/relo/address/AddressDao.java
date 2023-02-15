@@ -43,5 +43,12 @@ public interface AddressDao {
 	 * @param addr_num 주소록 번호
 	 */
 	void delete(int addrNum) throws FindException;
+	/**
+	 * 주소록을 검색한다.
+	 * @param addrNum 주소록 번
+	 * @return AddressVo
+	 * @throws FindException
+	 */
+	AddressVo selectByNum(int addrNum) throws FindException;
 	
 }

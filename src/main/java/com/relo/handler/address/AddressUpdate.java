@@ -22,13 +22,13 @@ public class AddressUpdate implements Handler {
 			throws ServletException, IOException {
 		response.setContentType("application/json;charset=utf-8");
 //		response.addHeader("Access-Control-Allow-Origin", "http://192.168.123.105:5500");
-		response.addHeader("Access-Control-Allow-Origin", "http://192.168.0.17:5500");
+		response.addHeader("Access-Control-Allow-Origin", "http://192.168.0.95:5500");
 		response.addHeader("Access-Control-Allow-Credentials", "true");//쿠키허용
 
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		
-		HttpSession session = request.getSession(false);
+		HttpSession session = request.getSession();
 		String loginId = (String) session.getAttribute("loginId");
 		
 		int addrNum = Integer.parseInt(request.getParameter("addrNum"));

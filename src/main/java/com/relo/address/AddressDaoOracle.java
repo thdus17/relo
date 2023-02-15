@@ -71,4 +71,14 @@ public class AddressDaoOracle implements AddressDao{
 		session.commit();
 		session.close();
 	}
+
+	@Override
+	public AddressVo selectByNum(int addrNum) throws FindException {
+		SqlSession session = sqlSessionFactory.openSession();
+		AddressDao dao = (AddressDao) session.getMapper(AddressDao.class);
+		AddressVo vo = dao.selectByNum(addrNum);
+		session.close();
+		return vo;
+	}
+
 }

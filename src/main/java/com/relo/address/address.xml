@@ -37,6 +37,10 @@
 		where id=#{id} order by addr_num desc
 	</select>
 	
+	<select id="selectByNum" parameterType="int" resultType="AddressVo">
+		select * from address where addr_num=#{addrNum}
+	</select>
+	
 	<update id="changeAddrTypeIs0" parameterType="string">
 		update address set
 		addr_type=1

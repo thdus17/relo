@@ -33,17 +33,19 @@ public class LikesDaoOracle implements LikesDao {
 	}
 	//좋아요 했는지 체크
 	@Override
-	public LikesVo checkLikes(int styleNum, String id) throws FindException {
+	public LikesVo checkLikes(LikesVo vo) throws FindException {
 		SqlSession session = sqlSessionFactory.openSession();
 		LikesDao dao = (LikesDao) session.getMapper(LikesDao.class);
-		LikesVo vo = dao.checkLikes(styleNum, id);
+		LikesVo vo1 = dao.checkLikes(vo);
 		session.close();
-		return vo;
+		return vo1;
 	}
 // 테스트 확인 완료	
-	public static void main(String[] args) throws FindException {
-		LikesDaoOracle dao = new LikesDaoOracle();
+//	public static void main(String[] args) throws FindException {
+//		LikesDaoOracle dao = new LikesDaoOracle();
 //		dao.addLikes(new LikesVo(7,"ddd"));
 //		dao.delLikes(new LikesVo(3,"ccc"));
-	}
+//		LikesVo vo = dao.checkLikes(new LikesVo(2,"ddd"));
+//		System.out.print(vo);
+//	}
 }

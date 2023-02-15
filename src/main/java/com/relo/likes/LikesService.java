@@ -17,7 +17,7 @@ public class LikesService {
 		dao.delLikes(vo);
 	}
 	
-	public LikesVo checkLikes(int styleNum, String id) throws FindException {
-		return dao.checkLikes(styleNum,id);
+	public LikesVo checkLikes(LikesVo vo) throws FindException {
+		return dao.checkLikes(vo);
 	}
 }

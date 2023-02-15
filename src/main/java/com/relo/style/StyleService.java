@@ -59,23 +59,5 @@ public class StyleService {
 	public void styleLikesChange(int styleNum) throws FindException{
 		dao.styleLikesChange(styleNum);
 	}
-	
-//	//게시물 목록 출력
-//	public List<StyleVo> selectStyleList(HashMap<String,Object> styleCode) throws FindException{
-//		return dao.selectStyleList(styleCode);
-//	}
-	
-//	public static void main(String[] args) throws FindException {
-//		StyleService sService = new StyleService();
-//		ReplyService rService = new ReplyService();
-//		StyleTagService tService = new StyleTagService();
-//		int styleNum = 16;
-//		List<ReplyVo> repList = rService.detailRep(styleNum);
-//		List<StyleTagVo> tagList = tService.styleTagDetail(styleNum);
-//		
-//		StyleVo vo = sService.styleDetail(styleNum);
-//		vo.setRepList(repList);
-//		vo.setTagList(tagList);
-//		System.out.println(vo);
-//	}
+
 }
